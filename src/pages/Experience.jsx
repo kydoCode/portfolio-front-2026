@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import experienceData from '../data/experience.json'
+import experienceData from '../data/experience_augmented.json'
+import ExperienceDetail from '../components/ExperienceDetail'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import backgroundImage from '/images/background.svg';
@@ -47,9 +48,9 @@ export default function Experience() {
                     <p className="text-gray-600 mb-1">{experience.annees.join(', ')}</p>
                     {experience.entreprise && <p className="text-gray-600 mb-2">{experience.entreprise}</p>}
                     {experience.details && (
-                      <ul className="list-disc list-inside mt-2 text-gray-600">
+                      <ul className="list-disc list-outside ml-5 mt-4">
                         {experience.details.map((detail, detailIndex) => (
-                          <li key={detailIndex} className="mb-1">{detail}</li>
+                          <ExperienceDetail key={detailIndex} detail={detail} />
                         ))}
                       </ul>
                     )}
