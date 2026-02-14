@@ -1,0 +1,19 @@
+{
+  "langues": [
+    {
+      "langue": "Anglais",
+      "niveau": "Opérationnel supérieur (B2+/C1)",
+      "certification": ["TOEIC", "séjours linguistiques"]
+    },
+    {
+      "langue": "Allemand",
+      "niveau": "Expert (C1+)",
+      "certification": ["Diplôme C1 Université de Vienne (Mention Culture)"]
+    },
+    {
+      "langue": "Chinois",
+      "niveau": "Élémentaire (A2)",
+      "certification": ["DU 1A Études chinoises INALCO"]
+    }
+  ]
+}

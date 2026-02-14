@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "首页",
+    "projects": "项目",
+    "skills": "技能",
+    "experience": "经验",
+    "creations": "创作",
+    "education": "教育",
+    "hobbies": "爱好",
+    "about": "关于我",
+    "contact": "联系"
+  },
+  "hero": {
+    "title": "你好，我是 Sylvain",
+    "subtitle": "全栈开发者",
+    "description": "我是一名热爱编程的全栈开发者，位于法国南部。我喜欢创建美观且实用的网站应用程序。",
+    "cta": "查看作品集"
+  },
+  "featuredWork": {
+    "title": "我的职业历程",
+    "viewButton": "查看",
+    "projectsDesc": "探索我的项目，看看我在做什么。",
+    "skillsDesc": "发现我擅长的技能和技术。",
+    "experienceDesc": "了解我的职业经验和职业历程。",
+    "creationsDesc": "查看我的创作和个人项目。",
+    "educationDesc": "了解我的教育背景和资格。",
+    "hobbiesDesc": "了解我的工作之外的兴趣和爱好。",
+    "aboutDesc": "阅读更多关于我和我的故事。",
+    "contactDesc": "联系我进行合作或咨询。"
+  },
+  "latestProjects": {
+    "title": "最新项目",
+    "viewDetails": "查看详情",
+    "noDescription": "暂无描述。"
+  },
+  "projectModal": {
+    "noDescription": "暂无描述。",
+    "languages": "语言",
+    "technologies": "技术",
+    "htmlVersion": "HTML版本",
+    "notSpecified": "未指定",
+    "modernityScore": "现代性评分",
+    "accessibility": "可访问性",
+    "bestPractices": "最佳实践",
+    "cleanCode": "清晰代码",
+    "notAvailable": "不可用",
+    "viewOnGithub": "在GitHub上查看",
+    "visitSite": "访问网站",
+    "close": "关闭"
+  },
+  "about": {
+    "title": "关于我",
+    "description": "我是一名热爱技术的全栈开发者，具有丰富的网络应用开发经验。"
+  },
+  "contact": {
+    "title": "联系我",
+    "message": "发送我消息以询问或合作。"
+  }
+}

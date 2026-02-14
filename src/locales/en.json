@@ -1,0 +1,51 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "skills": "Skills",
+    "experience": "Experience",
+    "creations": "Creations",
+    "education": "Education",
+    "hobbies": "Hobbies",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Hello, I'm Sylvain",
+    "subtitle": "Full Stack Developer",
+    "description": "I'm a passionate full stack developer based in South France. I love creating beautiful and functional web applications.",
+    "cta": "View Portfolio"
+  },
+  "featuredWork": {
+    "title": "My Professional Journey",
+    "viewButton": "View",
+    "projectsDesc": "Explore my projects and see what I've been working on.",
+    "skillsDesc": "Discover the skills and technologies I excel in.",
+    "experienceDesc": "Learn about my professional experience and career journey.",
+    "creationsDesc": "Check out my creative works and personal projects.",
+    "educationDesc": "Find out about my educational background and qualifications.",
+    "hobbiesDesc": "Get to know my hobbies and interests outside of work.",
+    "aboutDesc": "Read more about me and my story.",
+    "contactDesc": "Get in touch with me for collaborations or inquiries."
+  },
+  "latestProjects": {
+    "title": "Latest Projects",
+    "viewDetails": "View Details",
+    "noDescription": "No description available."
+  },
+  "projectModal": {
+    "noDescription": "No description available.",
+    "languages": "Languages",
+    "technologies": "Technologies",
+    "htmlVersion": "HTML Version",
+    "notSpecified": "Not specified",
+    "modernityScore": "Modernity Score",
+    "accessibility": "Accessibility",
+    "bestPractices": "Best Practices",
+    "cleanCode": "Clean Code",
+    "notAvailable": "Not available",
+    "viewOnGithub": "View on GitHub",
+    "visitSite": "Visit Site",
+    "close": "Close"
+  }
+}

@@ -1,0 +1,31 @@
+    {
+      "intitule": "Cycle Bachelor: CPGE, NEOMA & L3 + Licence LLCE Allemand",
+      "annees": ["2005 - 2009"],
+      "etablissements": [
+        {
+          "nom": "Université de Strasbourg",
+          "mention": "Assez Bien",
+          "url": "https://langues.unistra.fr/formation/licences/licence-langues-litteratures-et-civilisations-etrangeres-et-regionales/parcours-monolingues/etudes-allemandes-langues-et-cultures-des-mondes-germaniques-ead/",
+          "logo": "https://i.ibb.co/DfkZhwQ/logo-unistra.jpg",
+          "favicon": "https://i.ibb.co/7bpMRTP/favicon-unistra.png"
+        },
+        {
+          "nom": "Sup de Co Reims",
+          "intitule": "Bachelor",
+          "url": "https://neoma-bs.fr/formations/programme-grande-ecole/",
+          "logo": "https://i.ibb.co/PMwtXm1/logo-neoma.png",
+          "favicon": "https://i.ibb.co/g9X2D0t/favicon-neoma.png"
+        },
+        {
+          "nom": "Lycée Masséna",
+          "intitule": "CPGE (Équivalence L2) + khûbbe",
+          "mention": "Très Bien",
+          "url": "https://www.lycee-massena.fr/les-cpge/#CPGE_prepa",
+          "logo": "https://i.ibb.co/Vwrw7j1/logo-massena.png",
+          "favicon": " https://i.ibb.co/cF6wYdD/favicon-massena.png"
+        }
+      ],
+      "url": "https://langues.unistra.fr/formation/licences/licence-langues-litteratures-et-civilisations-etrangeres-et-regionales/parcours-monolingues/etudes-allemandes-langues-et-cultures-des-mondes-germaniques-ead/",
+      "logo": "https://i.ibb.co/PMwtXm1/logo-neoma.png",
+      "favicon": "https://i.ibb.co/g9X2D0t/favicon-neoma.png"
+    }

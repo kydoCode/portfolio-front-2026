@@ -1,0 +1,66 @@
+{
+  "competences": {
+    "techniques": [
+      {
+        "type": "Développement Web / Web Mobile",
+        "subtype": "Front-end",
+        "details": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "React",
+          "Tailwind CSS",
+          "Bootstrap",
+          "UIKit"
+        ]
+      },
+      {
+        "type": "Back-end",
+        "details": [
+          "PHP",
+          "MySQL",
+          "Node.js",
+          "Express.js",
+          "Vue.js",
+          "Python",
+          "PostgreSQL",
+          "NoSQL"
+        ]
+      },
+      {
+        "type": "Autres compétences web",
+        "details": [
+          "SGBR / SIGB / SI",
+          "JSON / XML / XML-TEI"
+        ]
+      },
+      {
+        "type": "Développement iOS natif",
+        "details": ["Swift", "SwiftUI"]
+      }
+    ],
+    "transversales": [
+      {
+        "type": "Méthodologies",
+        "details": [
+          "Agilité (Kanban, SCRUM)",
+          "Gestion de projet (Trello)"
+        ]
+      },
+      {
+        "type": "Outils de développement",
+        "details": [
+          "IDE (VS Code, Xcode)",
+          "Versioning (Git, GitHub)",
+          "Extensions IA VS Code (Blackbox AI, Copilot, ChatGPT)",
+          "Outils de qualité de code (Linters)",
+          "Conception UI/UX (Figma)"
+        ]
+      },
+      {
+        "type": "Bureautique",
+        "details": ["diplôme du C2i niveau 1 (Unistra)"]
+      }
+    ]
+  }
+}

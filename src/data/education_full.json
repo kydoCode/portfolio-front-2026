@@ -1,0 +1,106 @@
+{
+  "education": [
+    {
+      "intitule": "DWWM: Développeur Web et Web Mobile",
+      "annees": ["04/2024 - 02/2025"],
+      "etablissement": "La Plateforme_",
+      "url": "https://laplateforme.io/prf-var-devweb/",
+      "logo": "https://i.ibb.co/BHD1dht/logo-laplateforme.png",
+      "favicon": "https://i.ibb.co/6yxsFDB/favicon-la-Plateforme.png"
+    },
+    {
+      "intitule": "Langage à la carte",
+      "annees": ["01/2024 - 04/2024"],
+      "etablissement": "La Plateforme_",
+      "url": "https://laplateforme.io/prf-var-langage-informatique/",
+      "logo": "https://i.ibb.co/BHD1dht/logo-laplateforme.png",
+      "favicon": "https://i.ibb.co/6yxsFDB/favicon-la-Plateforme.png"
+    },
+    {
+      "intitule": "Apple Foundation Program Advanced - CDA Swift",
+      "annees": ["09/2022 - 06/2023"],
+      "etablissement": "Simplon.co",
+      "url": "https://www.simplon.co/developpement/advanced-apple-foundation-program",
+      "logo": "https://i.ibb.co/hmn85c7/logo-simplon.png",
+      "favicon": "https://i.ibb.co/3WF880F/favicon-simplon.png"
+    },
+    {
+      "intitule": "Apple Foundation Program Extended",
+      "annees": ["06/2022"],
+      "etablissement": "Simplon.co",
+      "url": "https://www.simplon.co/developpement/apple-foundation-program",
+      "logo": "https://i.ibb.co/hmn85c7/logo-simplon.png",
+      "favicon": "https://i.ibb.co/3WF880F/favicon-simplon.png"
+    },
+    {
+      "intitule": "Apple Foundation Program Initiation",
+      "annees": ["03/2022", "04/2022"],
+      "etablissement": "Simplon.co",
+      "url": "https://www.simplon.co/developpement/apple-foundation-program",
+      "logo": "https://i.ibb.co/hmn85c7/logo-simplon.png",
+      "favicon": "https://i.ibb.co/3WF880F/favicon-simplon.png"
+    },
+    {
+      "intitule": "Master 2 MEEF Professeur Documentaliste",
+      "annees": ["2017 - 2021"],
+      "etablissement": "Université Lyon III",
+      "url": "https://facdeshumanites.univ-lyon3.fr/master-meef-second-degre-information-documentation-2",
+      "logo": "https://i.ibb.co/ngf5pHh/logo-lyon3.png",
+      "favicon": "https://i.ibb.co/BsRF3cf/favicon-lyon3.png"
+    },
+    {
+      "intitule": "Master 1 MEEF Professeur Documentaliste",
+      "annees": ["2013 - 2014"],
+      "etablissement": "INSPE Aix-Marseille",
+      "mention": "Assez Bien",
+      "url": "https://inspe.univ-amu.fr/fr/formations/master-meef-second-degre",
+      "logo": "https://i.ibb.co/Lxb3cG9/logo-amu-inspe.png",
+      "favicon": "https://i.ibb.co/K65Hp4x/favicon-amu.png"
+    },
+    {
+      "intitule": "Master Études germaniques",
+      "annees": ["2010 - 2013"],
+      "etablissement": "Université de Strasbourg",
+      "url": "https://langues.unistra.fr/formation/masters/master-langues-litteratures-et-civilisations-etrangeres-et-regionales/etudes-allemandes/",
+      "logo": "https://i.ibb.co/DfkZhwQ/logo-unistra.jpg",
+      "favicon": "https://i.ibb.co/7bpMRTP/favicon-unistra.png"
+    },
+    {
+      "intitule": "Master Études germaniques",
+      "annees": ["2009 - 2010"],
+      "etablissement": "ENS de Lyon",
+      "url": "https://www.ens-lyon.fr/formation/offre-de-formation/master-2022-2026/etudes-germaniques",
+      "logo": "https://i.ibb.co/DtT1GyK/logo-ens.png",
+      "favicon": "https://i.ibb.co/nsrz5nK/favicon-ens.png"
+    },
+    {
+      "intitule": "Cycle Bachelor: CPGE, NEOMA & L3 + Licence LLCE Allemand",
+      "annees": ["2008 - 2009"],
+      "etablissements": [
+        {
+          "nom": "Université de Strasbourg",
+          "mention": "Assez Bien",
+          "url": "https://langues.unistra.fr/formation/licences/licence-langues-litteratures-et-civilisations-etrangeres-et-regionales/parcours-monolingues/etudes-allemandes-langues-et-cultures-des-mondes-germaniques-ead/",
+          "logo": "https://i.ibb.co/DfkZhwQ/logo-unistra.jpg",
+          "favicon": "https://i.ibb.co/7bpMRTP/favicon-unistra.png"
+        },
+        {
+          "nom": "Sup de Co Reims",
+          "intitule": "Bachelor",
+          "url": "https://neoma-bs.fr/formations/programme-grande-ecole/",
+          "logo": "https://i.ibb.co/PMwtXm1/logo-neoma.png",
+          "favicon": "https://i.ibb.co/g9X2D0t/favicon-neoma.png"
+        },
+        {
+          "nom": "Lycée Masséna",
+          "intitule": "Bachelor",
+          "mention": "Très Bien",
+          "url": "https://www.lycee-massena.fr/les-cpge/#CPGE_prepa",
+          "logo": "https://i.ibb.co/Vwrw7j1/logo-massena.png",
+          "favicon": " https://i.ibb.co/cF6wYdD/favicon-massena.png"
+        }
+      ],
+      "favicon": "https://i.ibb.co/g9X2D0t/favicon-neoma.png"
+    }
+  ]
+}

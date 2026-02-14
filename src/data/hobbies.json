@@ -1,0 +1,24 @@
+{
+  "hobbies": [
+    {
+      "categorie": "Arts",
+      "details": ["musique", "photo", "courts-métrages", "théâtre"]
+    },
+    {
+      "categorie": "Associatif",
+      "details": ["groupe de rock sino-français"]
+    },
+    {
+      "categorie": "Culture",
+      "details": ["lecture", "conférences", "voyages"]
+    },
+    {
+      "categorie": "Sport",
+      "details": ["Natation", "ski (compétition)"]
+    },
+    {
+      "categorie": "Formations",
+      "details": ["régie/PEMP (ENS de Lyon)", "MOOCs", "PAF"]
+    }
+  ]
+}

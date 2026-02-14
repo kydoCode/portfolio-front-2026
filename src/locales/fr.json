@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "projects": "Projets",
+    "skills": "Compétences",
+    "experience": "Expérience",
+    "creations": "Créations",
+    "education": "Éducation",
+    "hobbies": "Loisirs",
+    "about": "À propos",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Hello, moi c'est Sylvain",
+    "subtitle": "Développeur Full Stack",
+    "description": "Je suis un développeur passionné basé dans le Sud de la France. J’aime créer des applications web belles et fonctionnelles.",
+    "cta": "Voir le Portfolio"
+  },
+  "featuredWork": {
+    "title": "Mon Parcours Professionnel",
+    "viewButton": "Voir",
+    "projectsDesc": "Explorez mes projets et découvrez sur quoi j'ai travaillé.",
+    "skillsDesc": "Découvrez les compétences et technologies que je maîtrise.",
+    "experienceDesc": "Apprenez-en plus sur mon expérience professionnelle et mon parcours de carrière.",
+    "creationsDesc": "Découvrez mes œuvres créatives et projets personnels.",
+    "educationDesc": "Découvrez mon parcours académique et mes qualifications.",
+    "hobbiesDesc": "Découvrez mes loisirs et intérêts en dehors du travail.",
+    "aboutDesc": "En savoir plus sur moi et mon histoire.",
+    "contactDesc": "Contactez-moi pour des collaborations ou des demandes."
+  },
+  "latestProjects": {
+    "title": "Derniers Projets",
+    "viewDetails": "Voir les détails",
+    "noDescription": "Aucune description disponible."
+  },
+  "projectModal": {
+    "noDescription": "Aucune description disponible.",
+    "languages": "Langues",
+    "technologies": "Technologies",
+    "htmlVersion": "Version HTML",
+    "notSpecified": "Non spécifié",
+    "modernityScore": "Score de Modernité",
+    "accessibility": "Accessibilité",
+    "bestPractices": "Bonnes Pratiques",
+    "cleanCode": "Code Propre",
+    "notAvailable": "Non disponible",
+    "viewOnGithub": "Voir sur GitHub",
+    "visitSite": "Visiter le Site",
+    "close": "Fermer"
+  },
+  "about": {
+    "title": "À propos de moi",
+    "description": "Je suis Sylvain, un développeur full stack passionné. J'ai une solide expérience dans le développement d'applications web."
+  },
+  "contact": {
+    "title": "Contactez-moi",
+    "message": "Envoyez-moi un message pour toute question ou collaboration."
+  }
+}

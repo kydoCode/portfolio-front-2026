@@ -1,0 +1,16 @@
+{
+  "creations": [
+    {
+      "type": "Album de musique",
+      "details": "Productions médias (GEM)"
+    },
+    {
+      "type": "Courts-métrages",
+      "details": "Mentionné dans les centres d'intérêts"
+    },
+    {
+      "type": "Photographie",
+      "details": "Mentionné dans les centres d'intérêts"
+    }
+  ]
+}

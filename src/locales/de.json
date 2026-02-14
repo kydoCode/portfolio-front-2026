@@ -1,0 +1,59 @@
+{
+  "nav": {
+    "home": "Startseite",
+    "projects": "Projekte",
+    "skills": "Fähigkeiten",
+    "experience": "Erfahrung",
+    "creations": "Kreationen",
+    "education": "Ausbildung",
+    "hobbies": "Hobbys",
+    "about": "Über mich",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "title": "Hallo, ich bin Sylvain",
+    "subtitle": "Full Stack Entwickler",
+    "description": "Ich bin ein leidenschaftlicher Full-Stack-Entwickler aus Südfrankreich. Ich liebe es, schöne und funktionale Webanwendungen zu erstellen.",
+    "cta": "Portfolio ansehen"
+  },
+  "featuredWork": {
+    "title": "Mein beruflicher Werdegang",
+    "viewButton": "Ansehen",
+    "projectsDesc": "Entdecken Sie meine Projekte und sehen Sie, woran ich gearbeitet habe.",
+    "skillsDesc": "Entdecken Sie die Fähigkeiten und Technologien, in denen ich hervorragend bin.",
+    "experienceDesc": "Erfahren Sie mehr über meine beruflichen Erfahrungen und meinen Karriereweg.",
+    "creationsDesc": "Schauen Sie sich meine kreativen Arbeiten und persönlichen Projekte an.",
+    "educationDesc": "Erfahren Sie mehr über meinen akademischen Hintergrund und meine Qualifikationen.",
+    "hobbiesDesc": "Erfahren Sie mehr über meine Hobbys und Interessen außerhalb der Arbeit.",
+    "aboutDesc": "Lesen Sie mehr über mich und meine Geschichte.",
+    "contactDesc": "Kontaktieren Sie mich für Zusammenarbeit oder Anfragen."
+  },
+  "latestProjects": {
+    "title": "Neueste Projekte",
+    "viewDetails": "Details anzeigen",
+    "noDescription": "Keine Beschreibung verfügbar."
+  },
+  "projectModal": {
+    "noDescription": "Keine Beschreibung verfügbar.",
+    "languages": "Sprachen",
+    "technologies": "Technologien",
+    "htmlVersion": "HTML-Version",
+    "notSpecified": "Nicht spezifiziert",
+    "modernityScore": "Modernitätsgrad",
+    "accessibility": "Zugänglichkeit",
+    "bestPractices": "Beste Praktiken",
+    "cleanCode": "Sauberer Code",
+    "notAvailable": "Nicht verfügbar",
+    "viewOnGithub": "Auf GitHub ansehen",
+    "visitSite": "Website besuchen",
+    "close": "Schließen"
+  },
+  "about": {
+    "title": "Über mich",
+    "description": "Ich bin Sylvain, ein leidenschaftlicher Full-Stack-Entwickler mit umfangreicher Erfahrung in der Webanwendungsentwicklung."
+  },
+  "contact": {
+    "title": "Kontakt",
+    "message": "Senden Sie mir eine Nachricht für Fragen oder Kooperationen."
+  }
+}

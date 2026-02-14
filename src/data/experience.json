@@ -1,0 +1,115 @@
+{
+  "experience": [
+    {
+      "poste": "Formateur IT & Concepteur Développeur (Stage)",
+      "annees": ["2025"],
+      "entreprise": "StoryCom",
+      "logo": "https://storycom.fr/wp-content/uploads/2019/08/logoblack.png", 
+      "url": "https://storycom.fr",
+      "favicon": "https://storycom.fr/favicon.ico",
+      "details": [
+        "Ingénierie pédagogique : Animation de cours sur le framework MVC Symfony et préparation aux certifications (REAC du TP DWWM).",
+        "Conception UI/UX & Développement : Création d'outils pédagogiques (<a href=\"https://dwwm-reviz-app-frontend.vercel.app/login.html\">DWWM ReviZ</a>, ArticlesApp) et d'une web app avec IA (Nexium) via API REST.",
+        "Game Design & Co-conception : Élaboration du GDD, design thinking et création d'assets (graphiques, sons, business model) pour le jeu mobile 'Tree of Life'.",
+        "Assurance Qualité : Tests fonctionnels de l'application 'Slime Identity' avant mise en production.",
+        "Jury d'examen : Évaluation et feedback lors de soutenances oraux blancs pour des projets professionnels."
+      ]
+    },
+    {
+      "poste": "Développeur web stagiaire",
+      "annees": ["2024 - 2025"],
+      "entreprise": "Taxi Laurie Bouclier",
+      "logo": "https://i.ibb.co/N1FBwFS/tlb.png",
+      "url": "https://taxilauriebouclier.wordpress.com/",
+      "favicon": "https://i.ibb.co/N1FBwFS/tlb.png",
+      "details": [
+        "Développement du site avec le CMS Wordpress.",
+        "Participation à des réunions d'équipe pour discuter des exigences et des solutions techniques.",
+        "Stratégie SEO",
+        "Rédaction de documentation technique et des tutoriaux de prise en main pour la cliente."
+      ]
+    },
+    {
+      "poste": "Développeur web stagiaire",
+      "annees": ["2024"],
+      "entreprise": "Instant Media",
+      "logo": "https://i.ibb.co/txbLSBf/instant-logo-fond-blanc-3x-1.png",
+      "url": "https://www.instant-media.fr/",
+      "favicon": "https://i.ibb.co/yfj0hvH/instant-icone-fond-blanc-3x-1.png",
+      "details": [
+        "Développement d'outils CRUD pour la gestion des avis et le suivi des mails clients.",
+        "Participation à des réunions d'équipe pour discuter des exigences et des solutions techniques.",
+        "Rédaction de documentation technique pour les fonctionnalités développées."
+      ]
+    },
+    {
+      "poste": "Professeur Documentaliste",
+      "annees": ["2017 - 2021"],
+      "entreprise": "Éducation Nationale",
+      "logo": "https://i.ibb.co/H4DxbNb/MIN-Education-Nationale-et-Jeunesse-RVB.jpg",
+      "url": "https://www.devenirenseignant.gouv.fr/etre-professeur-documentaliste-148",
+      "favicon": "https://i.ibb.co/q9Wxwwj/favicon.png",
+      "details": [
+        "Gestion et organisation des ressources documentaires.",
+        "Formation des élèves à la recherche documentaire et à l'utilisation des outils numériques.",
+        "Participation à des projets pédagogiques et culturels."
+      ]
+    },
+    {
+      "poste": "Professeur Documentaliste stagiaire",
+      "annees": ["2013 - 2014"],
+      "details": [
+        "Stages en établissements",
+        "Représentant étudiants Master",
+        "Participation à des projets de numérisation des ressources documentaires."
+      ],
+      "logo": "https://i.ibb.co/H4DxbNb/MIN-Education-Nationale-et-Jeunesse-RVB.jpg",
+      "url": "https://www.devenirenseignant.gouv.fr/etre-professeur-documentaliste-148",
+      "favicon": "https://i.ibb.co/q9Wxwwj/favicon.png"
+    },
+    {
+      "poste": "Professeur de FLE",
+      "annees": ["2011 - 2012"],
+      "entreprise": "Alliance Française (Strasbourg)",
+      "logo": "https://i.ibb.co/BfHbZY2/Alliance-fran-aise-de-Paris.png",
+      "url": "https://www.afstrasbourg.eu/",
+      "favicon": "https://i.ibb.co/jhkK0Yw/af.png",
+      "details": [
+        "Enseignement du français langue étrangère à des étudiants internationaux.",
+        "Organisation d'activités culturelles pour promouvoir la langue et la culture françaises.",
+        "Évaluation des progrès des étudiants et adaptation des cours en conséquence."
+      ]
+    },
+    {
+      "poste": "Professeur d'Allemand",
+      "annees": ["2010 - 2012"],
+      "details": [
+        "Stages en établissements",
+        "Représentant étudiants Master",
+        "Cours à domicile (Acadomia)",
+        "Enseignement de l'allemand à des élèves de différents niveaux.",
+        "Création de supports pédagogiques adaptés aux besoins des élèves."
+      ],
+      "logo": "https://i.ibb.co/H4DxbNb/MIN-Education-Nationale-et-Jeunesse-RVB.jpg",
+      "url": "https://www.education.gouv.fr/les-langues-vivantes-etrangeres-et-regionales-11249",
+      "favicon": "https://i.ibb.co/q9Wxwwj/favicon.png"
+    },
+    {
+      "poste": "Responsable en Associations",
+      "annees": ["2015 - 2021"],
+      "details": [
+        "Album de musique, productions médias (GEM)",
+        "PSC1, BEPS, IRR (Croix-Rouge)",
+        "Respo web, com', animateur radio, assistant régie (ENS de Lyon)",
+        "Respo web, com'/SI, commercial, chargé d'enquête (NEOMA)",
+        "Président BDE des CPGE (Lycée Masséna)",
+        "Organisation d'événements et de projets associatifs.",
+        "Gestion des équipes et des ressources.",
+        "Communication et promotion des activités associatives."
+      ],
+      "logo": "https://i.ibb.co/wpFkHqv/experience-logo-placeholder.png",
+      "url": "https://www.trensistor.fr/author/sclement/",
+      "favicon": "https://i.ibb.co/rswJC9j/experience-favicon.png"
+    }
+  ]
+}

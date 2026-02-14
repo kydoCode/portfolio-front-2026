@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.AccordionContent {
+  overflow: hidden;
+}
+
+.AccordionContent[data-state='open'] {
+  animation: slideDown 300ms ease-out;
+}
+
+.AccordionContent[data-state='closed'] {
+  animation: slideUp 300ms ease-out;
+}
+
+.AccordionChevron {
+  transition: transform 300ms;
+}
+
+.AccordionTrigger[data-state='open'] > .AccordionChevron {
+  transform: rotate(180deg);
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+/* Custom styles for the carousel */
+.custom-carousel .carousel-root {
+  width: 100%;
+}
+
+.custom-carousel .carousel .slide {
+  background: none;
+}
+
+.custom-carousel .carousel .slide img {
+  width: 100%;
+  height: auto;
+}
+
+.custom-carousel .carousel .legend {
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
+/* Ensure buttons have consistent styling */
+.btn-primary {
+  @apply bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors;
+}
