@@ -2,12 +2,10 @@ import React from 'react';
 import { Github, Linkedin } from 'lucide-react';
 
 export default function Footer() {
-
-  const d = new Date();
-  let year = d.getFullYear();
+  const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-800 text-white py-4 w-full">  {/*  mt-8 */}
+    <footer className="bg-gray-800 text-white py-4 w-full">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row justify-between items-center">
           <div className="flex items-center space-x-4 mb-4 sm:mb-0">

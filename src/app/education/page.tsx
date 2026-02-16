@@ -1,18 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import educationData from '../data/education_light.json'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import backgroundImage from '/images/background.svg';
+import React from 'react';
+import Link from 'next/link';
+import educationData from '@/data/education_light.json';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+
+interface Education {
+  intitule?: string;
+  annees: string[];
+  etablissement?: string;
+  etablissements?: Array<{
+    nom: string;
+    intitule?: string;
+    mention?: string;
+  }>;
+  url?: string;
+  favicon?: string;
+  logo?: string;
+  backgroundImage?: string;
+}
 
 export default function Education() {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col bg-no-repeat bg-cover bg-fixed" style={{backgroundImage: `url(${backgroundImage})`}}>
+    <div className="min-h-screen bg-gray-100 flex flex-col bg-no-repeat bg-cover bg-fixed" style={{backgroundImage: 'url(/images/background.svg)'}}>
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8 sm:px-6 lg:px-8">
         <h1 className="text-3xl text-white font-bold mb-6 text-center">Education</h1>
         <ul className="space-y-6">
-          {educationData.education.map((education, index) => (
+          {(educationData.education as Education[]).map((education, index) => (
             <li 
               key={index}
               className="relative bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105 education-card"
@@ -76,12 +90,12 @@ export default function Education() {
           ))}
         </ul>
         <div className="mt-8 text-center">
-          <Link to="/" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+          <Link href="/" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
             Back to Home
           </Link>
         </div>
       </main>
       <Footer />
     </div>
-  )
+  );
 }

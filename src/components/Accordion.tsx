@@ -1,11 +1,27 @@
+'use client';
+
 import React from 'react';
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
-import '../index.css';
 
-const Accordion = ({ items }) => {
+
+interface AccordionDetail {
+  icon: React.ReactNode;
+  text: string;
+}
+
+interface AccordionItem {
+  type: string;
+  details: AccordionDetail[];
+}
+
+interface AccordionProps {
+  items: AccordionItem[];
+}
+
+const Accordion = ({ items }: AccordionProps) => {
   return (
-    <div className="w-full max-w-4xl mx-auto"> {/* Added wrapper for centering */}
+    <div className="w-full max-w-4xl mx-auto">
       <RadixAccordion.Root type="single" collapsible className="AccordionRoot w-full">
         {items.map((item, index) => (
           <RadixAccordion.Item key={index} value={`item-${index}`} className="AccordionItem mb-2" id={`accordion-item-${index}`}>

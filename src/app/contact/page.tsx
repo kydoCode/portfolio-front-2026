@@ -1,36 +1,34 @@
-import React, { useState } from 'react'
-import { Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import { Link } from 'react-router-dom'
-import backgroundImage from '/images/background.svg';
+'use client';
+
+import React, { useState } from 'react';
+import { Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import Link from 'next/link';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
-  })
+  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData(prevState => ({ ...prevState, [name]: value }))
-  }
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prevState => ({ ...prevState, [name]: value }));
+  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Here you would typically send the form data to a server
-    console.log('Form submitted:', formData)
-    // Reset form after submission
-    setFormData({ name: '', email: '', message: '' })
-  }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+    setFormData({ name: '', email: '', message: '' });
+  };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center bg-no-repeat bg-cover bg-fixed" style={{backgroundImage: `url(${backgroundImage})`}}>
-      {/* py-12 px-4 sm:px-6 lg:px-8  */}
-        <Header />
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center bg-no-repeat bg-cover bg-fixed" style={{backgroundImage: 'url(/images/background.svg)'}}>
+      <Header />
       <div className="w-full max-w-screen-lg">
-        <h1 className="text-3x text-white text-center font-bold text-gray-900 mt-8 mb-8">Contact Me</h1>
+        <h1 className="text-3xl text-white text-center font-bold text-gray-900 mt-8 mb-8">Contact Me</h1>
         
         <div className="bg-white shadow overflow-hidden sm:rounded-lg mb-8">
           <div className="px-4 py-5 sm:p-6">
@@ -99,7 +97,7 @@ export default function Contact() {
                 <textarea
                   name="message"
                   id="message"
-                  rows="4"
+                  rows={4}
                   value={formData.message}
                   onChange={handleChange}
                   required
@@ -118,12 +116,12 @@ export default function Contact() {
           </div>
         </div>
         <div className="mb-8 mt-8 text-center">
-          <Link to="/" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+          <Link href="/" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
             Back to Home
           </Link>
         </div>
       </div>
-        <Footer />
+      <Footer />
     </div>
-  )
+  );
 }

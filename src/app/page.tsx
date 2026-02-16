@@ -1,65 +1,144 @@
-import Image from "next/image";
+'use client';
+
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { ChevronRight, Laptop, Code, Briefcase, Palette, GraduationCap, Heart, User, Mail } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import ProjectModal from '@/components/ProjectModal';
+import { Carousel } from 'react-responsive-carousel';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import reposData from '@/data/repos_github_for_portfolio.json';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+interface Project {
+  name: string;
+  description?: string;
+  image_path?: string;
+  languages: Record<string, number>;
+  detected_technologies: Record<string, number>;
+  html_version?: string;
+  modernity_score?: {
+    accessibility?: string;
+    best_practices?: string;
+    clean_code?: string;
+  };
+  context?: string;
+  repo_url: string;
+  site_url?: string;
+}
 
 export default function Home() {
+  const { t } = useTranslation();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const featuredWork = [
+    { title: t('nav.projects'), description: t('featuredWork.projectsDesc'), icon: <Laptop />, link: '/projects' },
+    { title: t('nav.skills'), description: t('featuredWork.skillsDesc'), icon: <Code />, link: '/skills' },
+    { title: t('nav.experience'), description: t('featuredWork.experienceDesc'), icon: <Briefcase />, link: '/experience' },
+    { title: t('nav.creations'), description: t('featuredWork.creationsDesc'), icon: <Palette />, link: '/creations' },
+    { title: t('nav.education'), description: t('featuredWork.educationDesc'), icon: <GraduationCap />, link: '/education' },
+    { title: t('nav.hobbies'), description: t('featuredWork.hobbiesDesc'), icon: <Heart />, link: '/hobbies' },
+    { title: t('nav.about'), description: t('featuredWork.aboutDesc'), icon: <User />, link: '/about' },
+    { title: t('nav.contact'), description: t('featuredWork.contactDesc'), icon: <Mail />, link: '/contact' },
+  ];
+
+  const openModal = (project: Project) => {
+    setModalOpen(true);
+    setSelectedProject(project);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedProject(null);
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center">
+      <Header />
+      <main className="py-12 px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl bg-no-repeat bg-cover bg-fixed" style={{backgroundImage: 'url(/images/background.svg)'}}>
+        <div className="bg-white rounded-lg shadow-xl overflow-hidden">
+          <div className="md:flex">
+            <div className="md:flex-shrink-0">
+              <img className="h-full w-full object-cover md:w-48" src="https://i.ibb.co/yN7YVXc/avatar-homepage.jpg" alt="Profile picture" />
+            </div>
+            <div className="p-8">
+              <div className="text-sm font-semibold text-blue-600">{t('hero.subtitle')}</div>
+              <h2 className="mt-2 text-4xl font-bold text-gray-900">{t('hero.title')}</h2>
+              <p className="mt-2 text-gray-600">{t('hero.description')}</p>
+              <div className="mt-4">
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                >
+                  {t('hero.cta')}
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <h1 className="text-4xl text-white font-bold mt-8 mb-8 text-center">Portfolio</h1>
+
+        <div className="mt-12">
+          <h2 className="text-2xl text-white font-bold text-gray-900">{t('featuredWork.title')}</h2>
+          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {featuredWork.map((item, index) => (
+              <div key={index} className="bg-white overflow-hidden shadow rounded-lg">
+                <div className="p-5">
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0">
+                      {item.icon}
+                    </div>
+                    <div className="ml-5 w-0 flex-1">
+                      <dl>
+                        <dt className="text-sm font-medium text-gray-500 truncate">{item.title}</dt>
+                        <dd className="mt-1 text-sm text-gray-900">{item.description}</dd>
+                      </dl>
+                    </div>
+                    <div className="ml-4 flex-shrink-0">
+                      <Link
+                        href={item.link}
+                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                      >
+                        {t('featuredWork.viewButton')}
+                        <ChevronRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
+        <div className="mt-12">
+          <h2 className="text-2xl text-white font-bold text-gray-900">{t('latestProjects.title')}</h2>
+          <Carousel showThumbs={false} showStatus={false} infiniteLoop useKeyboardArrows>
+            {(reposData as any[]).slice(0, 6).map((project, index) => (
+              <div key={index} className="bg-white overflow-hidden shadow rounded-lg">
+                <div className="p-5">
+                  <h3 className="text-lg font-medium text-gray-900">{project.name}</h3>
+                  <p className="mt-1 text-sm text-gray-500">{project.description || t('latestProjects.noDescription')}</p>
+                  <div className="mt-4">
+                    <img src={project.image_path || "/placeholder.svg?height=200&width=300"} alt={project.name} className="w-full h-48 object-cover rounded-md mb-4" />
+                    <button
+                      onClick={() => openModal(project)}
+                      className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mb-4"
+                    >
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Carousel>
+        </div>
+        
+        {modalOpen && selectedProject && (
+          <ProjectModal project={selectedProject} onClose={closeModal} />
+        )}
       </main>
+      <Footer />
     </div>
   );
 }

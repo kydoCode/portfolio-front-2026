@@ -1,20 +1,29 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import experienceData from '../data/experience_augmented.json'
-import ExperienceDetail from '../components/ExperienceDetail'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import backgroundImage from '/images/background.svg';
+import React from 'react';
+import Link from 'next/link';
+import experienceData from '@/data/experience_augmented.json';
+import ExperienceDetail from '@/components/ExperienceDetail';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
+interface Experience {
+  poste: string;
+  annees: string[];
+  entreprise?: string;
+  url?: string;
+  favicon?: string;
+  logo?: string;
+  backgroundImage?: string;
+  details?: any[];
+}
 
 export default function Experience() {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
       <Header />
-      <main className="flex-grow container mx-auto px-4 py-8 sm:px-6 lg:px-8 bg-no-repeat bg-cover bg-fixed" style={{backgroundImage: `url(${backgroundImage})`}}>
+      <main className="flex-grow container mx-auto px-4 py-8 sm:px-6 lg:px-8 bg-no-repeat bg-cover bg-fixed" style={{backgroundImage: 'url(/images/background.svg)'}}>
         <h1 className="text-3xl text-white font-bold mb-6 text-center">Experience</h1>
         <ul className="space-y-6">
-          {experienceData.experience.map((experience, index) => (
+          {(experienceData.experience as Experience[]).map((experience, index) => (
             <li 
               key={index}
               className="relative bg-white shadow-lg rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105 experience-card"
@@ -74,12 +83,12 @@ export default function Experience() {
           ))}
         </ul>
         <div className="mt-8 text-center">
-          <Link to="/" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+          <Link href="/" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
             Back to Home
           </Link>
         </div>
       </main>
       <Footer />
     </div>
-  )
+  );
 }

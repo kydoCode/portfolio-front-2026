@@ -1,13 +1,17 @@
+'use client';
+
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Globe, Home } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+
+const NAV_ITEMS = ['Projects', 'Skills', 'Experience', 'Creations', 'Education', 'Hobbies', 'About', 'Contact'] as const;
 
 export default function Header() {
   const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
 
-  const changeLanguage = (lng) => {
+  const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
   };
 
@@ -20,18 +24,18 @@ export default function Header() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <Link to="/">
+            <Link href="/">
               <img src="https://i.ibb.co/zsHCctJ/logo-coder.jpg" alt="Logo" className="h-10 w-auto rounded-full" />
             </Link>
           </div>
           <nav className="hidden md:flex space-x-4 lg:space-x-8">
-            <Link to="/" className="text-gray-500 hover:text-gray-900">
+            <Link href="/" className="text-gray-500 hover:text-gray-900">
               <Home className="h-5 w-5" />
             </Link>
-            {['Projects', 'Skills', 'Experience', 'Creations', 'Education', 'Hobbies', 'About', 'Contact'].map((item) => (
+            {NAV_ITEMS.map((item) => (
               <Link
                 key={item}
-                to={`/${item.toLowerCase()}`}
+                href={`/${item.toLowerCase()}`}
                 className="text-gray-500 hover:text-gray-900 text-sm lg:text-base"
               >
                 {t(`nav.${item.toLowerCase()}`)}
@@ -60,13 +64,13 @@ export default function Header() {
         </div>
         {isOpen && (
           <nav className="md:hidden pb-4">
-            <Link to="/" className="block text-gray-500 hover:text-gray-900 py-2">
+            <Link href="/" className="block text-gray-500 hover:text-gray-900 py-2">
               <Home className="h-5 w-5" />
             </Link>
-            {['Projects', 'Skills', 'Experience', 'Creations', 'Education', 'Hobbies', 'About', 'Contact'].map((item) => (
+            {NAV_ITEMS.map((item) => (
               <Link
                 key={item}
-                to={`/${item.toLowerCase()}`}
+                href={`/${item.toLowerCase()}`}
                 className="block text-gray-500 hover:text-gray-900 py-2"
               >
                 {t(`nav.${item.toLowerCase()}`)}

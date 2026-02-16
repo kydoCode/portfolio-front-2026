@@ -1,34 +1,60 @@
-import { X, Github, Globe } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
-import { useEffect } from 'react'
+'use client';
 
-export default function ProjectModal({ project, onClose }) {
-  const { t } = useTranslation()
+import { X, Github, Globe } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useEffect } from 'react';
 
-  const handleKeyDown = (event) => {
+interface ModernityScore {
+  accessibility?: string;
+  best_practices?: string;
+  clean_code?: string;
+}
+
+interface Project {
+  name: string;
+  image_path?: string;
+  description?: string;
+  languages: Record<string, number>;
+  detected_technologies: Record<string, number>;
+  html_version?: string;
+  modernity_score?: ModernityScore;
+  context?: string;
+  repo_url: string;
+  site_url?: string;
+}
+
+interface ProjectModalProps {
+  project: Project;
+  onClose: () => void;
+}
+
+export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const { t } = useTranslation();
+
+  const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      onClose()
+      onClose();
     }
-  }
+  };
 
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener('keydown', handleKeyDown);
     return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [])
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
-  const computeLanguagePercentages = (languages) => {
-    const totalBytes = Object.values(languages).reduce((acc, bytes) => acc + bytes, 0)
+  const computeLanguagePercentages = (languages: Record<string, number>): Record<string, string> => {
+    const totalBytes = Object.values(languages).reduce((acc, bytes) => acc + bytes, 0);
     return Object.entries(languages).reduce((acc, [lang, bytes]) => {
       if (lang !== 'not available') {
-        acc[lang] = ((bytes / totalBytes) * 100).toFixed(2)
+        acc[lang] = ((bytes / totalBytes) * 100).toFixed(2);
       }
-      return acc
-    }, {})
-  }
+      return acc;
+    }, {} as Record<string, string>);
+  };
 
-  const languagePercentages = computeLanguagePercentages(project.languages)
+  const languagePercentages = computeLanguagePercentages(project.languages);
 
   return (
     <div className="fixed z-10 inset-0 overflow-y-auto">
@@ -77,7 +103,7 @@ export default function ProjectModal({ project, onClose }) {
                   <div className="mt-4">
                     <h4 className="text-sm font-medium text-gray-900">{t('projectModal.modernityScore')}</h4>
                     <ul className="mt-2 space-y-1">
-                      <li className="text-sm  text-gray-500">{t('projectModal.accessibility')}: {project.modernity_score?.accessibility || t('projectModal.notAvailable')}</li>
+                      <li className="text-sm text-gray-500">{t('projectModal.accessibility')}: {project.modernity_score?.accessibility || t('projectModal.notAvailable')}</li>
                       <li className="text-sm text-gray-500">{t('projectModal.bestPractices')}: {project.modernity_score?.best_practices || t('projectModal.notAvailable')}</li>
                       <li className="text-sm text-gray-500">{t('projectModal.cleanCode')}: {project.modernity_score?.clean_code || t('projectModal.notAvailable')}</li>
                     </ul>
@@ -121,5 +147,5 @@ export default function ProjectModal({ project, onClose }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

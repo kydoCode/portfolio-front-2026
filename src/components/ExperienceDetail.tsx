@@ -1,6 +1,20 @@
 import React from 'react';
 
-const ExperienceDetail = ({ detail }) => {
+interface AugmentedDetail {
+  prefixe?: string;
+  tag: string;
+  url?: string;
+  important?: boolean;
+  suffixe?: string;
+}
+
+type Detail = string | AugmentedDetail;
+
+interface ExperienceDetailProps {
+  detail: Detail;
+}
+
+const ExperienceDetail = ({ detail }: ExperienceDetailProps) => {
   // Cas 1 : Le détail est une simple chaîne de caractères
   if (typeof detail === 'string') {
     return <li className="mb-2 text-gray-700">{detail}</li>;
