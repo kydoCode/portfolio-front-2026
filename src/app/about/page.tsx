@@ -117,7 +117,7 @@ export default function About() {
           <div className="px-4 py-5 sm:p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">My Mission</h2>
             <p className="text-gray-600">
-              My goal is to leverage my skills and passion for technology to create impactful digital solutions that solve real-world problems. I'm constantly learning and evolving, always excited to take on new challenges and push the boundaries of what's possible in web development.
+              My goal is to use my skills and passion for technology to create impactful digital solutions that solve real-world problems. I'm constantly learning and evolving, always excited to take on new challenges and push the boundaries of what's possible in web development.
             </p>
           </div>
         </div>

@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio 2026 - Sylvain CLEMENT
 
-## Getting Started
+Portfolio professionnel moderne développé avec Next.js 16 et React 19.
 
-First, run the development server:
+## Stack technique
+
+- **Framework** : Next.js 16.1.6 (Turbopack)
+- **UI** : React 19.2.3 + TypeScript 5
+- **Styling** : Tailwind CSS 4
+- **Base de données** : Neon PostgreSQL + Prisma 6
+- **Déploiement** : Vercel
+
+## Prérequis
+
+- Node.js 20.x (LTS)
+- npm ou yarn
+- PostgreSQL (Neon)
+
+## Installation
+
+```bash
+npm install
+```
+
+## Configuration
+
+Créer un fichier `.env` à la racine :
+
+```env
+DATABASE_URL="postgresql://..."
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+```
+
+## Développement
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## Base de données
 
-To learn more about Next.js, take a look at the following resources:
+Synchroniser le schéma Prisma :
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npx prisma db push
+npx prisma generate
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Architecture
 
-## Deploy on Vercel
+- `/src/app` : Pages App Router
+- `/src/components` : Composants réutilisables
+- `/src/data` : Données JSON
+- `/prisma` : Schéma base de données
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Design System
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Palette Electric Carbon :
+- Carbon Night : #050a12
+- Cyan Atomique : #00F5FF
+
+Typographies :
+- Space Grotesk (titres)
+- Inter (corps de texte)
+- Crimson Pro (labels)
+
+## Sécurité
+
+- Variables d'environnement protégées
+- XSS prevention (React interpolation)
+- OWASP Top 10 compliance
+
+## Documentation
+
+Documentation technique disponible dans le dossier `/docs` du projet.
+
+## Licence
+
+Tous droits réservés - Sylvain CLEMENT 2026
