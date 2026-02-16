@@ -31,43 +31,61 @@ model Experience {
 }
 
 model Education {
-  id          String   @id @default(cuid())
-  diplome     String
+  id            String   @id @default(cuid())
+  diplome       String
   etablissement String
-  annees      String[]
-  logo        String?
-  url         String?
-  details     String[]
-  order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  startDate     DateTime? // Date début
+  endDate       DateTime? // Date fin
+  logo          String?
+  url           String?
+  details       String[]
+  mention       String?   // Mention obtenue
+  order         Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Certification {
   id          String   @id @default(cuid())
   nom         String
   organisme   String
-  date        String
+  date        DateTime // Date précise au lieu de String
   logo        String?
   description String?
-  url         String?
+  url         String?  // Lien GASQ/CFTL pour ISTQB
+  credentialId String? // ID certification
   order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
 model Project {
-  id          String   @id @default(cuid())
-  title       String
-  description String
-  image       String?
-  technologies String[]
-  githubUrl   String?
-  liveUrl     String?
-  featured    Boolean  @default(false)
-  order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                     String   @id @default(cuid())
+  name                   String   // Titre projet
+  title                  String?  // Alias pour compatibilité
+  description            String
+  image                  String?  // Image principale
+  image_path             String?  // Chemin image (existant JSON)
+  technologies           String[] // Liste technologies
+  languages              Json?    // Langages avec pourcentages (existant JSON)
+  detected_technologies  Json?    // Technologies détectées (existant JSON)
+  html_version           String?  // Version HTML (existant JSON)
+  modernity_score        Json?    // Score modernité (existant JSON)
+  context                String?  // Contexte projet (existant JSON)
+  githubUrl              String?  // URL GitHub
+  repo_url               String?  // Alias pour compatibilité
+  liveUrl                String?  // URL live
+  site_url               String?  // Alias pour compatibilité
+  featured               Boolean  @default(false)
+  challenge              String?  // Défi technique rencontré
+  strategy               String?  // Stratégie de résolution
+  tools                  String[] // Outils utilisés
+  learnings              String[] // Apprentissages clés (positif)
+  startDate              DateTime?
+  endDate                DateTime?
+  order                  Int      @default(0)
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
 }
 
 model Skill {
