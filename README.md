@@ -60,7 +60,22 @@ npx prisma generate
 - `/src/app` : Pages App Router
 - `/src/components` : Composants réutilisables
 - `/src/data` : Données JSON
+- `/src/locales` : Traductions i18n (FR/EN/DE/ZH)
 - `/prisma` : Schéma base de données
+
+## Internationalisation
+
+- **Bibliothèque** : react-i18next + i18next
+- **Langues** : FR (défaut), EN, DE, ZH
+- **Fallback** : FR → EN
+- **Détection** : Langue navigateur automatique
+
+## Formulaire contact
+
+- **Solution** : Vercel Functions + Resend API
+- **Validation** : React Hook Form + Zod
+- **Protection spam** : Rate limiting
+- **Gratuit** : 100 emails/jour
 
 ## Design System
 
