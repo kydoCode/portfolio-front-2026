@@ -4,9 +4,9 @@
       "poste": "Formateur IT & Concepteur Développeur (Stage)",
       "annees": ["2025"],
       "entreprise": "StoryCom",
-      "logo": "https://storycom.fr/wp-content/uploads/2019/08/logoblack.png",
+      "logo": "/images/logos/storycom-placeholder.png",
       "url": "https://storycom.fr",
-      "favicon": "https://storycom.fr/favicon.ico",
+      "favicon": "/images/favicons/storycom-placeholder.ico",
       "details": [
         "Ingénierie pédagogique : Animation de cours sur le framework MVC Symfony et préparation aux certifications (REAC du TP DWWM).",
         {
