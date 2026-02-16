@@ -1,144 +1,51 @@
 'use client';
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { ChevronRight, Laptop, Code, Briefcase, Palette, GraduationCap, Heart, User, Mail } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
-import ProjectModal from '@/components/ProjectModal';
-import { Carousel } from 'react-responsive-carousel';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import reposData from '@/data/repos_github_for_portfolio.json';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-
-interface Project {
-  name: string;
-  description?: string;
-  image_path?: string;
-  languages: Record<string, number>;
-  detected_technologies: Record<string, number>;
-  html_version?: string;
-  modernity_score?: {
-    accessibility?: string;
-    best_practices?: string;
-    clean_code?: string;
-  };
-  context?: string;
-  repo_url: string;
-  site_url?: string;
-}
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const { t } = useTranslation();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const router = useRouter();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [depth, setDepth] = useState(0);
 
-  const featuredWork = [
-    { title: t('nav.projects'), description: t('featuredWork.projectsDesc'), icon: <Laptop />, link: '/projects' },
-    { title: t('nav.skills'), description: t('featuredWork.skillsDesc'), icon: <Code />, link: '/skills' },
-    { title: t('nav.experience'), description: t('featuredWork.experienceDesc'), icon: <Briefcase />, link: '/experience' },
-    { title: t('nav.creations'), description: t('featuredWork.creationsDesc'), icon: <Palette />, link: '/creations' },
-    { title: t('nav.education'), description: t('featuredWork.educationDesc'), icon: <GraduationCap />, link: '/education' },
-    { title: t('nav.hobbies'), description: t('featuredWork.hobbiesDesc'), icon: <Heart />, link: '/hobbies' },
-    { title: t('nav.about'), description: t('featuredWork.aboutDesc'), icon: <User />, link: '/about' },
-    { title: t('nav.contact'), description: t('featuredWork.contactDesc'), icon: <Mail />, link: '/contact' },
-  ];
-
-  const openModal = (project: Project) => {
-    setModalOpen(true);
-    setSelectedProject(project);
-  };
-
-  const closeModal = () => {
-    setModalOpen(false);
-    setSelectedProject(null);
-  };
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+      setDepth(Math.floor((e.clientY / window.innerHeight) * 500));
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center">
-      <Header />
-      <main className="py-12 px-4 sm:px-6 lg:px-8 w-full max-w-screen-xl bg-no-repeat bg-cover bg-fixed" style={{backgroundImage: 'url(/images/background.svg)'}}>
-        <div className="bg-white rounded-lg shadow-xl overflow-hidden">
-          <div className="md:flex">
-            <div className="md:flex-shrink-0">
-              <img className="h-full w-full object-cover md:w-48" src="https://i.ibb.co/yN7YVXc/avatar-homepage.jpg" alt="Profile picture" />
-            </div>
-            <div className="p-8">
-              <div className="text-sm font-semibold text-blue-600">{t('hero.subtitle')}</div>
-              <h2 className="mt-2 text-4xl font-bold text-gray-900">{t('hero.title')}</h2>
-              <p className="mt-2 text-gray-600">{t('hero.description')}</p>
-              <div className="mt-4">
-                <Link
-                  href="/projects"
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-                >
-                  {t('hero.cta')}
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h1 className="text-4xl text-white font-bold mt-8 mb-8 text-center">Portfolio</h1>
+    <div className="relative h-screen overflow-hidden bg-[#050a12] text-white" style={{ backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.15) 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
+      
+      <div className="fixed right-12 top-1/2 -translate-y-1/2 text-cyan-500 text-sm font-mono tracking-[5px] [writing-mode:vertical-rl] border-r-2 border-cyan-500 pr-4 z-50">
+        STATUS: SCANNING // DEPTH: {depth}M
+      </div>
 
-        <div className="mt-12">
-          <h2 className="text-2xl text-white font-bold text-gray-900">{t('featuredWork.title')}</h2>
-          <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {featuredWork.map((item, index) => (
-              <div key={index} className="bg-white overflow-hidden shadow rounded-lg">
-                <div className="p-5">
-                  <div className="flex items-center">
-                    <div className="flex-shrink-0">
-                      {item.icon}
-                    </div>
-                    <div className="ml-5 w-0 flex-1">
-                      <dl>
-                        <dt className="text-sm font-medium text-gray-500 truncate">{item.title}</dt>
-                        <dd className="mt-1 text-sm text-gray-900">{item.description}</dd>
-                      </dl>
-                    </div>
-                    <div className="ml-4 flex-shrink-0">
-                      <Link
-                        href={item.link}
-                        className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                      >
-                        {t('featuredWork.viewButton')}
-                        <ChevronRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="mt-12">
-          <h2 className="text-2xl text-white font-bold text-gray-900">{t('latestProjects.title')}</h2>
-          <Carousel showThumbs={false} showStatus={false} infiniteLoop useKeyboardArrows>
-            {(reposData as any[]).slice(0, 6).map((project, index) => (
-              <div key={index} className="bg-white overflow-hidden shadow rounded-lg">
-                <div className="p-5">
-                  <h3 className="text-lg font-medium text-gray-900">{project.name}</h3>
-                  <p className="mt-1 text-sm text-gray-500">{project.description || t('latestProjects.noDescription')}</p>
-                  <div className="mt-4">
-                    <img src={project.image_path || "/placeholder.svg?height=200&width=300"} alt={project.name} className="w-full h-48 object-cover rounded-md mb-4" />
-                    <button
-                      onClick={() => openModal(project)}
-                      className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mb-4"
-                    >
-                      View Details
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </Carousel>
-        </div>
-        
-        {modalOpen && selectedProject && (
-          <ProjectModal project={selectedProject} onClose={closeModal} />
-        )}
-      </main>
-      <Footer />
+      <div 
+        className="fixed inset-0 pointer-events-none z-[9998]"
+        style={{ background: `radial-gradient(circle 320px at ${mousePos.x}px ${mousePos.y}px, transparent 0%, rgba(5, 10, 18, 0.98) 100%)` }}
+      />
+
+      <div 
+        className="fixed w-2 h-2 bg-white rounded-full pointer-events-none z-[10000] shadow-[0_0_25px_#00F5FF]"
+        style={{ left: mousePos.x, top: mousePos.y, transform: 'translate(-50%, -50%)' }}
+      />
+
+      <section className="h-screen flex flex-col justify-center items-center relative z-[9999]">
+        <span className="text-sm tracking-[12px] text-cyan-500 uppercase mb-8 opacity-80">Strategic Intelligence</span>
+        <h1 className="text-[12vw] leading-[0.8] uppercase text-center tracking-[-5px] font-bold">
+          SILENT<br/>SYSTEM
+        </h1>
+        <button 
+          onClick={() => router.push('/core')}
+          className="mt-20 px-16 py-6 bg-transparent border border-cyan-500 text-cyan-500 uppercase tracking-[5px] text-lg rounded-sm transition-all hover:bg-cyan-500 hover:text-[#050a12] hover:shadow-[0_0_50px_#00F5FF] hover:scale-105"
+        >
+          Démarrer l'immersion
+        </button>
+      </section>
     </div>
   );
 }
