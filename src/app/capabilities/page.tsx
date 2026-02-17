@@ -28,9 +28,12 @@ export default function SystemCapabilities() {
   ];
 
   const certifications = [
-    { name: 'DWWM', status: 'CRITICAL', year: 2025 },
-    { name: 'Apple Foundation', status: 'NORMAL', year: 2023 }
+    { name: 'ISTQB Foundation v4.0', status: 'CRITICAL', year: 2025, org: 'GASQ/CFTL', link: 'https://www.cftl.fr', state: 'ACTIVE' },
+    { name: 'Cisco CyberOps Associate', status: 'NORMAL', year: 2026, org: 'Cisco', link: null, state: 'PENDING' },
+    { name: 'C2i Niveau 1', status: 'NORMAL', year: 2014, org: 'Université', link: null, state: 'ACTIVE' }
   ];
+
+
 
   return (
     <div className="min-h-screen bg-[#050a12] text-white overflow-x-hidden" style={{ backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.15) 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
@@ -77,22 +80,44 @@ export default function SystemCapabilities() {
           </div>
         </div>
 
-        {/* BADGES CERTIFICATIONS */}
+        {/* CERTIFICATIONS */}
         <div className="mb-20">
           <h2 className="text-2xl font-bold uppercase mb-8 text-cyan-500">Certifications</h2>
-          <div className="flex gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {certifications.map((cert, i) => (
-              <div key={i} className="flex items-center gap-3">
-                <span className={`px-4 py-2 border text-xs rounded ${
-                  cert.status === 'CRITICAL' 
-                    ? 'bg-red-500/20 border-red-500 text-red-500' 
-                    : 'bg-cyan-500/20 border-cyan-500 text-cyan-500'
-                }`}>
-                  {cert.status}
-                </span>
-                <div>
-                  <div className="text-sm font-bold">{cert.name}</div>
-                  <div className="text-xs opacity-50">{cert.year}</div>
+              <div key={i} className="border border-cyan-500/20 p-4 bg-white/[0.03] hover:border-cyan-500/50 transition-all">
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex-1">
+                    <h3 className="text-sm font-bold">{cert.name}</h3>
+                    <p className="text-xs opacity-50 mt-1">{cert.org}</p>
+                  </div>
+                  <span className={`px-3 py-1 border text-xs rounded whitespace-nowrap ${
+                    cert.status === 'CRITICAL' 
+                      ? 'bg-red-500/20 border-red-500 text-red-500' 
+                      : 'bg-cyan-500/20 border-cyan-500 text-cyan-500'
+                  }`}>
+                    {cert.status}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between mt-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-cyan-500">{cert.year}</span>
+                    <span className={`text-xs font-mono ${
+                      cert.state === 'ACTIVE' ? 'text-green-500' : cert.state === 'PENDING' ? 'text-yellow-500' : 'text-cyan-500'
+                    }`}>
+                      [{cert.state}]
+                    </span>
+                  </div>
+                  {cert.link && (
+                    <a 
+                      href={cert.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-xs text-cyan-500 hover:text-white transition-colors"
+                    >
+                      Vérifier →
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
