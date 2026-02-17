@@ -1,13 +1,22 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import projectsData from '@/data/projects.json';
+import BurgerMenu from '@/components/BurgerMenu';
 
 export default function SystemCapabilities() {
   const router = useRouter();
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && menuOpen) setMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [menuOpen]);
 
   const techStack = [
     { name: 'React/TypeScript', level: 85 },
@@ -36,14 +45,7 @@ export default function SystemCapabilities() {
         <span className={`w-6 h-0.5 bg-cyan-500 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
       </button>
 
-      {menuOpen && (
-        <div className="fixed inset-0 bg-black/95 z-[99] flex flex-col justify-center items-center gap-8">
-          <button onClick={() => { router.push('/'); setMenuOpen(false); }} className="text-2xl text-cyan-500 hover:text-white transition-colors tracking-widest">HOME</button>
-          <button onClick={() => { router.push('/core'); setMenuOpen(false); }} className="text-2xl text-cyan-500 hover:text-white transition-colors tracking-widest">CORE</button>
-          <button onClick={() => setMenuOpen(false)} className="text-2xl text-white tracking-widest">CAPABILITIES</button>
-          <button onClick={() => { router.push('/peripheral'); setMenuOpen(false); }} className="text-2xl text-cyan-500 hover:text-white transition-colors tracking-widest">PERIPHERAL</button>
-        </div>
-      )}
+      <BurgerMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} currentPage="capabilities" />
 
       <button 
         onClick={() => router.push('/core')}
@@ -125,7 +127,13 @@ export default function SystemCapabilities() {
         </div>
 
         {/* NAVIGATION */}
-        <div className="mt-20 flex justify-center">
+        <div className="mt-20 flex justify-center gap-4">
+          <button 
+            onClick={() => router.push('/core')}
+            className="border border-cyan-500/50 text-cyan-500/50 px-8 py-3 text-xs tracking-widest hover:border-cyan-500 hover:text-cyan-500 transition-all"
+          >
+            ← CORE
+          </button>
           <button 
             onClick={() => router.push('/peripheral')}
             className="border border-cyan-500 text-cyan-500 px-12 py-4 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all"

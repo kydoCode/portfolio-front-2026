@@ -62,8 +62,8 @@ export default function Home() {
         style={{ left: mousePos.x, top: mousePos.y, transform: 'translate(-50%, -50%)' }}
       />
 
-      <section className="h-screen flex flex-col justify-center items-center relative z-[9999]">
-        <span className="text-sm tracking-[12px] text-cyan-500 uppercase mb-8 opacity-80 animate-[fadeIn_1s_ease-in]">
+      <section className="h-screen flex flex-col justify-center items-center relative z-[9999] pt-32">
+        <span className="text-sm tracking-[12px] text-cyan-500 uppercase mb-12 opacity-80 animate-[fadeIn_1s_ease-in]">
           Sylvain CLEMENT - Portfolio
         </span>
         <h1 

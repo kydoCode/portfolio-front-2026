@@ -1,18 +1,32 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import hobbiesData from '@/data/hobbies.json';
+import BurgerMenu from '@/components/BurgerMenu';
 
 export default function PeripheralData() {
   const router = useRouter();
   const [sonarActive, setSonarActive] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [menuOpen, setMenuOpen] = useState(false);
+  const [messageSent, setMessageSent] = useState(false);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && menuOpen) setMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [menuOpen]);
 
   const handleSonarClick = () => {
     setSonarActive(true);
-    setTimeout(() => setSonarActive(false), 600);
+    setMessageSent(true);
+    setTimeout(() => {
+      setSonarActive(false);
+      setFormData({ name: '', email: '', message: '' });
+    }, 600);
   };
 
   return (
@@ -28,14 +42,7 @@ export default function PeripheralData() {
         <span className={`w-6 h-0.5 bg-cyan-500 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
       </button>
 
-      {menuOpen && (
-        <div className="fixed inset-0 bg-black/95 z-[99] flex flex-col justify-center items-center gap-8">
-          <button onClick={() => { router.push('/'); setMenuOpen(false); }} className="text-2xl text-cyan-500 hover:text-white transition-colors tracking-widest">HOME</button>
-          <button onClick={() => { router.push('/core'); setMenuOpen(false); }} className="text-2xl text-cyan-500 hover:text-white transition-colors tracking-widest">CORE</button>
-          <button onClick={() => { router.push('/capabilities'); setMenuOpen(false); }} className="text-2xl text-cyan-500 hover:text-white transition-colors tracking-widest">CAPABILITIES</button>
-          <button onClick={() => setMenuOpen(false)} className="text-2xl text-white tracking-widest">PERIPHERAL</button>
-        </div>
-      )}
+      <BurgerMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} currentPage="peripheral" />
 
       <button 
         onClick={() => router.push('/capabilities')}
@@ -121,6 +128,11 @@ export default function PeripheralData() {
               <div className="absolute inset-0 bg-cyan-500 animate-[implode_0.6s_ease-out]" />
             )}
           </button>
+          {messageSent && (
+            <div className="mt-4 text-green-500 text-xs font-mono animate-pulse">
+              &gt; MESSAGE_SENT_SUCCESSFULLY
+            </div>
+          )}
         </div>
 
         {/* NAVIGATION */}
