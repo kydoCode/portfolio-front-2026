@@ -79,7 +79,7 @@ export default function Home() {
         </p>
         <button 
           onClick={() => router.push('/core')}
-          className="mt-20 px-16 py-6 bg-transparent border border-cyan-500 text-cyan-500 uppercase tracking-[5px] text-lg rounded-sm transition-all hover:bg-cyan-500 hover:text-[#050a12] hover:shadow-[0_0_50px_#00F5FF] hover:scale-105 animate-[fadeIn_1s_ease-in_0.8s_both] relative overflow-hidden group"
+          className="mt-20 px-16 py-6 bg-transparent border border-cyan-500 text-cyan-500 uppercase tracking-[5px] text-lg rounded-sm transition-all hover:bg-cyan-500 hover:text-[#050a12] hover:shadow-[0_0_50px_#00F5FF] hover:scale-105 animate-[fadeIn_1s_ease-in_0.8s_both] relative overflow-hidden group flex items-center justify-center"
         >
           <span className="relative z-10">Démarrer l'immersion</span>
           <div className="absolute inset-0 bg-cyan-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
