@@ -1,13 +1,21 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import hobbiesData from '@/data/hobbies.json';
 
 export default function PeripheralData() {
   const router = useRouter();
+  const [sonarActive, setSonarActive] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+  const handleSonarClick = () => {
+    setSonarActive(true);
+    setTimeout(() => setSonarActive(false), 600);
+  };
 
   return (
-    <div className="min-h-screen bg-[#050a12] text-white p-8 cursor-none" style={{ backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.2) 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
+    <div className="min-h-screen bg-[#050a12] text-white overflow-x-hidden" style={{ backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.15) 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
       
       <button 
         onClick={() => router.push('/capabilities')}
@@ -16,18 +24,14 @@ export default function PeripheralData() {
         ← CAPABILITIES
       </button>
 
-      <div className="max-w-7xl mx-auto pt-20">
+      <section className="max-w-[1400px] mx-auto px-8 py-20">
         
-        <section className="border border-cyan-500/20 bg-white/[0.03] p-12 relative mb-10">
-          <span className="absolute -top-3 left-5 bg-[#050a12] px-3 text-xs text-cyan-500 tracking-widest">
-            05 // PERIPHERAL_DATA
-          </span>
-          
-          <h2 className="text-4xl font-bold uppercase mb-8">Beyond_Code</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* HOBBIES */}
+        <div className="mb-20">
+          <h2 className="text-2xl font-bold uppercase mb-8 text-cyan-500">Beyond_Code</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {hobbiesData.hobbies.map((hobby, i) => (
-              <div key={i} className="bg-cyan-500/5 border-l-4 border-cyan-500 p-6 hover:bg-cyan-500/10 transition-all">
+              <div key={i} className="border border-cyan-500/20 p-6 bg-white/[0.03] hover:border-cyan-500/50 transition-all">
                 <h3 className="text-sm uppercase mb-3 text-cyan-500">{hobby.categorie}</h3>
                 <ul className="space-y-1">
                   {hobby.details.map((detail, j) => (
@@ -39,77 +43,68 @@ export default function PeripheralData() {
               </div>
             ))}
           </div>
+        </div>
 
-          <button 
-            onClick={() => router.push('/hobbies')}
-            className="mt-8 border border-cyan-500 text-cyan-500 px-6 py-2 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all"
-          >
-            EXPLORE_MORE
-          </button>
-        </section>
-
-        <section className="border border-cyan-500/20 bg-white/[0.03] p-12 relative">
-          <span className="absolute -top-3 left-5 bg-[#050a12] px-3 text-xs text-cyan-500 tracking-widest">
-            06 // CONTACT_PROTOCOL
-          </span>
+        {/* FORMULAIRE TERMINAL */}
+        <div className="bg-black/50 border border-cyan-500/30 p-8 font-mono">
+          <div className="text-cyan-500 mb-6 text-sm">&gt; INITIATE_CONTACT_PROTOCOL</div>
           
-          <h2 className="text-4xl font-bold uppercase mb-8">Initiate_Connection</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-            <div>
-              <h3 className="text-sm uppercase text-cyan-500 mb-4">Canaux de Communication</h3>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 text-xs opacity-70">
-                  <span className="text-cyan-500">EMAIL:</span>
-                  <span>contact@silentsystem.dev</span>
-                </div>
-                <div className="flex items-center gap-3 text-xs opacity-70">
-                  <span className="text-cyan-500">GITHUB:</span>
-                  <span>github.com/kydoCode</span>
-                </div>
-                <div className="flex items-center gap-3 text-xs opacity-70">
-                  <span className="text-cyan-500">LINKEDIN:</span>
-                  <span>linkedin.com/in/sylvain-clement</span>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-sm uppercase text-cyan-500 mb-4">Disponibilité</h3>
-              <div className="space-y-2 text-xs opacity-70">
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                  <span>Ouvert aux opportunités</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-cyan-500 rounded-full"></span>
-                  <span>Freelance disponible</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-cyan-500 rounded-full"></span>
-                  <span>Collaboration open-source</span>
-                </div>
-              </div>
-            </div>
+          {/* INPUT ABYSS - NAME */}
+          <div className="relative mb-6">
+            <input 
+              type="text"
+              value={formData.name}
+              onChange={(e) => setFormData({...formData, name: e.target.value})}
+              className="peer w-full bg-transparent border-b-2 border-cyan-500/30 text-white px-2 py-3 focus:border-cyan-500 outline-none transition-all"
+              placeholder=" "
+            />
+            <label className="absolute left-2 top-3 text-cyan-500/50 text-xs transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-cyan-500 peer-[:not(:placeholder-shown)]:-top-4">
+              &gt; NAME
+            </label>
           </div>
 
-          <p className="text-sm opacity-80 mb-6">
-            Pour toute collaboration, projet ou demande d'information, n'hésitez pas à me contacter. 
-            Réponse sous 24-48h.
-          </p>
-          
+          {/* INPUT ABYSS - EMAIL */}
+          <div className="relative mb-6">
+            <input 
+              type="email"
+              value={formData.email}
+              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              className="peer w-full bg-transparent border-b-2 border-cyan-500/30 text-white px-2 py-3 focus:border-cyan-500 outline-none transition-all"
+              placeholder=" "
+            />
+            <label className="absolute left-2 top-3 text-cyan-500/50 text-xs transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-cyan-500 peer-[:not(:placeholder-shown)]:-top-4">
+              &gt; EMAIL
+            </label>
+          </div>
+
+          {/* INPUT ABYSS - MESSAGE */}
+          <div className="relative mb-6">
+            <textarea 
+              value={formData.message}
+              onChange={(e) => setFormData({...formData, message: e.target.value})}
+              className="peer w-full bg-transparent border border-cyan-500/30 text-white p-3 focus:border-cyan-500 outline-none transition-all"
+              rows={4}
+              placeholder=" "
+            />
+            <label className="absolute left-3 top-3 text-cyan-500/50 text-xs transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-cyan-500 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:bg-[#050a12] peer-[:not(:placeholder-shown)]:px-2">
+              &gt; MESSAGE
+            </label>
+          </div>
+
+          {/* BOUTON SONAR */}
           <button 
-            onClick={() => router.push('/contact')}
-            className="border border-cyan-500 text-cyan-500 px-8 py-3 text-sm tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all hover:shadow-[0_0_30px_#00F5FF]"
+            onClick={handleSonarClick}
+            className="relative overflow-hidden border border-cyan-500 text-cyan-500 px-12 py-4 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all"
           >
-            SEND_MESSAGE
+            <span className="relative z-10">SEND_TRANSMISSION</span>
+            {sonarActive && (
+              <div className="absolute inset-0 bg-cyan-500 animate-[implode_0.6s_ease-out]" />
+            )}
           </button>
-        </section>
+        </div>
 
-      </div>
-
-      <div className="max-w-7xl mx-auto mt-10">
-        <div className="flex justify-center gap-4">
+        {/* NAVIGATION */}
+        <div className="mt-20 flex justify-center gap-4">
           <button 
             onClick={() => router.push('/capabilities')}
             className="border border-cyan-500/50 text-cyan-500/50 px-8 py-3 text-xs tracking-widest hover:border-cyan-500 hover:text-cyan-500 transition-all"
@@ -118,12 +113,19 @@ export default function PeripheralData() {
           </button>
           <button 
             onClick={() => router.push('/')}
-            className="border border-cyan-500/50 text-cyan-500/50 px-8 py-3 text-xs tracking-widest hover:border-cyan-500 hover:text-cyan-500 transition-all"
+            className="border border-cyan-500 text-cyan-500 px-12 py-4 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all"
           >
             RETOUR_ACCUEIL
           </button>
         </div>
-      </div>
+      </section>
+
+      <style jsx>{`
+        @keyframes implode {
+          0% { transform: scale(0); opacity: 1; }
+          100% { transform: scale(3); opacity: 0; }
+        }
+      `}</style>
     </div>
   );
 }

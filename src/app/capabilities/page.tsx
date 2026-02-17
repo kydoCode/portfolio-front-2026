@@ -1,110 +1,161 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import projectsData from '@/data/projects.json';
 
 export default function SystemCapabilities() {
   const router = useRouter();
+  const [selectedProject, setSelectedProject] = useState<any>(null);
 
   const techStack = [
-    { category: 'Frontend', skills: ['React', 'Next.js 16', 'TypeScript', 'Tailwind CSS', 'Vue.js'] },
-    { category: 'Backend', skills: ['Node.js', 'PostgreSQL', 'Prisma', 'API REST', 'Django'] },
-    { category: 'DevOps', skills: ['Git', 'Docker', 'Vercel', 'CI/CD', 'GitHub Actions'] },
-    { category: 'Mobile', skills: ['Swift', 'SwiftUI', 'iOS Development'] },
-    { category: 'Tools', skills: ['VS Code', 'Figma', 'Postman', 'Notion'] },
-    { category: 'Cyber', skills: ['OWASP', 'Sécurité Web', 'Audit', 'RGPD'] }
+    { name: 'React/TypeScript', level: 85 },
+    { name: 'Next.js', level: 80 },
+    { name: 'Node.js', level: 75 },
+    { name: 'PostgreSQL', level: 70 },
+    { name: 'Docker', level: 65 },
+    { name: 'Swift/iOS', level: 60 }
+  ];
+
+  const certifications = [
+    { name: 'DWWM', status: 'CRITICAL', year: 2025 },
+    { name: 'Apple Foundation', status: 'NORMAL', year: 2023 }
   ];
 
   return (
-    <div className="min-h-screen bg-[#050a12] text-white p-8 cursor-none" style={{ backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.2) 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
+    <div className="min-h-screen bg-[#050a12] text-white overflow-x-hidden" style={{ backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.15) 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
       
       <button 
         onClick={() => router.push('/core')}
         className="fixed top-8 left-8 text-cyan-500 text-xs tracking-widest hover:text-white transition-colors z-50"
       >
-        ← CORE_PROCESSOR
+        ← CORE
       </button>
 
-      <div className="max-w-7xl mx-auto pt-20">
+      <section className="max-w-[1400px] mx-auto px-8 py-20">
         
-        <section className="border border-cyan-500/20 bg-white/[0.03] p-12 relative mb-10">
-          <span className="absolute -top-3 left-5 bg-[#050a12] px-3 text-xs text-cyan-500 tracking-widest">
-            03 // SYSTEM_CAPABILITIES
-          </span>
-          
-          <h2 className="text-4xl font-bold uppercase mb-8">Technical_Arsenal</h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {techStack.map((tech, i) => (
-              <div key={i} className="bg-cyan-500/5 border-l-4 border-cyan-500 p-6 hover:bg-cyan-500/10 transition-all">
-                <h3 className="text-sm uppercase mb-3 text-cyan-500">{tech.category}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {tech.skills.map((skill, j) => (
-                    <span key={j} className="text-xs opacity-70 bg-cyan-500/10 px-2 py-1 rounded">
-                      {skill}
-                    </span>
-                  ))}
+        {/* PROGRESS BARS SKILLS */}
+        <div className="mb-20">
+          <h2 className="text-2xl font-bold uppercase mb-8 text-cyan-500">Technical_Stack</h2>
+          <div className="space-y-6">
+            {techStack.map((skill, i) => (
+              <div key={i}>
+                <div className="flex justify-between mb-2">
+                  <span className="text-sm">{skill.name}</span>
+                  <span className="text-sm text-cyan-500">{skill.level}%</span>
+                </div>
+                <div className="h-2 bg-cyan-500/10 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-cyan-500 shadow-[0_0_10px_#00F5FF] transition-all duration-1000"
+                    style={{ width: `${skill.level}%` }}
+                  />
                 </div>
               </div>
             ))}
           </div>
-        </section>
+        </div>
 
-        <section className="border border-cyan-500/20 bg-white/[0.03] p-12 relative">
-          <span className="absolute -top-3 left-5 bg-[#050a12] px-3 text-xs text-cyan-500 tracking-widest">
-            04 // PROJECT_ARCHIVE
-          </span>
-          
-          <h2 className="text-4xl font-bold uppercase mb-8">Mission_Logs</h2>
-          
+        {/* BADGES CERTIFICATIONS */}
+        <div className="mb-20">
+          <h2 className="text-2xl font-bold uppercase mb-8 text-cyan-500">Certifications</h2>
+          <div className="flex gap-4">
+            {certifications.map((cert, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <span className={`px-4 py-2 border text-xs rounded ${
+                  cert.status === 'CRITICAL' 
+                    ? 'bg-red-500/20 border-red-500 text-red-500' 
+                    : 'bg-cyan-500/20 border-cyan-500 text-cyan-500'
+                }`}>
+                  {cert.status}
+                </span>
+                <div>
+                  <div className="text-sm font-bold">{cert.name}</div>
+                  <div className="text-xs opacity-50">{cert.year}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* GRILLE PROJETS AVEC SPOTLIGHT */}
+        <div>
+          <h2 className="text-2xl font-bold uppercase mb-8 text-cyan-500">Project_Archive</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {projectsData.projets.map((project, i) => (
-              <div key={i} className="border border-cyan-500/20 p-6 hover:border-cyan-500/50 transition-all group">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-lg uppercase font-bold group-hover:text-cyan-500 transition-colors">
-                    {project.nom}
-                  </h3>
-                  <span className="text-xs text-cyan-500/50">{project.year}</span>
+              <div 
+                key={i}
+                className="relative border border-cyan-500/20 p-6 bg-white/[0.03] hover:border-cyan-500/50 transition-all cursor-pointer group"
+                onClick={() => setSelectedProject(project)}
+              >
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                <div className="relative z-10">
+                  <h3 className="text-xl font-bold uppercase mb-2">{project.nom}</h3>
+                  <p className="text-xs opacity-70 mb-4">{project.context}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech, j) => (
+                      <span key={j} className="text-xs bg-cyan-500/10 text-cyan-500 px-2 py-1 rounded">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <p className="text-xs opacity-70 mb-4">{project.context}</p>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, j) => (
-                    <span key={j} className="text-xs bg-cyan-500/10 text-cyan-500 px-2 py-1 rounded">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                <span className="text-xs opacity-50">{project.role}</span>
               </div>
             ))}
           </div>
+        </div>
 
-          <button 
-            onClick={() => router.push('/projects')}
-            className="mt-8 border border-cyan-500 text-cyan-500 px-6 py-2 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all"
-          >
-            VIEW_ALL_PROJECTS
-          </button>
-        </section>
-
-      </div>
-
-      <div className="max-w-7xl mx-auto mt-10">
-        <div className="flex justify-center gap-4">
-          <button 
-            onClick={() => router.push('/core')}
-            className="border border-cyan-500/50 text-cyan-500/50 px-8 py-3 text-xs tracking-widest hover:border-cyan-500 hover:text-cyan-500 transition-all"
-          >
-            ← CORE
-          </button>
+        {/* NAVIGATION */}
+        <div className="mt-20 flex justify-center">
           <button 
             onClick={() => router.push('/peripheral')}
-            className="border border-cyan-500/50 text-cyan-500/50 px-8 py-3 text-xs tracking-widest hover:border-cyan-500 hover:text-cyan-500 transition-all"
+            className="border border-cyan-500 text-cyan-500 px-12 py-4 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all"
           >
             NEXT: PERIPHERAL →
           </button>
         </div>
-      </div>
+      </section>
+
+      {/* MODALE DATA TRANSFER */}
+      {selectedProject && (
+        <div 
+          className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-8"
+          onClick={() => setSelectedProject(null)}
+        >
+          <div 
+            className="border border-cyan-500 bg-[#050a12] p-8 max-w-2xl w-full relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent animate-[scan_2s_linear_infinite]" />
+            <h3 className="text-2xl font-bold uppercase mb-6">DATA_TRANSFER // {selectedProject.nom}</h3>
+            <div className="space-y-4 text-sm">
+              <div><span className="text-cyan-500">CONTEXT:</span> {selectedProject.context}</div>
+              <div><span className="text-cyan-500">ROLE:</span> {selectedProject.role}</div>
+              <div><span className="text-cyan-500">YEAR:</span> {selectedProject.year}</div>
+              <div>
+                <span className="text-cyan-500">TOOLS:</span>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {selectedProject.technologies.map((tech: string, i: number) => (
+                    <span key={i} className="text-xs bg-cyan-500/20 px-2 py-1 rounded">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <button 
+              onClick={() => setSelectedProject(null)}
+              className="mt-6 border border-cyan-500 text-cyan-500 px-6 py-2 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all"
+            >
+              CLOSE
+            </button>
+          </div>
+        </div>
+      )}
+
+      <style jsx>{`
+        @keyframes scan {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+      `}</style>
     </div>
   );
 }

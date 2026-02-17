@@ -9,6 +9,7 @@ export default function Home() {
   const [depth, setDepth] = useState(0);
   const [glitchText, setGlitchText] = useState('SILENT');
   const [mounted, setMounted] = useState(false);
+  const [torchActive, setTorchActive] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -49,10 +50,12 @@ export default function Home() {
         </div>
       </div>
 
-      <div 
-        className="fixed inset-0 pointer-events-none z-[9998]"
-        style={{ background: `radial-gradient(circle 320px at ${mousePos.x}px ${mousePos.y}px, transparent 0%, rgba(5, 10, 18, 0.98) 100%)` }}
-      />
+      {torchActive && (
+        <div 
+          className="fixed inset-0 pointer-events-none z-[9998]"
+          style={{ background: `radial-gradient(circle 320px at ${mousePos.x}px ${mousePos.y}px, transparent 0%, rgba(5, 10, 18, 0.98) 100%)` }}
+        />
+      )}
 
       <div 
         className="fixed w-2 h-2 bg-white rounded-full pointer-events-none z-[10000] shadow-[0_0_25px_#00F5FF]"
@@ -63,10 +66,13 @@ export default function Home() {
         <span className="text-sm tracking-[12px] text-cyan-500 uppercase mb-8 opacity-80 animate-[fadeIn_1s_ease-in]">
           Sylvain CLEMENT - Portfolio
         </span>
-        <h1 className="text-[12vw] leading-[0.8] uppercase text-center tracking-[-5px] font-bold relative">
+        <h1 
+          className="text-[12vw] leading-[0.8] uppercase text-center tracking-[-5px] font-bold relative"
+          onMouseEnter={() => setTorchActive(true)}
+          onMouseLeave={() => setTorchActive(false)}
+        >
           <span className="block animate-[slideDown_0.8s_ease-out]">{glitchText}</span>
           <span className="block animate-[slideUp_0.8s_ease-out_0.2s_both]">SYSTEM</span>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent animate-[scan_3s_linear_infinite]" />
         </h1>
         <p className="mt-8 text-sm text-cyan-500/70 max-w-md text-center tracking-wide animate-[fadeIn_1s_ease-in_0.5s_both]">
           Interface de navigation sécurisée // Accès aux données système
@@ -108,10 +114,7 @@ export default function Home() {
           from { transform: translateY(50px); opacity: 0; }
           to { transform: translateY(0); opacity: 1; }
         }
-        @keyframes scan {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
+
       `}</style>
     </div>
   );
