@@ -12,7 +12,7 @@ export default function SystemCore() {
   return (
     <div className="min-h-screen bg-[#050a12] text-white overflow-x-hidden" style={{ backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.15) 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
       
-      {/* NAV BURGER */}
+      {/* BURGER MENU */}
       <button 
         onClick={() => setMenuOpen(!menuOpen)}
         className="fixed top-8 right-8 z-[100] flex flex-col gap-1.5 w-8 h-8 justify-center items-center group"
@@ -39,7 +39,7 @@ export default function SystemCore() {
         ← HOME
       </button>
 
-      {/* HERO SECTION */}
+      {/* HERO */}
       <section className="h-screen flex flex-col justify-center items-center relative">
         <span className="text-xs tracking-[10px] text-cyan-500 uppercase mb-4 opacity-80">Core Protocol</span>
         <h1 className="text-[12vw] leading-[0.85] uppercase text-center font-bold">
@@ -48,11 +48,10 @@ export default function SystemCore() {
         <div className="mt-4 text-xs text-cyan-500/50 font-mono">&gt; CONFIGURING_CORE_ASSETS...</div>
       </section>
 
-      {/* BENTO GRID - CARDS AMÉLIORÉES */}
       <section className="max-w-[1400px] mx-auto px-8 pb-20">
+        
+        {/* 3D CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
-          
-          {/* CARD 1 */}
           <div className="relative h-[420px] group">
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative h-full border border-cyan-500/30 group-hover:border-cyan-500 p-8 bg-black/30 backdrop-blur-sm transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(0,245,255,0.3)]">
@@ -66,7 +65,6 @@ export default function SystemCore() {
             </div>
           </div>
 
-          {/* CARD 2 */}
           <div className="relative h-[420px] group">
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="relative h-full border border-cyan-500/30 group-hover:border-cyan-500 p-8 bg-black/30 backdrop-blur-sm transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(0,245,255,0.3)]">
@@ -81,10 +79,9 @@ export default function SystemCore() {
           </div>
         </div>
 
-        {/* GRID FORMATION + EXPERIENCE CÔTE À CÔTE */}
+        {/* FORMATION + EXPERIENCE CÔTE À CÔTE */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
           
-          {/* TIMELINE FORMATION */}
           <div>
             <h2 className="text-2xl font-bold uppercase mb-8 text-cyan-500">Formation_Module</h2>
             <div className="relative pl-8 border-l-2 border-cyan-500/30">
@@ -99,7 +96,6 @@ export default function SystemCore() {
             </div>
           </div>
 
-          {/* EXPERIENCE */}
           <div>
             <h2 className="text-2xl font-bold uppercase mb-8 text-cyan-500">Mission_History</h2>
             <div className="space-y-6">

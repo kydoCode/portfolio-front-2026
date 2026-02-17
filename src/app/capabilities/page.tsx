@@ -7,6 +7,7 @@ import projectsData from '@/data/projects.json';
 export default function SystemCapabilities() {
   const router = useRouter();
   const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const techStack = [
     { name: 'React/TypeScript', level: 85 },
@@ -25,6 +26,25 @@ export default function SystemCapabilities() {
   return (
     <div className="min-h-screen bg-[#050a12] text-white overflow-x-hidden" style={{ backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.15) 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
       
+      {/* BURGER MENU */}
+      <button 
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="fixed top-8 right-8 z-[100] flex flex-col gap-1.5 w-8 h-8 justify-center items-center group"
+      >
+        <span className={`w-6 h-0.5 bg-cyan-500 transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+        <span className={`w-6 h-0.5 bg-cyan-500 transition-all ${menuOpen ? 'opacity-0' : ''}`} />
+        <span className={`w-6 h-0.5 bg-cyan-500 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+      </button>
+
+      {menuOpen && (
+        <div className="fixed inset-0 bg-black/95 z-[99] flex flex-col justify-center items-center gap-8">
+          <button onClick={() => { router.push('/'); setMenuOpen(false); }} className="text-2xl text-cyan-500 hover:text-white transition-colors tracking-widest">HOME</button>
+          <button onClick={() => { router.push('/core'); setMenuOpen(false); }} className="text-2xl text-cyan-500 hover:text-white transition-colors tracking-widest">CORE</button>
+          <button onClick={() => setMenuOpen(false)} className="text-2xl text-white tracking-widest">CAPABILITIES</button>
+          <button onClick={() => { router.push('/peripheral'); setMenuOpen(false); }} className="text-2xl text-cyan-500 hover:text-white transition-colors tracking-widest">PERIPHERAL</button>
+        </div>
+      )}
+
       <button 
         onClick={() => router.push('/core')}
         className="fixed top-8 left-8 text-cyan-500 text-xs tracking-widest hover:text-white transition-colors z-50"
