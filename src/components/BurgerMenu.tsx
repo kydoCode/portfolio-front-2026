@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface BurgerMenuProps {
   isOpen: boolean;
@@ -11,6 +11,12 @@ interface BurgerMenuProps {
 
 export default function BurgerMenu({ isOpen, onClose, currentPage }: BurgerMenuProps) {
   const router = useRouter();
+  const [isMuted, setIsMuted] = useState(true);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('soundMuted');
+    setIsMuted(saved === 'true');
+  }, []);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -19,6 +25,12 @@ export default function BurgerMenu({ isOpen, onClose, currentPage }: BurgerMenuP
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
   }, [isOpen, onClose]);
+
+  const toggleMute = () => {
+    const newMuted = !isMuted;
+    setIsMuted(newMuted);
+    localStorage.setItem('soundMuted', String(newMuted));
+  };
 
   if (!isOpen) return null;
 
@@ -49,6 +61,13 @@ export default function BurgerMenu({ isOpen, onClose, currentPage }: BurgerMenuP
         PERIPHERAL
       </button>
       <div className="h-px w-32 bg-cyan-500/30 my-4" />
+      <button 
+        onClick={toggleMute}
+        className="text-lg text-cyan-500 hover:text-white transition-colors tracking-widest flex items-center gap-3"
+      >
+        <span>{isMuted ? 'SOUND_OFF' : 'SOUND_ON'}</span>
+        <span className="text-xs opacity-50">[{isMuted ? 'MUTED' : 'ACTIVE'}]</span>
+      </button>
       <a 
         href="/cv.pdf" 
         target="_blank" 
