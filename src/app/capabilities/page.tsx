@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import projectsData from '@/data/projects.json';
 import BurgerMenu from '@/components/BurgerMenu';
+import BubbleBackground from '@/components/BubbleBackground';
+import Cursor from '@/components/Cursor';
 
 export default function SystemCapabilities() {
   const router = useRouter();
@@ -36,7 +38,9 @@ export default function SystemCapabilities() {
 
 
   return (
-    <div className="min-h-screen bg-[#050a12] text-white overflow-x-hidden" style={{ backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.15) 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
+    <div className="min-h-screen bg-[#050a12] text-white overflow-x-hidden" style={{ cursor: 'none' }}>
+      <BubbleBackground />
+      <Cursor />
       
       {/* BURGER MENU */}
       <button 
