@@ -77,7 +77,7 @@ export default function SystemCore() {
               if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
             }}
           >
-            <div className="card-inner h-full transition-transform duration-100" style={{ transformStyle: 'preserve-3d', transform: 'rotateX(5deg) rotateY(-8deg)' }}>>
+            <div className="card-inner h-full" style={{ transformStyle: 'preserve-3d', transform: 'rotateY(-12deg) rotateX(8deg)' }}>
               <div className="card-content relative h-full border border-white/10 rounded-[32px] p-14 bg-white/[0.02] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all group-hover:border-cyan-500 group-hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 <span className="text-[0.65rem] text-cyan-500 tracking-[3px] mb-4 uppercase relative z-10">1 // Intellect Asset</span>
@@ -110,7 +110,7 @@ export default function SystemCore() {
               if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
             }}
           >
-            <div className="card-inner h-full transition-transform duration-100" style={{ transformStyle: 'preserve-3d', transform: 'rotateX(5deg) rotateY(8deg)' }}>>
+            <div className="card-inner h-full" style={{ transformStyle: 'preserve-3d', transform: 'rotateY(12deg) rotateX(8deg)' }}>
               <div className="card-content relative h-full border border-white/10 rounded-[32px] p-14 bg-white/[0.02] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all group-hover:border-cyan-500 group-hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 <span className="text-[0.65rem] text-cyan-500 tracking-[3px] mb-4 uppercase relative z-10">2 // CyberOps SOC</span>
@@ -139,9 +139,9 @@ export default function SystemCore() {
             <h2 className="text-2xl font-bold uppercase mb-8 text-cyan-500">Formation_Module</h2>
             <div className="relative pl-8 border-l-2 border-cyan-500/30">
               {educationData.education.slice(0, 5).map((edu, i) => (
-                <div key={i} className="relative mb-8 group">
+                <div key={i} className="relative mb-8 group pl-2">
                   <div className="absolute -left-[13px] w-6 h-6 bg-cyan-500 rounded-full border-4 border-[#050a12] group-hover:scale-125 transition-transform z-10" />
-                  <span className="text-xs text-cyan-500 relative z-0">{edu.annees.join(' - ')}</span>
+                  <span className="text-xs text-cyan-500 block mb-1">{edu.annees.join(' - ')}</span>
                   <h3 className="text-lg font-bold group-hover:text-cyan-400 transition-colors">{edu.intitule}</h3>
                   <p className="text-xs opacity-70">{edu.etablissement}</p>
                 </div>
@@ -153,7 +153,7 @@ export default function SystemCore() {
             <h2 className="text-2xl font-bold uppercase mb-8 text-cyan-500">Mission_History</h2>
             <div className="space-y-6">
               {experienceData.experience.slice(0, 3).map((exp, i) => (
-                <div key={i} className="border border-cyan-500/20 p-6 bg-white/[0.01] hover:border-cyan-500/50 hover:bg-white/[0.02] transition-all">
+                <div key={i} className="border border-cyan-500/20 p-6 bg-transparent hover:bg-white/[0.01] hover:border-cyan-500/50 transition-all">
                   <span className="text-xs text-cyan-500">{exp.annees.join(' - ')}</span>
                   <h3 className="text-lg font-bold uppercase mt-2">{exp.poste}</h3>
                   <span className="text-sm opacity-50">{exp.entreprise}</span>
