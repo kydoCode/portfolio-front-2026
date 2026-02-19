@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Cursor from '@/components/Cursor';
 
 export default function Home() {
   const router = useRouter();
@@ -35,7 +36,8 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative h-screen overflow-hidden bg-[#050a12] text-white cursor-none" style={{ backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.15) 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
+    <div className="relative h-screen overflow-hidden bg-[#050a12] text-white" style={{ cursor: 'none', backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.15) 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
+      <Cursor />
       
       <div className="fixed right-12 top-1/2 -translate-y-1/2 text-cyan-500 text-sm font-mono tracking-[5px] [writing-mode:vertical-rl] border-r-2 border-cyan-500 pr-4 z-50 animate-pulse">
         STATUS: SCANNING // DEPTH: {depth}M
@@ -57,10 +59,7 @@ export default function Home() {
         />
       )}
 
-      <div 
-        className="fixed w-2 h-2 bg-white rounded-full pointer-events-none z-[10000] shadow-[0_0_25px_#00F5FF]"
-        style={{ left: mousePos.x, top: mousePos.y, transform: 'translate(-50%, -50%)' }}
-      />
+
 
       <section className="h-screen flex flex-col justify-center items-center relative z-[9999] pt-32">
         <span className="text-sm tracking-[12px] text-cyan-500 uppercase mb-12 opacity-80 animate-[fadeIn_1s_ease-in]">
