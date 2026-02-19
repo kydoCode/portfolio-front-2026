@@ -77,7 +77,7 @@ export default function SystemCore() {
               if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
             }}
           >
-            <div className="card-inner h-full transition-transform duration-100" style={{ transformStyle: 'preserve-3d' }}>
+            <div className="card-inner h-full transition-transform duration-100" style={{ transformStyle: 'preserve-3d', transform: 'rotateX(-5deg) rotateY(5deg)' }}>
               <div className="card-content relative h-full border border-white/10 rounded-[32px] p-14 bg-white/[0.04] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all group-hover:border-cyan-500 group-hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 <span className="text-[0.65rem] text-cyan-500 tracking-[3px] mb-4 uppercase relative z-10">1 // Intellect Asset</span>
@@ -110,7 +110,7 @@ export default function SystemCore() {
               if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
             }}
           >
-            <div className="card-inner h-full transition-transform duration-100" style={{ transformStyle: 'preserve-3d' }}>
+            <div className="card-inner h-full transition-transform duration-100" style={{ transformStyle: 'preserve-3d', transform: 'rotateX(-5deg) rotateY(-5deg)' }}>
               <div className="card-content relative h-full border border-white/10 rounded-[32px] p-14 bg-white/[0.04] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all group-hover:border-cyan-500 group-hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 <span className="text-[0.65rem] text-cyan-500 tracking-[3px] mb-4 uppercase relative z-10">2 // CyberOps SOC</span>
