@@ -66,23 +66,26 @@ export default function SystemCore() {
               const rotateX = (rect.height / 2 - y) / 20;
               const rotateY = (x - rect.width / 2) / 20;
               const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
+              const content = e.currentTarget.querySelector('.card-content') as HTMLElement;
               if (inner) inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+              if (content) {
+                content.style.setProperty('--x', `${x}px`);
+                content.style.setProperty('--y', `${y}px`);
+              }
             }}
             onMouseLeave={(e) => {
               const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
               if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
             }}
           >
-            <div className="card-inner h-full transition-transform duration-200" style={{ transformStyle: 'preserve-3d' }}>
-              <div className="card-content relative h-full border border-cyan-500/30 p-8 bg-black/30 backdrop-blur-sm" style={{ transform: 'translateZ(50px)' }}>
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.2)_0%,transparent_50%)] opacity-0 hover:opacity-100 transition-opacity pointer-events-none" />
-                <span className="text-xs text-cyan-500 tracking-widest relative z-10">1 // Intellect Asset</span>
-                <h3 className="text-3xl font-bold mt-4 mb-4 relative z-10">Furtivité Sémantique</h3>
+            <div className="card-inner h-full transition-transform duration-100" style={{ transformStyle: 'preserve-3d' }}>
+              <div className="card-content relative h-full border border-white/10 rounded-[32px] p-14 bg-white/[0.04] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all hover:border-cyan-500 hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 hover:opacity-100 transition-opacity pointer-events-none" />
+                <span className="text-[0.65rem] text-cyan-500 tracking-[3px] mb-4 uppercase relative z-10">1 // Intellect Asset</span>
+                <h3 className="text-[2.4rem] font-bold mb-4 relative z-10">Furtivité Sémantique</h3>
                 <p className="text-sm opacity-70 leading-relaxed relative z-10">
-                  L'expertise littéraire appliquée à la robustesse des systèmes. 
-                  Analyse textuelle comme précurseur de l'analyse de code.
+                  L'expertise littéraire appliquée à la robustesse des systèmes.
                 </p>
-                <div className="absolute bottom-8 left-8 text-xs text-cyan-500/50 z-10">ENS LYON // MASTER</div>
               </div>
             </div>
           </div>
@@ -96,23 +99,26 @@ export default function SystemCore() {
               const rotateX = (rect.height / 2 - y) / 20;
               const rotateY = (x - rect.width / 2) / 20;
               const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
+              const content = e.currentTarget.querySelector('.card-content') as HTMLElement;
               if (inner) inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+              if (content) {
+                content.style.setProperty('--x', `${x}px`);
+                content.style.setProperty('--y', `${y}px`);
+              }
             }}
             onMouseLeave={(e) => {
               const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
               if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
             }}
           >
-            <div className="card-inner h-full transition-transform duration-200" style={{ transformStyle: 'preserve-3d' }}>
-              <div className="card-content relative h-full border border-cyan-500/30 p-8 bg-black/30 backdrop-blur-sm" style={{ transform: 'translateZ(50px)' }}>
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.2)_0%,transparent_50%)] opacity-0 hover:opacity-100 transition-opacity pointer-events-none" />
-                <span className="text-xs text-cyan-500 tracking-widest relative z-10">2 // CyberOps SOC</span>
-                <h3 className="text-3xl font-bold mt-4 mb-4 relative z-10">Robustesse Abyssale</h3>
+            <div className="card-inner h-full transition-transform duration-100" style={{ transformStyle: 'preserve-3d' }}>
+              <div className="card-content relative h-full border border-white/10 rounded-[32px] p-14 bg-white/[0.04] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all hover:border-cyan-500 hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 hover:opacity-100 transition-opacity pointer-events-none" />
+                <span className="text-[0.65rem] text-cyan-500 tracking-[3px] mb-4 uppercase relative z-10">2 // CyberOps SOC</span>
+                <h3 className="text-[2.4rem] font-bold mb-4 relative z-10">Robustesse Abyssale</h3>
                 <p className="text-sm opacity-70 leading-relaxed relative z-10">
-                  Monitoring furtif et défense périmétrique résiliente. 
-                  Architecture sécurisée et tests de pénétration.
+                  Monitoring furtif et défense périmétrique résiliente.
                 </p>
-                <div className="absolute bottom-8 left-8 text-xs text-cyan-500/50 z-10">LA PLATEFORME_ // DWWM</div>
               </div>
             </div>
           </div>
