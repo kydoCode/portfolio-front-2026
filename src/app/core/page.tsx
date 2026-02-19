@@ -37,12 +37,11 @@ export default function SystemCore() {
 
       <BurgerMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} currentPage="core" />
 
-      <button 
-        onClick={() => router.push('/')}
-        className="fixed top-8 left-8 text-cyan-500 text-xs tracking-widest hover:text-white transition-colors z-50"
-      >
-        ← HOME
-      </button>
+      <div className="fixed top-8 left-8 text-4xl font-black z-50 cursor-pointer" onClick={() => router.push('/')}>S.</div>
+
+      <div className="fixed right-10 top-1/2 -translate-y-1/2 text-cyan-500 text-[0.7rem] font-mono tracking-[4px] [writing-mode:vertical-rl] border-r border-cyan-500 pr-2.5 z-50 whitespace-nowrap">
+        COORD: 43.52N // DEPTH: -2500M
+      </div>
 
       {/* HERO */}
       <section className="h-screen flex flex-col justify-center items-center relative">
@@ -58,7 +57,7 @@ export default function SystemCore() {
         {/* 3D CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
           <div 
-            className="card-perspective h-[420px]"
+            className="card-perspective h-[420px] group"
             onMouseMove={(e) => {
               const rect = e.currentTarget.getBoundingClientRect();
               const x = e.clientX - rect.left;
@@ -67,7 +66,7 @@ export default function SystemCore() {
               const rotateY = (x - rect.width / 2) / 20;
               const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
               const content = e.currentTarget.querySelector('.card-content') as HTMLElement;
-              if (inner) inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+              if (inner) inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(50px)`;
               if (content) {
                 content.style.setProperty('--x', `${x}px`);
                 content.style.setProperty('--y', `${y}px`);
@@ -75,12 +74,12 @@ export default function SystemCore() {
             }}
             onMouseLeave={(e) => {
               const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
-              if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
+              if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(50px)';
             }}
           >
             <div className="card-inner h-full transition-transform duration-100" style={{ transformStyle: 'preserve-3d' }}>
-              <div className="card-content relative h-full border border-white/10 rounded-[32px] p-14 bg-white/[0.04] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all hover:border-cyan-500 hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 hover:opacity-100 transition-opacity pointer-events-none" />
+              <div className="card-content relative h-full border border-white/10 rounded-[32px] p-14 bg-white/[0.04] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all group-hover:border-cyan-500 group-hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 <span className="text-[0.65rem] text-cyan-500 tracking-[3px] mb-4 uppercase relative z-10">1 // Intellect Asset</span>
                 <h3 className="text-[2.4rem] font-bold mb-4 relative z-10">Furtivité Sémantique</h3>
                 <p className="text-sm opacity-70 leading-relaxed relative z-10">
@@ -91,7 +90,7 @@ export default function SystemCore() {
           </div>
 
           <div 
-            className="card-perspective h-[420px]"
+            className="card-perspective h-[420px] group"
             onMouseMove={(e) => {
               const rect = e.currentTarget.getBoundingClientRect();
               const x = e.clientX - rect.left;
@@ -100,7 +99,7 @@ export default function SystemCore() {
               const rotateY = (x - rect.width / 2) / 20;
               const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
               const content = e.currentTarget.querySelector('.card-content') as HTMLElement;
-              if (inner) inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+              if (inner) inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(50px)`;
               if (content) {
                 content.style.setProperty('--x', `${x}px`);
                 content.style.setProperty('--y', `${y}px`);
@@ -108,12 +107,12 @@ export default function SystemCore() {
             }}
             onMouseLeave={(e) => {
               const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
-              if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
+              if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(50px)';
             }}
           >
             <div className="card-inner h-full transition-transform duration-100" style={{ transformStyle: 'preserve-3d' }}>
-              <div className="card-content relative h-full border border-white/10 rounded-[32px] p-14 bg-white/[0.04] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all hover:border-cyan-500 hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 hover:opacity-100 transition-opacity pointer-events-none" />
+              <div className="card-content relative h-full border border-white/10 rounded-[32px] p-14 bg-white/[0.04] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all group-hover:border-cyan-500 group-hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 <span className="text-[0.65rem] text-cyan-500 tracking-[3px] mb-4 uppercase relative z-10">2 // CyberOps SOC</span>
                 <h3 className="text-[2.4rem] font-bold mb-4 relative z-10">Robustesse Abyssale</h3>
                 <p className="text-sm opacity-70 leading-relaxed relative z-10">
@@ -127,6 +126,9 @@ export default function SystemCore() {
         <style jsx>{`
           .card-perspective {
             perspective: 1200px;
+          }
+          .card-inner {
+            transform-style: preserve-3d;
           }
         `}</style>
 
