@@ -30,7 +30,7 @@ export default function SystemCapabilities() {
   ];
 
   const certifications = [
-    { name: 'ISTQB Foundation v4.0', status: 'CRITICAL', year: 2025, org: 'GASQ/CFTL', link: 'https://www.cftl.fr', state: 'ACTIVE' },
+    { name: 'ISTQB Foundation v4.0', status: 'HIGH', year: 2025, org: 'GASQ/CFTL', link: 'https://www.cftl.fr', state: 'ACTIVE' },
     { name: 'Cisco CyberOps Associate', status: 'NORMAL', year: 2026, org: 'Cisco', link: null, state: 'PENDING' },
     { name: 'C2i Niveau 1', status: 'NORMAL', year: 2014, org: 'Université', link: null, state: 'ACTIVE' }
   ];
@@ -89,15 +89,15 @@ export default function SystemCapabilities() {
           <h2 className="text-2xl font-bold uppercase mb-8 text-cyan-500">Certifications</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {certifications.map((cert, i) => (
-              <div key={i} className="border border-cyan-500/20 p-4 bg-white/[0.03] hover:border-cyan-500/50 transition-all">
+              <div key={i} className="border border-cyan-500/20 p-4 bg-transparent hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex-1">
                     <h3 className="text-sm font-bold">{cert.name}</h3>
                     <p className="text-xs opacity-50 mt-1">{cert.org}</p>
                   </div>
                   <span className={`px-3 py-1 border text-xs rounded whitespace-nowrap ${
-                    cert.status === 'CRITICAL' 
-                      ? 'bg-red-500/20 border-red-500 text-red-500' 
+                    cert.status === 'HIGH' 
+                      ? 'bg-orange-500/20 border-orange-500 text-orange-500' 
                       : 'bg-cyan-500/20 border-cyan-500 text-cyan-500'
                   }`}>
                     {cert.status}
@@ -135,7 +135,7 @@ export default function SystemCapabilities() {
             {projectsData.projets.map((project, i) => (
               <div 
                 key={i}
-                className="relative border border-cyan-500/20 p-6 bg-white/[0.03] hover:border-cyan-500/50 transition-all cursor-pointer group"
+                className="relative border border-cyan-500/20 p-6 bg-transparent hover:bg-white/[0.01] hover:border-cyan-500 transition-all cursor-pointer group"
                 onClick={() => setSelectedProject(project)}
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />

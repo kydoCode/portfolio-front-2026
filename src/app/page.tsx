@@ -39,7 +39,7 @@ export default function Home() {
     <div className="relative h-screen overflow-hidden bg-[#050a12] text-white" style={{ cursor: 'none', backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.15) 1px, transparent 1px)', backgroundSize: '50px 50px' }}>
       <Cursor />
       
-      <div className="fixed right-12 top-1/2 -translate-y-1/2 text-cyan-500 text-sm font-mono tracking-[5px] [writing-mode:vertical-rl] border-r-2 border-cyan-500 pr-4 z-50 animate-pulse">
+      <div className="fixed right-10 top-1/2 -translate-y-1/2 text-cyan-500 text-[0.7rem] font-mono tracking-[4px] [writing-mode:vertical-rl] border-r border-cyan-500 pr-2.5 z-50 whitespace-nowrap">
         STATUS: SCANNING // DEPTH: {depth}M
       </div>
 

@@ -62,7 +62,7 @@ export default function PeripheralData() {
           <h2 className="text-2xl font-bold uppercase mb-8 text-cyan-500">Beyond_Code</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {hobbiesData.hobbies.map((hobby, i) => (
-              <div key={i} className="border border-cyan-500/20 p-6 bg-white/[0.03] hover:border-cyan-500/50 transition-all">
+              <div key={i} className="border border-cyan-500/20 p-6 bg-transparent hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
                 <h3 className="text-sm uppercase mb-3 text-cyan-500">{hobby.categorie}</h3>
                 <ul className="space-y-1">
                   {hobby.details.map((detail, j) => (
