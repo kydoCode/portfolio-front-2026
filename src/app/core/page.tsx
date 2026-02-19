@@ -66,7 +66,7 @@ export default function SystemCore() {
               const rotateY = (x - rect.width / 2) / 20;
               const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
               const content = e.currentTarget.querySelector('.card-content') as HTMLElement;
-              if (inner) inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(50px)`;
+              if (inner) inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
               if (content) {
                 content.style.setProperty('--x', `${x}px`);
                 content.style.setProperty('--y', `${y}px`);
@@ -74,7 +74,7 @@ export default function SystemCore() {
             }}
             onMouseLeave={(e) => {
               const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
-              if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(50px)';
+              if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
             }}
           >
             <div className="card-inner h-full transition-transform duration-100" style={{ transformStyle: 'preserve-3d' }}>
@@ -99,7 +99,7 @@ export default function SystemCore() {
               const rotateY = (x - rect.width / 2) / 20;
               const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
               const content = e.currentTarget.querySelector('.card-content') as HTMLElement;
-              if (inner) inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(50px)`;
+              if (inner) inner.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
               if (content) {
                 content.style.setProperty('--x', `${x}px`);
                 content.style.setProperty('--y', `${y}px`);
@@ -107,7 +107,7 @@ export default function SystemCore() {
             }}
             onMouseLeave={(e) => {
               const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
-              if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg) translateZ(50px)';
+              if (inner) inner.style.transform = 'rotateX(0deg) rotateY(0deg)';
             }}
           >
             <div className="card-inner h-full transition-transform duration-100" style={{ transformStyle: 'preserve-3d' }}>
