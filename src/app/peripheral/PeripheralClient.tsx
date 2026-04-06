@@ -3,12 +3,16 @@
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import hobbiesData from '@/data/hobbies.json';
+import type { Hobby } from '@prisma/client';
 import BurgerMenu from '@/components/BurgerMenu';
 import BubbleBackground from '@/components/BubbleBackground';
 import Cursor from '@/components/Cursor';
 
-export default function PeripheralData() {
+interface Props {
+  hobbies: Hobby[];
+}
+
+export default function PeripheralClient({ hobbies }: Props) {
   const router = useRouter();
   const [sonarActive, setSonarActive] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -18,7 +22,7 @@ export default function PeripheralData() {
   const [sendError, setSendError] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const { t } = useTranslation();
-  const visibleHobbies = hobbiesData.hobbies.filter(h => h.visible);
+  const visibleHobbies = hobbies;
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -91,16 +95,10 @@ export default function PeripheralData() {
         <div className="mb-16 md:mb-20">
           <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('peripheral.hobbiesTitle')}</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {visibleHobbies.map((hobby, i) => (
-              <div key={i} className="border border-cyan-500/20 p-4 md:p-6 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
-                <h3 className="text-xs md:text-sm uppercase mb-2 md:mb-3 text-cyan-500">{hobby.categorie}</h3>
-                <ul className="space-y-1">
-                  {hobby.details.map((detail, j) => (
-                    <li key={j} className="text-xs opacity-70 before:content-['>_'] before:text-cyan-500 before:mr-1">
-                      {detail}
-                    </li>
-                  ))}
-                </ul>
+            {visibleHobbies.map((hobby) => (
+              <div key={hobby.id} className="border border-cyan-500/20 p-4 md:p-6 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
+                <h3 className="text-xs md:text-sm uppercase mb-2 md:mb-3 text-cyan-500">{hobby.name}</h3>
+                <p className="text-xs opacity-70">{hobby.description}</p>
               </div>
             ))}
           </div>

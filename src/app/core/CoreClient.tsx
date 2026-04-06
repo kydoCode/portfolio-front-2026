@@ -3,19 +3,18 @@
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import educationData from '@/data/education_full.json';
-import experienceData from '@/data/experience.json';
+import type { Experience, Education, Certification } from '@prisma/client';
 import BurgerMenu from '@/components/BurgerMenu';
 import BubbleBackground from '@/components/BubbleBackground';
 import Cursor from '@/components/Cursor';
 
-const certifications = [
-  { name: 'ISTQB Foundation v4.0', year: 2025, org: 'GASQ / CFTL', link: 'https://www.cftl.fr', state: 'ACTIVE', priority: 'HIGH' },
-  { name: 'Cisco CyberOps Associate', year: 2026, org: 'Cisco Networking Academy', link: null, state: 'PENDING', priority: 'NORMAL' },
-  { name: 'C2i Niveau 1', year: 2014, org: 'Université de Strasbourg', link: null, state: 'ACTIVE', priority: 'NORMAL' },
-];
+interface Props {
+  experience: Experience[];
+  education: Education[];
+  certifications: Certification[];
+}
 
-export default function CoreClient() {
+export default function CoreClient({ experience, education, certifications }: Props) {
   const router = useRouter();
   const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,8 +46,8 @@ export default function CoreClient() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [isMobile]);
 
-  const allEdu = educationData.education.filter(e => e.visible);
-  const allExp = experienceData.experience.filter(e => e.visible);
+  const allEdu = education;
+  const allExp = experience;
   const visibleEdu = showAllEdu ? allEdu : allEdu.slice(0, 5);
   const visibleExp = showAllExp ? allExp : allExp.slice(0, 3);
 
@@ -124,20 +123,18 @@ export default function CoreClient() {
             <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('core.formationTitle')}</h2>
             <div className="relative pl-6 md:pl-8 border-l-2 border-cyan-500/30">
               {visibleEdu.map((edu, i) => (
-                <div key={i} className="relative mb-6 group pl-3 md:pl-4">
+                <div key={edu.id} className="relative mb-6 group pl-3 md:pl-4">
                   <div className="absolute -left-[13px] w-5 h-5 md:w-6 md:h-6 bg-cyan-500 rounded-full border-4 border-[#050a12] group-hover:scale-125 transition-transform z-10" />
-                  <span className="text-xs text-cyan-500 block mb-1">{edu.annees.join(' — ')}</span>
-                  <h3 className="text-base md:text-lg font-bold group-hover:text-cyan-400 transition-colors">{edu.intitule}</h3>
-                  {'etablissement' in edu && (
-                    <p className="text-xs opacity-70">{edu.etablissement as string}</p>
-                  )}
-                  {'mention' in edu && edu.mention && (
-                    <span className="text-xs text-cyan-500/60 mt-1 block">Mention : {edu.mention as string}</span>
-                  )}
+                  <span className="text-xs text-cyan-500 block mb-1">
+                    {edu.annees && edu.annees.length > 0 ? edu.annees.join(' — ') : '—'}
+                  </span>
+                  <h3 className="text-base md:text-lg font-bold group-hover:text-cyan-400 transition-colors">{edu.diplome}</h3>
+                  <p className="text-xs opacity-70">{edu.etablissement}</p>
+                  {edu.mention && <span className="text-xs text-cyan-500/60 mt-1 block">Mention : {edu.mention}</span>}
                 </div>
               ))}
             </div>
-            {educationData.education.length > 5 && (
+            {allEdu.length > 5 && (
               <button onClick={() => setShowAllEdu(!showAllEdu)} className="mt-4 text-xs text-cyan-500 tracking-widest hover:text-white transition-colors border border-cyan-500/30 px-4 py-2 hover:border-cyan-500">
                 {showAllEdu ? t('core.seeLess') : `${t('core.seeAll')} (${allEdu.length} ${t('core.entries')})`}
               </button>
@@ -147,13 +144,13 @@ export default function CoreClient() {
           <div>
             <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('core.experienceTitle')}</h2>
             <div className="space-y-4 md:space-y-6">
-              {visibleExp.map((exp, i) => (
-                <div key={i} className="border border-cyan-500/20 p-4 md:p-6 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
+              {visibleExp.map((exp) => (
+                <div key={exp.id} className="border border-cyan-500/20 p-4 md:p-6 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
                   <span className="text-xs text-cyan-500">{exp.annees.join(' — ')}</span>
                   <h3 className="text-base md:text-lg font-bold uppercase mt-2">{exp.poste}</h3>
-                  {'entreprise' in exp && <span className="text-sm opacity-50">{exp.entreprise as string}</span>}
+                  {exp.entreprise && <span className="text-sm opacity-50">{exp.entreprise}</span>}
                   <ul className="mt-3 space-y-1">
-                    {exp.details.slice(0, 3).map((detail, j) => (
+                    {(exp.details as string[]).slice(0, 3).map((detail, j) => (
                       <li key={j} className="text-xs opacity-70 before:content-['>_'] before:text-cyan-500 before:mr-2">
                         {detail.replace(/<[^>]*>/g, '')}
                       </li>
@@ -174,22 +171,22 @@ export default function CoreClient() {
         <div className="mb-16 md:mb-20">
           <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('core.certificationsTitle')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {certifications.map((cert, i) => (
-              <div key={i} className="border border-cyan-500/20 p-4 md:p-5 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
+            {certifications.map((cert) => (
+              <div key={cert.id} className="border border-cyan-500/20 p-4 md:p-5 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
                 <div className="flex items-start justify-between gap-2 mb-3">
-                  <h3 className="text-sm font-bold leading-tight">{cert.name}</h3>
-                  <span className={`text-xs px-2 py-0.5 border rounded flex-shrink-0 ${cert.priority === 'HIGH' ? 'bg-orange-500/20 border-orange-500 text-orange-500' : 'bg-cyan-500/20 border-cyan-500 text-cyan-500'}`}>
-                    {cert.priority}
+                  <h3 className="text-sm font-bold leading-tight">{cert.nom}</h3>
+                  <span className={`text-xs px-2 py-0.5 border rounded flex-shrink-0 ${cert.featured ? 'bg-orange-500/20 border-orange-500 text-orange-500' : 'bg-cyan-500/20 border-cyan-500 text-cyan-500'}`}>
+                    {cert.featured ? 'HIGH' : 'NORMAL'}
                   </span>
                 </div>
-                <p className="text-xs opacity-50 mb-3">{cert.org}</p>
+                <p className="text-xs opacity-50 mb-3">{cert.organisme}</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-cyan-500">{cert.year}</span>
-                    <span className={`text-xs font-mono ${cert.state === 'ACTIVE' ? 'text-green-500' : 'text-yellow-500'}`}>[{cert.state}]</span>
+                    <span className="text-xs text-cyan-500">{cert.date.getFullYear()}</span>
+                    <span className="text-xs font-mono text-green-500">[ACTIVE]</span>
                   </div>
-                  {cert.link && (
-                    <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-500 hover:text-white transition-colors">
+                  {cert.url && (
+                    <a href={cert.url} target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-500 hover:text-white transition-colors">
                       {t('core.verify')}
                     </a>
                   )}

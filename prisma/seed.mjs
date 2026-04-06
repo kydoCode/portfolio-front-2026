@@ -41,6 +41,7 @@ async function main() {
       data: {
         diplome: edu.intitule,
         etablissement: edu.etablissement ?? '',
+        annees: edu.annees ?? [],
         mention: edu.mention ?? null,
         url: edu.url ?? null,
         visible: edu.visible ?? true,

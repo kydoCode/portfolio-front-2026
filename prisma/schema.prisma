@@ -36,6 +36,7 @@ model Education {
   id            String    @id @default(cuid())
   diplome       String
   etablissement String
+  annees        String[]
   startDate     DateTime?
   endDate       DateTime?
   logo          String?
