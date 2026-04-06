@@ -1,36 +1,92 @@
 {
   "projets": [
     {
+      "nom": "Portfolio Silent System",
+      "description": "Portfolio personnel 2026 — design immersif cyber/abyss",
+      "context": "Refactorisation complète d'un portfolio React/Vite vers Next.js 16 + TypeScript. Architecture 3 pages thématiques, design system 'Silent System', i18n 4 langues.",
+      "technologies": ["Next.js", "TypeScript", "React 19", "Tailwind CSS", "Prisma", "PostgreSQL", "i18next", "Vercel"],
+      "role": "Concepteur & Développeur Full Stack",
+      "year": 2026,
+      "github": "https://github.com/Sylvain-CLEMENT",
+      "demo": "https://sylvainclement.dev",
+      "highlights": ["Design System custom", "SSR/SSG", "i18n 4 langues", "Responsive", "ISTQB-driven QA"]
+    },
+    {
+      "nom": "DWWM ReviZ",
+      "description": "Application web de révision pour la certification DWWM",
+      "context": "Outil pédagogique développé en stage chez StoryCom pour aider les apprenants à préparer la certification Titre Professionnel DWWM. Quiz interactifs, fiches de révision, suivi de progression.",
+      "technologies": ["HTML", "CSS", "JavaScript", "Node.js", "Express.js", "MySQL"],
+      "role": "Concepteur & Développeur Full Stack",
+      "year": 2025,
+      "github": null,
+      "demo": "https://dwwm-reviz-app-frontend.vercel.app/login.html",
+      "highlights": ["Ingénierie pédagogique", "UX orientée apprentissage", "Déployé en production"]
+    },
+    {
+      "nom": "Nexium",
+      "description": "Web app avec intégration IA via API REST",
+      "context": "Application développée en stage chez StoryCom intégrant une API d'intelligence artificielle. Conception UI/UX, développement front et back, intégration API REST.",
+      "technologies": ["React", "Node.js", "Express.js", "REST API", "IA"],
+      "role": "Développeur Full Stack",
+      "year": 2025,
+      "github": null,
+      "demo": null,
+      "highlights": ["Intégration IA", "API REST", "Conception UI/UX"]
+    },
+    {
       "nom": "AgilFlow",
-      "description": "application de gestion des userStories",
-      "context": "Développement d'une application pour gérer les user stories dans un environnement agile.",
-      "technologies": ["React", "Node.js", "MongoDB"],
+      "description": "Application de gestion des user stories en environnement agile",
+      "context": "Application web permettant de gérer le cycle de vie des user stories dans un projet agile : création, priorisation, suivi de sprint, tableau Kanban.",
+      "technologies": ["React", "Node.js", "MongoDB", "Express.js", "JWT"],
       "role": "Lead Developer",
-      "year": 2023
+      "year": 2024,
+      "github": "https://github.com/Sylvain-CLEMENT",
+      "demo": null,
+      "highlights": ["Architecture MVC", "Auth JWT", "Kanban dynamique"]
     },
     {
-      "nom": "Instant Media",
-      "description": "outils CRUD (gestion des avis, suivi des mails clients)",
-      "context": "Création d'outils CRUD pour la gestion des avis et le suivi des mails clients.",
-      "technologies": ["Vue.js", "Firebase"],
-      "role": "Full Stack Developer",
-      "year": 2024
+      "nom": "Instant Media — Outils CRUD",
+      "description": "Suite d'outils internes pour la gestion des avis et suivi clients",
+      "context": "Développement en stage chez Instant Media d'outils CRUD pour la gestion des avis clients et le suivi des mails. Interface d'administration, filtres, export.",
+      "technologies": ["Vue.js", "Firebase", "Firestore", "CSS"],
+      "role": "Développeur Full Stack",
+      "year": 2024,
+      "github": null,
+      "demo": null,
+      "highlights": ["Firebase Realtime", "Interface admin", "Filtres dynamiques"]
     },
     {
-      "nom": "Zer0Wipe",
-      "description": "application d'effacement sécurisé des données",
-      "context": "Développement d'une application pour l'effacement sécurisé des données sensibles.",
-      "technologies": ["Python", "Django"],
-      "role": "Backend Developer",
-      "year": 2022
+      "nom": "Taxi Laurie Bouclier — Site & SEO",
+      "description": "Refonte site web et stratégie SEO pour artisan taxi",
+      "context": "Développement du site vitrine avec WordPress, optimisation SEO complète (on-page, technique, local SEO), rédaction de documentation et tutoriaux de prise en main pour la cliente.",
+      "technologies": ["WordPress", "SEO", "Google Search Console", "Yoast"],
+      "role": "Développeur Web & SEO Specialist",
+      "year": 2024,
+      "github": null,
+      "demo": "https://taxilauriebouclier.wordpress.com/",
+      "highlights": ["SEO local", "Formation cliente", "Documentation technique"]
     },
     {
-      "nom": "Taxi Laurie",
-      "description": "optimisation SEO pour accroître la visibilité",
-      "context": "Optimisation SEO pour améliorer la visibilité en ligne de l'entreprise Taxi Laurie.",
-      "technologies": ["WordPress", "SEO Tools"],
-      "role": "SEO Specialist",
-      "year": 2021
+      "nom": "GeniArtHub — Refactor React",
+      "description": "Refactorisation d'une application de galerie d'art vers React",
+      "context": "Migration d'une application web de galerie artistique vers React avec composants réutilisables, gestion d'état, et amélioration des performances.",
+      "technologies": ["React", "JavaScript", "CSS Modules", "REST API"],
+      "role": "Développeur Front-end",
+      "year": 2024,
+      "github": "https://github.com/Sylvain-CLEMENT",
+      "demo": null,
+      "highlights": ["Migration vers React", "Composants réutilisables", "Optimisation perf"]
+    },
+    {
+      "nom": "Tree of Life — Mobile Game",
+      "description": "Jeu mobile iOS — Game Design & assets",
+      "context": "Co-conception d'un jeu mobile iOS chez StoryCom : élaboration du GDD (Game Design Document), design thinking, création d'assets graphiques et sonores, définition du business model.",
+      "technologies": ["Swift", "SwiftUI", "Figma", "Game Design"],
+      "role": "Game Designer & Asset Creator",
+      "year": 2025,
+      "github": null,
+      "demo": null,
+      "highlights": ["GDD complet", "Assets graphiques & sonores", "Business model"]
     }
   ]
 }
