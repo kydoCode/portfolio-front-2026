@@ -2,17 +2,18 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-type Item = { visible: boolean; featured: boolean; [key: string]: unknown };
+type Item = { id: string; visible: boolean; featured: boolean; [key: string]: unknown };
 type DataStore = Record<string, { [listKey: string]: Item[] }>;
 
-const COLLECTIONS = ['projects', 'experience', 'education', 'hobbies'] as const;
+const COLLECTIONS = ['projects', 'experience', 'education', 'hobbies', 'certifications'] as const;
 type Collection = typeof COLLECTIONS[number];
 
 const LABELS: Record<Collection, { list: string; nameKey: string }> = {
-  projects:   { list: 'projets',   nameKey: 'nom' },
-  experience: { list: 'experience', nameKey: 'poste' },
-  education:  { list: 'education', nameKey: 'intitule' },
-  hobbies:    { list: 'hobbies',   nameKey: 'categorie' },
+  projects:       { list: 'projets',        nameKey: 'name' },
+  experience:     { list: 'experience',     nameKey: 'poste' },
+  education:      { list: 'education',      nameKey: 'diplome' },
+  hobbies:        { list: 'hobbies',        nameKey: 'name' },
+  certifications: { list: 'certifications', nameKey: 'nom' },
 };
 
 export default function AdminPage() {
@@ -30,19 +31,20 @@ export default function AdminPage() {
     setAuthed(true);
   }, []);
 
-  const toggle = async (collection: Collection, index: number, field: 'visible' | 'featured', value: boolean) => {
-    const key = `${collection}-${index}-${field}`;
+  const toggle = async (collection: Collection, id: string, field: 'visible' | 'featured', value: boolean) => {
+    const key = `${collection}-${id}-${field}`;
     setSaving(key);
     const res = await fetch('/api/ss-ctrl-7x9k', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
-      body: JSON.stringify({ collection, index, field, value }),
+      body: JSON.stringify({ collection, id, field, value }),
     });
     if (res.ok) {
       setData(prev => {
         const next = structuredClone(prev);
         const listKey = LABELS[collection].list;
-        next[collection][listKey][index][field] = value;
+        const item = next[collection][listKey].find((i: Item) => i.id === id);
+        if (item) item[field] = value;
         return next;
       });
     }
@@ -117,19 +119,18 @@ export default function AdminPage() {
                 <span className="text-center">VISIBLE</span>
                 <span className="text-center">FEATURED</span>
               </div>
-              {items.map((item, i) => {
-                const name = (item[nameKey] as string) ?? `#${i}`;
+              {items.map((item) => {
+                const name = (item[nameKey] as string) ?? item.id;
                 return (
-                  <div key={i} className={`grid grid-cols-[1fr_80px_80px] gap-4 items-center border px-4 py-3 transition-all ${
+                  <div key={item.id} className={`grid grid-cols-[1fr_80px_80px] gap-4 items-center border px-4 py-3 transition-all ${
                     item.visible ? 'border-cyan-500/20' : 'border-white/5 opacity-40'
                   }`}>
                     <span className="text-sm truncate">{name}</span>
 
-                    {/* VISIBLE */}
                     <div className="flex justify-center">
                       <button
-                        onClick={() => toggle(activeTab, i, 'visible', !item.visible)}
-                        disabled={saving === `${activeTab}-${i}-visible`}
+                        onClick={() => toggle(activeTab, item.id, 'visible', !item.visible)}
+                        disabled={saving === `${activeTab}-${item.id}-visible`}
                         className={`w-10 h-5 rounded-full border transition-all relative ${
                           item.visible ? 'bg-cyan-500/30 border-cyan-500' : 'bg-white/5 border-white/20'
                         }`}
@@ -140,11 +141,10 @@ export default function AdminPage() {
                       </button>
                     </div>
 
-                    {/* FEATURED */}
                     <div className="flex justify-center">
                       <button
-                        onClick={() => toggle(activeTab, i, 'featured', !item.featured)}
-                        disabled={saving === `${activeTab}-${i}-featured`}
+                        onClick={() => toggle(activeTab, item.id, 'featured', !item.featured)}
+                        disabled={saving === `${activeTab}-${item.id}-featured`}
                         className={`w-10 h-5 rounded-full border transition-all relative ${
                           item.featured ? 'bg-orange-500/30 border-orange-500' : 'bg-white/5 border-white/20'
                         }`}
@@ -162,7 +162,7 @@ export default function AdminPage() {
         })()}
 
         <div className="mt-8 text-xs text-white/20">
-          &gt; Les modifications sont écrites directement dans les JSON — rechargement de page requis pour voir l&apos;effet en prod.
+          &gt; Modifications persistées en DB — effet immédiat en prod.
         </div>
       </div>
     </div>

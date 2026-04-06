@@ -1,50 +1,57 @@
 import { NextRequest, NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { PrismaClient } from '@prisma/client';
 
-const DATA_DIR = path.join(process.cwd(), 'src/data');
+const prisma = new PrismaClient();
 
-const FILES: Record<string, string> = {
-  projects: 'projects.json',
-  experience: 'experience.json',
-  education: 'education_full.json',
-  hobbies: 'hobbies.json',
-};
+const MODELS = {
+  projects:   'project',
+  experience: 'experience',
+  education:  'education',
+  hobbies:    'hobby',
+  certifications: 'certification',
+} as const;
+
+type Collection = keyof typeof MODELS;
 
 function checkAuth(req: NextRequest) {
-  const token = req.headers.get('x-admin-token');
-  return token === process.env.ADMIN_SECRET;
+  return req.headers.get('x-admin-token') === process.env.ADMIN_SECRET;
 }
 
 export async function GET(req: NextRequest) {
   if (!checkAuth(req)) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const data: Record<string, unknown> = {};
-  for (const [key, file] of Object.entries(FILES)) {
-    const raw = fs.readFileSync(path.join(DATA_DIR, file), 'utf8');
-    data[key] = JSON.parse(raw);
-  }
-  return NextResponse.json(data);
+  const [projects, experience, education, hobbies, certifications] = await Promise.all([
+    prisma.project.findMany({ orderBy: { order: 'asc' } }),
+    prisma.experience.findMany({ orderBy: { order: 'asc' } }),
+    prisma.education.findMany({ orderBy: { order: 'asc' } }),
+    prisma.hobby.findMany({ orderBy: { order: 'asc' } }),
+    prisma.certification.findMany({ orderBy: { order: 'asc' } }),
+  ]);
+
+  return NextResponse.json({
+    projects:       { projets: projects },
+    experience:     { experience },
+    education:      { education },
+    hobbies:        { hobbies },
+    certifications: { certifications },
+  });
 }
 
 export async function POST(req: NextRequest) {
   if (!checkAuth(req)) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const { collection, index, field, value } = await req.json();
+  const { collection, id, field, value } = await req.json();
 
-  if (!FILES[collection]) return NextResponse.json({ error: 'Collection inconnue' }, { status: 400 });
-  if (!['visible', 'featured'].includes(field)) return NextResponse.json({ error: 'Champ non autorisé' }, { status: 400 });
-
-  const filePath = path.join(DATA_DIR, FILES[collection]);
-  const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-
-  const listKey = Object.keys(data)[0];
-  if (!Array.isArray(data[listKey]) || index < 0 || index >= data[listKey].length) {
-    return NextResponse.json({ error: 'Index invalide' }, { status: 400 });
+  if (!MODELS[collection as Collection]) {
+    return NextResponse.json({ error: 'Collection inconnue' }, { status: 400 });
+  }
+  if (!['visible', 'featured'].includes(field)) {
+    return NextResponse.json({ error: 'Champ non autorisé' }, { status: 400 });
   }
 
-  data[listKey][index][field] = value;
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  const model = MODELS[collection as Collection];
+  // @ts-expect-error dynamic model access
+  await prisma[model].update({ where: { id }, data: { [field]: value } });
 
   return NextResponse.json({ success: true });
 }
