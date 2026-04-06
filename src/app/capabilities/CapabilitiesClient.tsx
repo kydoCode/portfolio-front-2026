@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Project, Certification, Skill } from '@prisma/client';
+import { useUnderwaterSound } from '@/hooks/useUnderwaterSound';
 import BurgerMenu from '@/components/BurgerMenu';
 import BubbleBackground from '@/components/BubbleBackground';
 import Cursor from '@/components/Cursor';
@@ -35,6 +36,7 @@ export default function CapabilitiesClient({ projects, certifications, skills: _
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { t } = useTranslation();
+  const { play } = useUnderwaterSound();
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -129,7 +131,7 @@ export default function CapabilitiesClient({ projects, certifications, skills: _
               <div
                 key={project.id}
                 className="relative border border-cyan-500/20 p-4 md:p-6 hover:bg-white/[0.01] hover:border-cyan-500 transition-all cursor-pointer group"
-                onClick={() => setSelectedProject(project)}
+                onClick={() => { setSelectedProject(project); play('bubble'); }}
               >
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 <div className="relative z-10">
@@ -167,7 +169,7 @@ export default function CapabilitiesClient({ projects, certifications, skills: _
       {selectedProject && (
         <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 md:p-8" onClick={() => setSelectedProject(null)}>
           <div
-            className="border border-cyan-500 bg-[#050a12] p-6 md:p-8 max-w-2xl w-full relative overflow-y-auto"
+            className="border border-cyan-500 bg-[#050a12] p-6 md:p-8 max-w-2xl w-full relative overflow-y-auto overflow-x-hidden"
             style={{ maxHeight: '85vh' }}
             onClick={(e) => e.stopPropagation()}
           >
