@@ -1,24 +1,52 @@
 {
   "hobbies": [
     {
+      "visible": true,
+      "featured": true,
       "categorie": "Arts",
-      "details": ["musique", "photo", "courts-métrages", "théâtre"]
+      "details": [
+        "musique",
+        "photo",
+        "courts-métrages",
+        "théâtre"
+      ]
     },
     {
+      "visible": true,
+      "featured": true,
       "categorie": "Associatif",
-      "details": ["groupe de rock sino-français"]
+      "details": [
+        "groupe de rock sino-français"
+      ]
     },
     {
+      "visible": true,
+      "featured": false,
       "categorie": "Culture",
-      "details": ["lecture", "conférences", "voyages"]
+      "details": [
+        "lecture",
+        "conférences",
+        "voyages"
+      ]
     },
     {
+      "visible": true,
+      "featured": false,
       "categorie": "Sport",
-      "details": ["Natation", "ski (compétition)"]
+      "details": [
+        "Natation",
+        "ski (compétition)"
+      ]
     },
     {
+      "visible": true,
+      "featured": true,
       "categorie": "Formations",
-      "details": ["régie/PEMP (ENS de Lyon)", "MOOCs", "PAF"]
+      "details": [
+        "régie/PEMP (ENS de Lyon)",
+        "MOOCs",
+        "PAF"
+      ]
     }
   ]
 }

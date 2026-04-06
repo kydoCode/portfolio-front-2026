@@ -6,16 +6,16 @@
     "status": "运行中"
   },
   "nav": {
-    "home": "主页",
-    "core": "核心",
-    "capabilities": "能力",
-    "peripheral": "外围",
+    "home": "HOME",
+    "core": "CORE",
+    "capabilities": "CAPABILITIES",
+    "peripheral": "PERIPHERAL",
     "downloadCv": "下载简历",
     "soundOff": "静音",
     "soundOn": "开启声音"
   },
   "core": {
-    "protocol": "核心协议",
+    "protocol": "CORE — 核心协议",
     "booting": "正在配置核心资产...",
     "card1Label": "1 // 智识资产",
     "card1Title": "语义隐匿",

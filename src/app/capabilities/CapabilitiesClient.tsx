@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import projectsData from '@/data/projects.json';
+import softskillsData from '@/data/softskills.json';
 import BurgerMenu from '@/components/BurgerMenu';
 import BubbleBackground from '@/components/BubbleBackground';
 import Cursor from '@/components/Cursor';
@@ -35,14 +36,11 @@ export default function SystemCapabilities() {
     return () => window.removeEventListener('keydown', handleEsc);
   }, [menuOpen, selectedProject]);
 
-  const techStack = [
-    { name: 'React / Next.js / TypeScript', level: 85 },
-    { name: 'Node.js / Express', level: 78 },
-    { name: 'PostgreSQL / Prisma', level: 72 },
-    { name: 'Swift / SwiftUI (iOS)', level: 65 },
-    { name: 'Docker / CI-CD', level: 60 },
-    { name: 'Tailwind CSS / UI Design', level: 88 },
-  ];
+  const visibleProjects = projectsData.projets.filter(p => p.visible);
+  const techStack = softskillsData.competences.techniques
+    .filter(s => s.visible)
+    .flatMap(cat => cat.details.map((d, i) => ({ name: d, cat: cat.type, level: Math.max(60, 92 - i * 5) })))
+    .slice(0, 8);
 
   const certifications = [
     { name: 'ISTQB Foundation v4.0', status: 'HIGH', year: 2025, org: 'GASQ / CFTL', link: 'https://www.cftl.fr', state: 'ACTIVE' },
@@ -141,7 +139,7 @@ export default function SystemCapabilities() {
         <div>
           <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('capabilities.projectsTitle')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-            {projectsData.projets.map((project, i) => (
+            {visibleProjects.map((project, i) => (
               <div
                 key={i}
                 className="relative border border-cyan-500/20 p-4 md:p-6 hover:bg-white/[0.01] hover:border-cyan-500 transition-all cursor-pointer group"

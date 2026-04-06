@@ -1,41 +1,45 @@
 {
   "experience": [
     {
-      "poste": "Formateur IT & Concepteur Développeur (Stage)",
+      "visible": true,
+      "featured": true,
+      "poste": "Intégrateur/Webdesigner JV & Formateur stagiaire",
       "annees": ["2025"],
       "entreprise": "StoryCom",
-      "logo": "/images/logos/storycom-placeholder.png", 
+      "logo": "/images/logos/storycom-placeholder.png",
       "url": "https://storycom.fr",
       "favicon": "/images/favicons/storycom-placeholder.ico",
       "details": [
-        "Ingénierie pédagogique : Animation de cours sur le framework MVC Symfony et préparation aux certifications (REAC du TP DWWM).",
-        "Conception UI/UX & Développement : Création d'outils pédagogiques (<a href=\"https://dwwm-reviz-app-frontend.vercel.app/login.html\">DWWM ReviZ</a>, ArticlesApp) et d'une web app avec IA (Nexium) via API REST.",
-        "Game Design & Co-conception : Élaboration du GDD, design thinking et création d'assets (graphiques, sons, business model) pour le jeu mobile 'Tree of Life'.",
-        "Assurance Qualité : Tests fonctionnels de l'application 'Slime Identity' avant mise en production.",
-        "Jury d'examen : Évaluation et feedback lors de soutenances oraux blancs pour des projets professionnels."
+        "Intégration et design UI pour des projets de jeux vidéo.",
+        "Animation de sessions de formation.",
+        "Conception d'interfaces centrées sur l'utilisateur."
       ]
     },
     {
+      "visible": true,
+      "featured": true,
       "poste": "Développeur web stagiaire",
       "annees": ["2024 - 2025"],
       "entreprise": "Taxi Laurie Bouclier",
-      "logo": "https://i.ibb.co/N1FBwFS/tlb.png",
+      "logo": "/images/logos/storycom-placeholder.png",
       "url": "https://taxilauriebouclier.wordpress.com/",
-      "favicon": "https://i.ibb.co/N1FBwFS/tlb.png",
+      "favicon": "/images/favicons/storycom-placeholder.ico",
       "details": [
         "Développement du site avec le CMS Wordpress.",
+        "Optimisation SEO pour accroître la visibilité en ligne.",
         "Participation à des réunions d'équipe pour discuter des exigences et des solutions techniques.",
-        "Stratégie SEO",
-        "Rédaction de documentation technique et des tutoriaux de prise en main pour la cliente."
+        "Rédaction de documentation technique et de tutoriels de prise en main pour la cliente."
       ]
     },
     {
+      "visible": true,
+      "featured": true,
       "poste": "Développeur web stagiaire",
       "annees": ["2024"],
       "entreprise": "Instant Media",
-      "logo": "https://i.ibb.co/txbLSBf/instant-logo-fond-blanc-3x-1.png",
+      "logo": "/images/logos/storycom-placeholder.png",
       "url": "https://www.instant-media.fr/",
-      "favicon": "https://i.ibb.co/yfj0hvH/instant-icone-fond-blanc-3x-1.png",
+      "favicon": "/images/favicons/storycom-placeholder.ico",
       "details": [
         "Développement d'outils CRUD pour la gestion des avis et le suivi des mails clients.",
         "Participation à des réunions d'équipe pour discuter des exigences et des solutions techniques.",
@@ -43,12 +47,14 @@
       ]
     },
     {
+      "visible": true,
+      "featured": false,
       "poste": "Professeur Documentaliste",
       "annees": ["2017 - 2021"],
       "entreprise": "Éducation Nationale",
-      "logo": "https://i.ibb.co/H4DxbNb/MIN-Education-Nationale-et-Jeunesse-RVB.jpg",
+      "logo": "/images/logos/storycom-placeholder.png",
       "url": "https://www.devenirenseignant.gouv.fr/etre-professeur-documentaliste-148",
-      "favicon": "https://i.ibb.co/q9Wxwwj/favicon.png",
+      "favicon": "/images/favicons/storycom-placeholder.ico",
       "details": [
         "Gestion et organisation des ressources documentaires.",
         "Formation des élèves à la recherche documentaire et à l'utilisation des outils numériques.",
@@ -56,45 +62,51 @@
       ]
     },
     {
+      "visible": true,
+      "featured": false,
       "poste": "Professeur Documentaliste stagiaire",
       "annees": ["2013 - 2014"],
-      "details": [
-        "Stages en établissements",
-        "Représentant étudiants Master",
-        "Participation à des projets de numérisation des ressources documentaires."
-      ],
-      "logo": "https://i.ibb.co/H4DxbNb/MIN-Education-Nationale-et-Jeunesse-RVB.jpg",
+      "entreprise": "Éducation Nationale",
+      "logo": "/images/logos/storycom-placeholder.png",
       "url": "https://www.devenirenseignant.gouv.fr/etre-professeur-documentaliste-148",
-      "favicon": "https://i.ibb.co/q9Wxwwj/favicon.png"
-    },
-    {
-      "poste": "Professeur de FLE",
-      "annees": ["2011 - 2012"],
-      "entreprise": "Alliance Française (Strasbourg)",
-      "logo": "https://i.ibb.co/BfHbZY2/Alliance-fran-aise-de-Paris.png",
-      "url": "https://www.afstrasbourg.eu/",
-      "favicon": "https://i.ibb.co/jhkK0Yw/af.png",
+      "favicon": "/images/favicons/storycom-placeholder.ico",
       "details": [
-        "Enseignement du français langue étrangère à des étudiants internationaux.",
-        "Organisation d'activités culturelles pour promouvoir la langue et la culture françaises.",
-        "Évaluation des progrès des étudiants et adaptation des cours en conséquence."
+        "Stages en établissements secondaires.",
+        "Représentant étudiants Master.",
+        "Participation à des projets de numérisation des ressources documentaires."
       ]
     },
     {
-      "poste": "Professeur d'Allemand",
-      "annees": ["2010 - 2012"],
+      "visible": true,
+      "featured": false,
+      "poste": "Professeur de FLE",
+      "annees": ["2011 - 2012"],
+      "entreprise": "Alliance Française (Strasbourg)",
+      "logo": "/images/logos/storycom-placeholder.png",
+      "url": "https://www.afstrasbourg.eu/",
+      "favicon": "/images/favicons/storycom-placeholder.ico",
       "details": [
-        "Stages en établissements",
-        "Représentant étudiants Master",
-        "Cours à domicile (Acadomia)",
-        "Enseignement de l'allemand à des élèves de différents niveaux.",
-        "Création de supports pédagogiques adaptés aux besoins des élèves."
-      ],
-      "logo": "https://i.ibb.co/H4DxbNb/MIN-Education-Nationale-et-Jeunesse-RVB.jpg",
-      "url": "https://www.education.gouv.fr/les-langues-vivantes-etrangeres-et-regionales-11249",
-      "favicon": "https://i.ibb.co/q9Wxwwj/favicon.png"
+        "Enseignement du français langue étrangère à des étudiants internationaux.",
+        "Organisation d'activités culturelles pour promouvoir la langue et la culture françaises."
+      ]
     },
     {
+      "visible": true,
+      "featured": false,
+      "poste": "Professeur d'Allemand",
+      "annees": ["2010 - 2012"],
+      "entreprise": "Acadomia / Stages",
+      "logo": "/images/logos/storycom-placeholder.png",
+      "url": "https://www.education.gouv.fr/les-langues-vivantes-etrangeres-et-regionales-11249",
+      "favicon": "/images/favicons/storycom-placeholder.ico",
+      "details": [
+        "Cours à domicile et stages en établissements.",
+        "Création de supports pédagogiques adaptés aux différents niveaux."
+      ]
+    },
+    {
+      "visible": true,
+      "featured": false,
       "poste": "Ambassadeur Medion / Animateur de vente informatique",
       "annees": ["2008"],
       "entreprise": "Saturn (via Adeshia)",
@@ -103,25 +115,24 @@
         "Formation par ingénieur Intel (Core i3/i5/i7 – 1ère génération).",
         "8 ventes réalisées en 3 jours dont 2 unités centrales MEDION.",
         "Conseil client basé sur usage et budget (approche non agressive).",
-        "Reporting SWOT auprès d'Adhesia"
+        "Reporting SWOT auprès d'Adhesia."
       ]
     },
     {
+      "visible": true,
+      "featured": false,
       "poste": "Responsable en Associations",
-      "annees": ["2015 - 2021"],
-      "details": [
-        "Album de musique, productions médias (GEM)",
-        "PSC1, BEPS, IRR (Croix-Rouge)",
-        "Respo web, com', animateur radio, assistant régie (ENS de Lyon)",
-        "Respo web, com'/SI, commercial, chargé d'enquête (NEOMA)",
-        "Président BDE des CPGE (Lycée Masséna)",
-        "Organisation d'événements et de projets associatifs.",
-        "Gestion des équipes et des ressources.",
-        "Communication et promotion des activités associatives."
-      ],
-      "logo": "https://i.ibb.co/wpFkHqv/experience-logo-placeholder.png",
+      "annees": ["2007 - 2021"],
+      "logo": "/images/logos/storycom-placeholder.png",
       "url": "https://www.trensistor.fr/author/sclement/",
-      "favicon": "https://i.ibb.co/rswJC9j/experience-favicon.png"
+      "favicon": "/images/favicons/storycom-placeholder.ico",
+      "details": [
+        "Album de musique, productions médias (GEM) — 2015-2021.",
+        "PSC1, BEPS, IRR (Croix-Rouge) — 2012.",
+        "Respo web/com', animateur radio, assistant régie (ENS de Lyon) — 2009-2010.",
+        "Respo web, com'/SI, commercial, chargé d'enquête (NEOMA) — 2008-2009.",
+        "Président BDE des CPGE (Lycée Masséna) — 2007-2008."
+      ]
     }
   ]
 }

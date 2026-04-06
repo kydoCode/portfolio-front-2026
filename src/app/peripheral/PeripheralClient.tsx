@@ -18,6 +18,7 @@ export default function PeripheralData() {
   const [sendError, setSendError] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const { t } = useTranslation();
+  const visibleHobbies = hobbiesData.hobbies.filter(h => h.visible);
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -90,7 +91,7 @@ export default function PeripheralData() {
         <div className="mb-16 md:mb-20">
           <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('peripheral.hobbiesTitle')}</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-            {hobbiesData.hobbies.map((hobby, i) => (
+            {visibleHobbies.map((hobby, i) => (
               <div key={i} className="border border-cyan-500/20 p-4 md:p-6 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
                 <h3 className="text-xs md:text-sm uppercase mb-2 md:mb-3 text-cyan-500">{hobby.categorie}</h3>
                 <ul className="space-y-1">

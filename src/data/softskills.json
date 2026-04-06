@@ -2,64 +2,90 @@
   "competences": {
     "techniques": [
       {
-        "type": "Développement Web / Web Mobile",
-        "subtype": "Front-end",
-        "details": [
-          "HTML",
-          "CSS",
-          "JavaScript",
-          "React",
-          "Tailwind CSS",
-          "Bootstrap",
-          "UIKit"
-        ]
+        "visible": true,
+        "featured": true,
+        "type": "Front-end",
+        "details": ["HTML", "CSS", "JavaScript", "React", "Next.js", "TypeScript", "Tailwind CSS", "Bootstrap"]
       },
       {
+        "visible": true,
+        "featured": true,
         "type": "Back-end",
-        "details": [
-          "PHP",
-          "MySQL",
-          "Node.js",
-          "Express.js",
-          "Vue.js",
-          "Python",
-          "PostgreSQL",
-          "NoSQL"
-        ]
+        "details": ["PHP", "MySQL", "PostgreSQL", "Node.js", "Express.js", "Python", "NoSQL", "Symfony"]
       },
       {
-        "type": "Autres compétences web",
-        "details": [
-          "SGBR / SIGB / SI",
-          "JSON / XML / XML-TEI"
-        ]
+        "visible": true,
+        "featured": true,
+        "type": "iOS Native",
+        "details": ["Swift", "SwiftUI", "Tests unitaires"]
       },
       {
-        "type": "Développement iOS natif",
-        "details": ["Swift", "SwiftUI"]
+        "visible": true,
+        "featured": false,
+        "type": "Web Standards",
+        "details": ["Mobile First", "Accessibilité (W3C)", "Multisupport", "SEO", "CMS (WordPress, Joomla)"]
+      }
+    ],
+    "creatives": [
+      {
+        "visible": true,
+        "featured": true,
+        "type": "UI/UX Design",
+        "details": ["Figma", "Canva", "UIKit", "Maquettage", "Prototypage"]
+      },
+      {
+        "visible": true,
+        "featured": false,
+        "type": "Animation & 3D",
+        "details": ["Unity", "Blender", "After Effects", "Illustrator", "Inkscape", "Natron"]
+      },
+      {
+        "visible": true,
+        "featured": false,
+        "type": "Plurimédia",
+        "details": ["Photoshop", "Lightroom", "Premiere Pro", "DaVinci Resolve", "Logic Pro X"]
       }
     ],
     "transversales": [
       {
-        "type": "Méthodologies",
-        "details": [
-          "Agilité (Kanban, SCRUM)",
-          "Gestion de projet (Trello)"
-        ]
+        "visible": true,
+        "featured": true,
+        "type": "Méthodologies & Outils",
+        "details": ["Agilité (SCRUM, Kanban)", "Trello", "Git", "GitHub", "VS Code", "Xcode", "Linters"]
       },
       {
-        "type": "Outils de développement",
-        "details": [
-          "IDE (VS Code, Xcode)",
-          "Versioning (Git, GitHub)",
-          "Extensions IA VS Code (Blackbox AI, Copilot, ChatGPT)",
-          "Outils de qualité de code (Linters)",
-          "Conception UI/UX (Figma)"
-        ]
+        "visible": true,
+        "featured": false,
+        "type": "IA Générative",
+        "details": ["GitHub Copilot", "ChatGPT", "Blackbox AI", "Amazon Q"]
       },
       {
-        "type": "Bureautique",
-        "details": ["diplôme du C2i niveau 1 (Unistra)"]
+        "visible": true,
+        "featured": false,
+        "type": "Savoir-être",
+        "details": ["Proactif", "Autonome", "Méthodique", "Rigoureux"]
+      }
+    ],
+    "langues": [
+      {
+        "visible": true,
+        "featured": true,
+        "langue": "Allemand",
+        "niveau": "Expert (C1+)",
+        "certification": ["Diplôme C1 Université de Vienne", "Programme Voltaire"]
+      },
+      {
+        "visible": true,
+        "featured": true,
+        "langue": "Anglais",
+        "niveau": "Opérationnel supérieur (B2+/C1)"
+      },
+      {
+        "visible": true,
+        "featured": false,
+        "langue": "Chinois",
+        "niveau": "Élémentaire (A2)",
+        "certification": ["DU 1A Études chinoises (INALCO)"]
       }
     ]
   }

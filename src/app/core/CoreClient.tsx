@@ -38,8 +38,19 @@ export default function CoreClient() {
     return () => window.removeEventListener('keydown', handleEsc);
   }, [menuOpen]);
 
-  const visibleEdu = showAllEdu ? educationData.education : educationData.education.slice(0, 5);
-  const visibleExp = showAllExp ? experienceData.experience : experienceData.experience.slice(0, 3);
+  const [depth, setDepth] = useState(0);
+
+  useEffect(() => {
+    if (isMobile) return;
+    const handleMouseMove = (e: MouseEvent) => setDepth(Math.floor((e.clientY / window.innerHeight) * 2500));
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [isMobile]);
+
+  const allEdu = educationData.education.filter(e => e.visible);
+  const allExp = experienceData.experience.filter(e => e.visible);
+  const visibleEdu = showAllEdu ? allEdu : allEdu.slice(0, 5);
+  const visibleExp = showAllExp ? allExp : allExp.slice(0, 3);
 
   return (
     <div className="min-h-screen bg-[#050a12] text-white overflow-x-hidden" style={{ cursor: isMobile ? 'auto' : 'none' }}>
@@ -57,7 +68,7 @@ export default function CoreClient() {
 
       {!isMobile && (
         <div className="fixed right-10 top-1/2 -translate-y-1/2 text-cyan-500 text-[0.7rem] font-mono tracking-[4px] [writing-mode:vertical-rl] border-r border-cyan-500 pr-2.5 z-50 whitespace-nowrap">
-          COORD: 43.52N // DEPTH: -2500M
+          COORD: 43.52N // DEPTH: -{depth}M
         </div>
       )}
 
@@ -117,12 +128,9 @@ export default function CoreClient() {
                   <div className="absolute -left-[13px] w-5 h-5 md:w-6 md:h-6 bg-cyan-500 rounded-full border-4 border-[#050a12] group-hover:scale-125 transition-transform z-10" />
                   <span className="text-xs text-cyan-500 block mb-1">{edu.annees.join(' — ')}</span>
                   <h3 className="text-base md:text-lg font-bold group-hover:text-cyan-400 transition-colors">{edu.intitule}</h3>
-                  {'etablissement' in edu
-                    ? <p className="text-xs opacity-70">{edu.etablissement as string}</p>
-                    : 'etablissements' in edu && (
-                      <p className="text-xs opacity-70">{(edu.etablissements as { nom: string }[]).map(e => e.nom).join(' · ')}</p>
-                    )
-                  }
+                  {'etablissement' in edu && (
+                    <p className="text-xs opacity-70">{edu.etablissement as string}</p>
+                  )}
                   {'mention' in edu && edu.mention && (
                     <span className="text-xs text-cyan-500/60 mt-1 block">Mention : {edu.mention as string}</span>
                   )}
@@ -131,7 +139,7 @@ export default function CoreClient() {
             </div>
             {educationData.education.length > 5 && (
               <button onClick={() => setShowAllEdu(!showAllEdu)} className="mt-4 text-xs text-cyan-500 tracking-widest hover:text-white transition-colors border border-cyan-500/30 px-4 py-2 hover:border-cyan-500">
-                {showAllEdu ? t('core.seeLess') : `${t('core.seeAll')} (${educationData.education.length} ${t('core.entries')})`}
+                {showAllEdu ? t('core.seeLess') : `${t('core.seeAll')} (${allEdu.length} ${t('core.entries')})`}
               </button>
             )}
           </div>
@@ -154,9 +162,9 @@ export default function CoreClient() {
                 </div>
               ))}
             </div>
-            {experienceData.experience.length > 3 && (
+            {allExp.length > 3 && (
               <button onClick={() => setShowAllExp(!showAllExp)} className="mt-4 text-xs text-cyan-500 tracking-widest hover:text-white transition-colors border border-cyan-500/30 px-4 py-2 hover:border-cyan-500">
-                {showAllExp ? t('core.seeLess') : `${t('core.seeAll')} (${experienceData.experience.length} ${t('core.posts')})`}
+                {showAllExp ? t('core.seeLess') : `${t('core.seeAll')} (${allExp.length} ${t('core.posts')})`}
               </button>
             )}
           </div>
@@ -194,8 +202,8 @@ export default function CoreClient() {
         {/* SYSTEM LOG */}
         <div className="bg-black/50 border border-cyan-500/30 p-4 md:p-6 font-mono text-xs mb-16 md:mb-20">
           <div className="text-cyan-500">&gt; {t('core.booting')}</div>
-          <div className="text-green-500">&gt; {t('core.logEducation')} ({educationData.education.length})</div>
-          <div className="text-green-500">&gt; {t('core.logExperience')} ({experienceData.experience.length})</div>
+          <div className="text-green-500">&gt; {t('core.logEducation')} ({allEdu.length})</div>
+          <div className="text-green-500">&gt; {t('core.logExperience')} ({allExp.length})</div>
           <div className="text-green-500">&gt; {t('core.logCertifications')} ({certifications.length})</div>
           <div className="text-cyan-500 animate-pulse">&gt; {t('core.logReady')}</div>
         </div>

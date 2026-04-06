@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /ss-ctrl-7x9k
+Disallow: /api/
+
+Sitemap: https://sylvainclement.dev/sitemap.xml

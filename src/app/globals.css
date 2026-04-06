@@ -1,26 +1,177 @@
 @import "tailwindcss";
 
+/* ============================================
+   SILENT SYSTEM — Design Tokens
+   Portfolio 2026
+   ============================================ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colors */
+  --color-primary: #00F5FF;
+  --color-primary-glow: rgba(0, 245, 255, 0.5);
+  --color-primary-dim: rgba(0, 245, 255, 0.15);
+  --color-bg: #050a12;
+  --color-bg-card: rgba(255, 255, 255, 0.02);
+  --color-bg-card-hover: rgba(255, 255, 255, 0.04);
+  --color-text: #ffffff;
+  --color-text-muted: rgba(255, 255, 255, 0.5);
+  --color-text-dim: rgba(255, 255, 255, 0.3);
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-danger: #f97316;
+  --color-error: #ef4444;
+
+  /* Borders */
+  --border-primary: 1px solid var(--color-primary);
+  --border-dim: 1px solid rgba(0, 245, 255, 0.2);
+  --border-subtle: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* Shadows */
+  --shadow-neon: 0 0 20px var(--color-primary-glow);
+  --shadow-neon-strong: 0 0 50px var(--color-primary);
+  --shadow-card: 0 0 30px rgba(0, 245, 255, 0.15);
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), 'Courier New', monospace;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 300ms ease;
+  --transition-slow: 500ms ease;
+
+  /* Z-index */
+  --z-base: 1;
+  --z-sticky: 50;
+  --z-fixed: 100;
+  --z-modal: 9000;
+  --z-cursor: 9999;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============================================
+   BASE
+   ============================================ */
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================
+   SILENT SYSTEM — Utility Classes
+   ============================================ */
+
+/* Neon text */
+.text-neon { color: var(--color-primary); }
+.text-neon-dim { color: rgba(0, 245, 255, 0.5); }
+
+/* Neon border */
+.border-neon { border: var(--border-primary); }
+.border-neon-dim { border: var(--border-dim); }
+
+/* Cards */
+.card-silent {
+  background: var(--color-bg-card);
+  border: var(--border-dim);
+  backdrop-filter: blur(12px);
+  transition: all var(--transition-base);
+}
+.card-silent:hover {
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-card);
+}
+
+/* Neon glow button */
+.btn-neon {
+  background: transparent;
+  border: var(--border-primary);
+  color: var(--color-primary);
+  font-family: var(--font-mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+.btn-neon:hover {
+  background: var(--color-primary);
+  color: var(--color-bg);
+  box-shadow: var(--shadow-neon);
+}
+
+/* Terminal line */
+.terminal-line::before {
+  content: '> ';
+  color: var(--color-primary);
+}
+
+/* Scan line animation */
+.scan-line {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  animation: scan 2s linear infinite;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes implode {
+  0% { transform: scale(0); opacity: 1; }
+  100% { transform: scale(3); opacity: 0; }
+}
+
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 10px var(--color-primary-glow); }
+  50% { box-shadow: var(--shadow-neon-strong); }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
