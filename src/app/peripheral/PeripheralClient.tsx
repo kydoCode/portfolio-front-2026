@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Hobby } from '@prisma/client';
+import { useUnderwaterSound } from '@/hooks/useUnderwaterSound';
 import BurgerMenu from '@/components/BurgerMenu';
 import BubbleBackground from '@/components/BubbleBackground';
 import Cursor from '@/components/Cursor';
@@ -22,6 +23,7 @@ export default function PeripheralClient({ hobbies }: Props) {
   const [sendError, setSendError] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const { t } = useTranslation();
+  const { play } = useUnderwaterSound();
   const visibleHobbies = hobbies;
 
   useEffect(() => {
@@ -47,6 +49,7 @@ export default function PeripheralClient({ hobbies }: Props) {
     setSending(true);
     setSendError('');
     setSonarActive(true);
+    play('sonar');
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',

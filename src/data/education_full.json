@@ -14,7 +14,7 @@
       "intitule": "Concepteur Designer UI / Développeur JV E-santé E-Tourisme",
       "annees": ["2025"],
       "etablissement": "MODE 83",
-      "url": "https://mode83.net/"
+      "url": "https://mode83.net/site/wp-content/uploads/2024/09/2024-MODE-Plaquette-Level-One-developpement-de-jeux-video-fif-session-3.pdf"
     },
     {
       "visible": true,
@@ -30,23 +30,47 @@
       "intitule": "SAS — Testeur QA Jeux Vidéos",
       "annees": ["2025"],
       "etablissement": "Simplon.co & MODE 83",
-      "url": "https://www.simplon.co/"
+      "url": "https://www.simplon.co/developpement/decouverte-metier-test-jeux-video"
     },
     {
       "visible": true,
       "featured": false,
       "intitule": "DWWM — Développeur Web et Web Mobile",
-      "annees": ["2024 - 2025"],
+      "annees": ["04/2024 - 02/2025"],
       "etablissement": "La Plateforme_",
-      "url": "https://laplateforme.io/"
+      "url": "https://laplateforme.io/prf-var-devweb/"
     },
     {
       "visible": true,
       "featured": false,
-      "intitule": "Apple Foundation Program (AFP)",
-      "annees": ["2022 - 2023"],
+      "intitule": "Langage à la carte",
+      "annees": ["08/01/2024 - 26/04/2024"],
+      "etablissement": "La Plateforme_",
+      "url": "https://laplateforme.io/prf-var-langage-informatique/"
+    },
+    {
+      "visible": true,
+      "featured": false,
+      "intitule": "Apple Foundation Program Advanced — CDA Swift",
+      "annees": ["09/2022 - 06/2023"],
       "etablissement": "Simplon.co",
-      "url": "https://www.simplon.co/"
+      "url": "https://www.simplon.co/developpement/advanced-apple-foundation-program"
+    },
+    {
+      "visible": true,
+      "featured": false,
+      "intitule": "Apple Foundation Program Extended",
+      "annees": ["06/2022"],
+      "etablissement": "Simplon.co",
+      "url": "https://www.simplon.co/developpement/apple-foundation-program"
+    },
+    {
+      "visible": true,
+      "featured": false,
+      "intitule": "Apple Foundation Program Initiation",
+      "annees": ["03/2022 - 04/2022"],
+      "etablissement": "Simplon.co",
+      "url": "https://www.simplon.co/developpement/apple-foundation-program"
     },
     {
       "visible": true,
@@ -54,22 +78,41 @@
       "intitule": "Master 1 MEEF Professeur Documentaliste",
       "annees": ["2013 - 2014"],
       "etablissement": "ESPE Aix-Marseille",
-      "mention": "Assez Bien"
+      "mention": "Assez Bien",
+      "url": "https://inspe.univ-amu.fr/fr/formations/master-meef-second-degre"
     },
     {
       "visible": true,
       "featured": false,
-      "intitule": "Master 1 Études germaniques",
-      "annees": ["2009 - 2013"],
-      "etablissement": "Université de Strasbourg / ENS de Lyon"
+      "intitule": "Master Études germaniques",
+      "annees": ["2010 - 2013"],
+      "etablissement": "Université de Strasbourg",
+      "url": "https://langues.unistra.fr/formation/masters/master-langues-litteratures-et-civilisations-etrangeres-et-regionales/etudes-allemandes/"
     },
     {
       "visible": true,
       "featured": false,
-      "intitule": "Bachelor / Licence LLCER Allemand",
+      "intitule": "Master Études germaniques",
+      "annees": ["2009 - 2010"],
+      "etablissement": "ENS de Lyon",
+      "url": "https://www.ens-lyon.fr/formation/offre-de-formation/master-2022-2026/etudes-germaniques"
+    },
+    {
+      "visible": true,
+      "featured": false,
+      "intitule": "Licence LLCER Allemand",
       "annees": ["2008 - 2009"],
-      "etablissement": "NEOMA (Sup de Co Reims) / Unistra",
-      "mention": "Assez Bien"
+      "etablissement": "Université de Strasbourg",
+      "mention": "Assez Bien",
+      "url": "https://langues.unistra.fr/formation/licences/licence-langues-litteratures-et-civilisations-etrangeres-et-regionales/parcours-monolingues/etudes-allemandes-langues-et-cultures-des-mondes-germaniques-ead/"
+    },
+    {
+      "visible": true,
+      "featured": false,
+      "intitule": "Bachelor — Sup de Co Reims (NEOMA)",
+      "annees": ["2008 - 2009"],
+      "etablissement": "NEOMA Business School",
+      "url": "https://neoma-bs.fr/formations/programme-grande-ecole/"
     },
     {
       "visible": true,
@@ -77,7 +120,8 @@
       "intitule": "CPGE Littéraire",
       "annees": ["2005 - 2008"],
       "etablissement": "Lycée Masséna",
-      "mention": "Très Bien"
+      "mention": "Très Bien",
+      "url": "https://www.lycee-massena.fr/les-cpge/#CPGE_prepa"
     },
     {
       "visible": true,

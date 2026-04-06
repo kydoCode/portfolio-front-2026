@@ -84,9 +84,9 @@ async function main() {
   console.log(`✓ ${hobbiesData.hobbies.length} hobbies`);
 
   const certs = [
-    { nom: 'ISTQB Foundation v4.0', organisme: 'GASQ / CFTL', date: new Date('2025-04-01'), url: 'https://www.cftl.fr', visible: true, featured: true, order: 0 },
-    { nom: 'Cisco CyberOps Associate', organisme: 'Cisco Networking Academy', date: new Date('2026-01-01'), url: null, visible: true, featured: false, order: 1 },
-    { nom: 'C2i Niveau 1', organisme: 'Université de Strasbourg', date: new Date('2014-01-01'), url: null, visible: true, featured: false, order: 2 },
+    { nom: 'ISTQB Foundation v4.0', organisme: 'GASQ / CFTL', date: new Date('2025-04-01'), url: 'https://www.cftl.fr', state: 'ACTIVE', visible: true, featured: true, order: 0 },
+    { nom: 'Cisco CyberOps Associate', organisme: 'Cisco Networking Academy', date: new Date('2026-01-01'), url: null, state: 'PENDING', visible: true, featured: false, order: 1 },
+    { nom: 'C2i Niveau 1', organisme: 'Université de Strasbourg', date: new Date('2014-01-01'), url: null, state: 'ACTIVE', visible: true, featured: false, order: 2 },
   ];
   for (const cert of certs) {
     await prisma.certification.create({ data: cert });

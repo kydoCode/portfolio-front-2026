@@ -59,6 +59,7 @@ model Certification {
   description  String?
   url          String?
   credentialId String?
+  state        String    @default("ACTIVE")
   visible      Boolean   @default(true)
   featured     Boolean   @default(false)
   order        Int       @default(0)

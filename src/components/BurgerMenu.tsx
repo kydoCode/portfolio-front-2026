@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useUnderwaterSound } from '@/hooks/useUnderwaterSound';
 
 interface BurgerMenuProps {
   isOpen: boolean;
@@ -21,6 +22,7 @@ export default function BurgerMenu({ isOpen, onClose, currentPage }: BurgerMenuP
   const router = useRouter();
   const [isMuted, setIsMuted] = useState(true);
   const { t, i18n } = useTranslation();
+  const { play } = useUnderwaterSound();
 
   useEffect(() => {
     const saved = localStorage.getItem('soundMuted');
@@ -59,7 +61,7 @@ export default function BurgerMenu({ isOpen, onClose, currentPage }: BurgerMenuP
       ].map(({ path, label, page }) => (
         <button
           key={page}
-          onClick={() => { router.push(path); onClose(); }}
+          onClick={() => { play('transition'); setTimeout(() => { router.push(path); onClose(); }, 200); }}
           className={`text-2xl tracking-widest transition-colors ${currentPage === page ? 'text-white' : 'text-cyan-500 hover:text-white'}`}
         >
           {label}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Experience, Education, Certification } from '@prisma/client';
 import BurgerMenu from '@/components/BurgerMenu';
@@ -14,6 +14,12 @@ interface Props {
   certifications: Certification[];
 }
 
+const STATE_CONFIG: Record<string, { label: string; color: string }> = {
+  ACTIVE:  { label: 'CERTIFIÉ',  color: 'text-green-400 border-green-400 bg-green-400/10' },
+  PENDING: { label: 'EN COURS',  color: 'text-yellow-400 border-yellow-400 bg-yellow-400/10' },
+  EXPIRED: { label: 'EXPIRÉ',    color: 'text-white/30 border-white/20 bg-white/5' },
+};
+
 export default function CoreClient({ experience, education, certifications }: Props) {
   const router = useRouter();
   const { t } = useTranslation();
@@ -21,23 +27,15 @@ export default function CoreClient({ experience, education, certifications }: Pr
   const [isMobile, setIsMobile] = useState(false);
   const [showAllEdu, setShowAllEdu] = useState(false);
   const [showAllExp, setShowAllExp] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768);
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && menuOpen) setMenuOpen(false);
-    };
-    window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
-  }, [menuOpen]);
-
   const [depth, setDepth] = useState(0);
+  const audioCtxRef = useRef<AudioContext | null>(null);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   useEffect(() => {
     if (isMobile) return;
@@ -45,6 +43,27 @@ export default function CoreClient({ experience, education, certifications }: Pr
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [isMobile]);
+
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => { if (e.key === 'Escape' && menuOpen) setMenuOpen(false); };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [menuOpen]);
+
+  const playBubble = () => {
+    try {
+      if (!audioCtxRef.current) audioCtxRef.current = new AudioContext();
+      const ctx = audioCtxRef.current;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.setValueAtTime(800, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(200, ctx.currentTime + 0.15);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
+      osc.start(); osc.stop(ctx.currentTime + 0.15);
+    } catch {}
+  };
 
   const allEdu = education;
   const allExp = experience;
@@ -71,9 +90,12 @@ export default function CoreClient({ experience, education, certifications }: Pr
         </div>
       )}
 
-      <section className="h-[50vh] md:h-screen flex flex-col justify-center items-center relative px-6">
-        <span className="text-xs tracking-[6px] md:tracking-[10px] text-cyan-500 uppercase mb-4 opacity-80">{t('core.protocol')}</span>
-        <h1 className="text-[14vw] md:text-[12vw] leading-[0.85] uppercase text-center font-bold">SILENT<br />SYSTEM</h1>
+      {/* HERO — fix mobile: hauteur auto, padding top pour éviter chevauchement avec nav */}
+      <section className="flex flex-col justify-center items-center relative px-6 pt-24 pb-12 md:h-screen md:pt-0 md:pb-0">
+        <span className="text-xs tracking-[6px] md:tracking-[10px] text-cyan-500 uppercase mb-4 opacity-80 text-center">{t('core.protocol')}</span>
+        <h1 className="text-[clamp(3rem,14vw,10rem)] leading-[0.85] uppercase text-center font-bold">
+          SILENT<br />SYSTEM
+        </h1>
         <div className="mt-4 text-xs text-cyan-500/50 font-mono">&gt; {t('core.booting')}</div>
       </section>
 
@@ -87,7 +109,7 @@ export default function CoreClient({ experience, education, certifications }: Pr
           ].map((card) => (
             <div
               key={card.labelKey}
-              className="h-[280px] md:h-[420px] group"
+              className="h-[240px] md:h-[420px] group"
               style={{ perspective: '1200px' }}
               onMouseMove={(e) => {
                 if (isMobile) return;
@@ -99,6 +121,7 @@ export default function CoreClient({ experience, education, certifications }: Pr
                 if (inner) inner.style.transform = `rotateX(${(rect.height / 2 - y) / 20}deg) rotateY(${(x - rect.width / 2) / 20}deg)`;
                 if (content) { content.style.setProperty('--x', `${x}px`); content.style.setProperty('--y', `${y}px`); }
               }}
+              onMouseEnter={playBubble}
               onMouseLeave={(e) => {
                 if (isMobile) return;
                 const inner = e.currentTarget.querySelector('.card-inner') as HTMLElement;
@@ -106,11 +129,11 @@ export default function CoreClient({ experience, education, certifications }: Pr
               }}
             >
               <div className="card-inner h-full transition-transform duration-300" style={{ transformStyle: 'preserve-3d', transform: isMobile ? 'none' : card.rotate }}>
-                <div className="card-content relative h-full border border-white/10 rounded-[24px] md:rounded-[32px] p-8 md:p-14 bg-white/[0.02] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all group-hover:border-cyan-500 group-hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
+                <div className="card-content relative h-full border border-white/10 rounded-[20px] md:rounded-[32px] p-6 md:p-14 bg-white/[0.02] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all group-hover:border-cyan-500 group-hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                  <span className="text-[0.65rem] text-cyan-500 tracking-[3px] mb-3 uppercase relative z-10">{t(card.labelKey)}</span>
-                  <h3 className="text-2xl md:text-[2.4rem] font-bold mb-3 relative z-10">{t(card.titleKey)}</h3>
-                  <p className="text-sm opacity-70 leading-relaxed relative z-10">{t(card.descKey)}</p>
+                  <span className="text-[0.65rem] text-cyan-500 tracking-[3px] mb-2 uppercase relative z-10">{t(card.labelKey)}</span>
+                  <h3 className="text-xl md:text-[2.4rem] font-bold mb-2 relative z-10">{t(card.titleKey)}</h3>
+                  <p className="text-xs md:text-sm opacity-70 leading-relaxed relative z-10">{t(card.descKey)}</p>
                 </div>
               </div>
             </div>
@@ -122,13 +145,20 @@ export default function CoreClient({ experience, education, certifications }: Pr
           <div>
             <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('core.formationTitle')}</h2>
             <div className="relative pl-6 md:pl-8 border-l-2 border-cyan-500/30">
-              {visibleEdu.map((edu, i) => (
+              {visibleEdu.map((edu) => (
                 <div key={edu.id} className="relative mb-6 group pl-3 md:pl-4">
                   <div className="absolute -left-[13px] w-5 h-5 md:w-6 md:h-6 bg-cyan-500 rounded-full border-4 border-[#050a12] group-hover:scale-125 transition-transform z-10" />
                   <span className="text-xs text-cyan-500 block mb-1">
                     {edu.annees && edu.annees.length > 0 ? edu.annees.join(' — ') : '—'}
                   </span>
-                  <h3 className="text-base md:text-lg font-bold group-hover:text-cyan-400 transition-colors">{edu.diplome}</h3>
+                  {edu.url ? (
+                    <a href={edu.url} target="_blank" rel="noopener noreferrer" onClick={playBubble}
+                      className="text-base md:text-lg font-bold group-hover:text-cyan-400 transition-colors hover:underline underline-offset-2 block">
+                      {edu.diplome}
+                    </a>
+                  ) : (
+                    <h3 className="text-base md:text-lg font-bold group-hover:text-cyan-400 transition-colors">{edu.diplome}</h3>
+                  )}
                   <p className="text-xs opacity-70">{edu.etablissement}</p>
                   {edu.mention && <span className="text-xs text-cyan-500/60 mt-1 block">Mention : {edu.mention}</span>}
                 </div>
@@ -167,32 +197,32 @@ export default function CoreClient({ experience, education, certifications }: Pr
           </div>
         </div>
 
-        {/* CERTIFICATIONS */}
+        {/* CERTIFICATIONS avec state */}
         <div className="mb-16 md:mb-20">
           <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('core.certificationsTitle')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {certifications.map((cert) => (
-              <div key={cert.id} className="border border-cyan-500/20 p-4 md:p-5 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
-                <div className="flex items-start justify-between gap-2 mb-3">
-                  <h3 className="text-sm font-bold leading-tight">{cert.nom}</h3>
-                  <span className={`text-xs px-2 py-0.5 border rounded flex-shrink-0 ${cert.featured ? 'bg-orange-500/20 border-orange-500 text-orange-500' : 'bg-cyan-500/20 border-cyan-500 text-cyan-500'}`}>
-                    {cert.featured ? 'HIGH' : 'NORMAL'}
-                  </span>
-                </div>
-                <p className="text-xs opacity-50 mb-3">{cert.organisme}</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-cyan-500">{cert.date.getFullYear()}</span>
-                    <span className="text-xs font-mono text-green-500">[ACTIVE]</span>
+            {certifications.map((cert) => {
+              const stateConf = STATE_CONFIG[(cert as unknown as { state: string }).state] ?? STATE_CONFIG.ACTIVE;
+              return (
+                <div key={cert.id} className="border border-cyan-500/20 p-4 md:p-5 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
+                  <div className="flex items-start justify-between gap-2 mb-3">
+                    <h3 className="text-sm font-bold leading-tight">{cert.nom}</h3>
+                    <span className={`text-[0.6rem] px-2 py-0.5 border rounded whitespace-nowrap flex-shrink-0 ${stateConf.color}`}>
+                      {stateConf.label}
+                    </span>
                   </div>
-                  {cert.url && (
-                    <a href={cert.url} target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-500 hover:text-white transition-colors">
-                      {t('core.verify')}
-                    </a>
-                  )}
+                  <p className="text-xs opacity-50 mb-3">{cert.organisme}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs text-cyan-500">{new Date(cert.date).getFullYear()}</span>
+                    {cert.url && (
+                      <a href={cert.url} target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-500 hover:text-white transition-colors">
+                        {t('core.verify')}
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

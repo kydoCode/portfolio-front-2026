@@ -3,24 +3,26 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
+import { useUnderwaterSound } from '@/hooks/useUnderwaterSound';
 import Cursor from '@/components/Cursor';
 
 export default function Home() {
   const router = useRouter();
+  const { t } = useTranslation();
+  const { play } = useUnderwaterSound();
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [depth, setDepth] = useState(0);
   const [glitchText, setGlitchText] = useState('SILENT');
   const [mounted, setMounted] = useState(false);
   const [torchActive, setTorchActive] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const { t } = useTranslation();
 
   useEffect(() => {
     setMounted(true);
-    setIsMobile(window.innerWidth < 768);
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
   }, []);
 
   useEffect(() => {
@@ -43,13 +45,18 @@ export default function Home() {
     return () => clearInterval(glitchInterval);
   }, []);
 
+  const handleCta = () => {
+    play('transition');
+    setTimeout(() => router.push('/core'), 300);
+  };
+
   return (
     <div
-      className="relative h-screen overflow-hidden bg-[#050a12] text-white"
+      className="relative min-h-screen overflow-hidden bg-[#050a12] text-white"
       style={{
         cursor: isMobile ? 'auto' : 'none',
         backgroundImage: 'radial-gradient(rgba(0, 245, 255, 0.15) 1px, transparent 1px)',
-        backgroundSize: '50px 50px'
+        backgroundSize: '50px 50px',
       }}
     >
       {!isMobile && <Cursor />}
@@ -81,15 +88,17 @@ export default function Home() {
         />
       )}
 
-      <section className="h-screen flex flex-col justify-center items-center relative z-[9999] px-6 pt-16 md:pt-32">
-        <span className="text-xs md:text-sm tracking-[6px] md:tracking-[12px] text-cyan-500 uppercase mb-6 md:mb-12 opacity-80 animate-[fadeIn_1s_ease-in] text-center">
+      {/* HERO — centré verticalement, padding top sur mobile pour éviter chevauchement */}
+      <section className="min-h-screen flex flex-col justify-center items-center relative z-[9999] px-6 pt-20 pb-10 md:pt-0 md:pb-0">
+        <span className="text-xs md:text-sm tracking-[6px] md:tracking-[12px] text-cyan-500 uppercase mb-6 md:mb-12 opacity-80 text-center animate-[fadeIn_1s_ease-in]">
           {t('landing.tagline')}
         </span>
 
         <h1
-          className="text-[18vw] md:text-[12vw] leading-[0.85] uppercase text-center tracking-[-2px] md:tracking-[-5px] font-bold relative"
-          onMouseEnter={() => !isMobile && setTorchActive(true)}
-          onMouseLeave={() => !isMobile && setTorchActive(false)}
+          className="leading-[0.85] uppercase text-center font-bold relative"
+          style={{ fontSize: 'clamp(3.5rem, 16vw, 12rem)', letterSpacing: '-0.02em' }}
+          onMouseEnter={() => { if (!isMobile) { setTorchActive(true); play('whale'); } }}
+          onMouseLeave={() => { if (!isMobile) setTorchActive(false); }}
         >
           <span className="block animate-[slideDown_0.8s_ease-out]">{glitchText}</span>
           <span className="block animate-[slideUp_0.8s_ease-out_0.2s_both]">SYSTEM</span>
@@ -100,7 +109,7 @@ export default function Home() {
         </p>
 
         <button
-          onClick={() => router.push('/core')}
+          onClick={handleCta}
           className="mt-10 md:mt-20 px-8 md:px-16 py-4 md:py-6 bg-transparent border border-cyan-500 text-cyan-500 uppercase tracking-[3px] md:tracking-[5px] text-sm md:text-lg rounded-sm transition-all hover:bg-cyan-500 hover:text-[#050a12] hover:shadow-[0_0_50px_#00F5FF] animate-[fadeIn_1s_ease-in_0.8s_both] relative overflow-hidden group flex items-center justify-center"
         >
           <span className="relative z-10">{t('landing.cta')}</span>
