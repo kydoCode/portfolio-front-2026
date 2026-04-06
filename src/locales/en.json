@@ -1,51 +1,69 @@
 {
+  "landing": {
+    "tagline": "Sylvain CLEMENT - Portfolio",
+    "subtitle": "Secure navigation interface // System data access",
+    "cta": "Start immersion",
+    "status": "OPERATIONAL"
+  },
   "nav": {
-    "home": "Home",
-    "projects": "Projects",
-    "skills": "Skills",
-    "experience": "Experience",
-    "creations": "Creations",
-    "education": "Education",
-    "hobbies": "Hobbies",
-    "about": "About",
-    "contact": "Contact"
+    "home": "HOME",
+    "core": "CORE",
+    "capabilities": "CAPABILITIES",
+    "peripheral": "PERIPHERAL",
+    "downloadCv": "DOWNLOAD_CV",
+    "soundOff": "SOUND_OFF",
+    "soundOn": "SOUND_ON"
   },
-  "hero": {
-    "title": "Hello, I'm Sylvain",
-    "subtitle": "Full Stack Developer",
-    "description": "I'm a passionate full stack developer based in South France. I love creating beautiful and functional web applications.",
-    "cta": "View Portfolio"
+  "core": {
+    "protocol": "Core Protocol",
+    "booting": "CONFIGURING_CORE_ASSETS...",
+    "card1Label": "1 // Intellect Asset",
+    "card1Title": "Semantic Stealth",
+    "card1Desc": "Literary expertise applied to system robustness.",
+    "card2Label": "2 // CyberOps SOC",
+    "card2Title": "Abyssal Resilience",
+    "card2Desc": "Covert monitoring and resilient perimeter defense.",
+    "formationTitle": "Formation_Module",
+    "experienceTitle": "Mission_History",
+    "certificationsTitle": "Certifications_Module",
+    "seeAll": "↓ SEE ALL",
+    "seeLess": "↑ COLLAPSE",
+    "entries": "entries",
+    "posts": "positions",
+    "verify": "Verify →",
+    "logEducation": "EDUCATION_MODULE: LOADED",
+    "logExperience": "EXPERIENCE_MODULE: LOADED",
+    "logCertifications": "CERTIFICATIONS_MODULE: LOADED",
+    "logReady": "SYSTEM_READY_",
+    "nextPage": "NEXT: CAPABILITIES →"
   },
-  "featuredWork": {
-    "title": "My Professional Journey",
-    "viewButton": "View",
-    "projectsDesc": "Explore my projects and see what I've been working on.",
-    "skillsDesc": "Discover the skills and technologies I excel in.",
-    "experienceDesc": "Learn about my professional experience and career journey.",
-    "creationsDesc": "Check out my creative works and personal projects.",
-    "educationDesc": "Find out about my educational background and qualifications.",
-    "hobbiesDesc": "Get to know my hobbies and interests outside of work.",
-    "aboutDesc": "Read more about me and my story.",
-    "contactDesc": "Get in touch with me for collaborations or inquiries."
+  "capabilities": {
+    "skillsTitle": "Technical_Stack",
+    "certificationsTitle": "Certifications",
+    "projectsTitle": "Project_Archive",
+    "modalContext": "CONTEXT:",
+    "modalRole": "ROLE:",
+    "modalYear": "YEAR:",
+    "modalHighlights": "HIGHLIGHTS:",
+    "modalTools": "TOOLS:",
+    "modalDemo": "→ LIVE_DEMO",
+    "modalGithub": "→ GITHUB",
+    "modalClose": "CLOSE",
+    "prevPage": "← CORE",
+    "nextPage": "NEXT: PERIPHERAL →"
   },
-  "latestProjects": {
-    "title": "Latest Projects",
-    "viewDetails": "View Details",
-    "noDescription": "No description available."
-  },
-  "projectModal": {
-    "noDescription": "No description available.",
-    "languages": "Languages",
-    "technologies": "Technologies",
-    "htmlVersion": "HTML Version",
-    "notSpecified": "Not specified",
-    "modernityScore": "Modernity Score",
-    "accessibility": "Accessibility",
-    "bestPractices": "Best Practices",
-    "cleanCode": "Clean Code",
-    "notAvailable": "Not available",
-    "viewOnGithub": "View on GitHub",
-    "visitSite": "Visit Site",
-    "close": "Close"
+  "peripheral": {
+    "hobbiesTitle": "Beyond_Code",
+    "contactTitle": "INITIATE_CONTACT_PROTOCOL",
+    "labelName": "> NAME",
+    "labelEmail": "> EMAIL",
+    "labelMessage": "> MESSAGE",
+    "send": "SEND_TRANSMISSION",
+    "sending": "SENDING...",
+    "successMsg": "> TRANSMISSION_SUCCESSFUL — message received, reply within 48h",
+    "errorIncomplete": "> INCOMPLETE_FIELDS",
+    "errorFailed": "> TRANSMISSION_FAILED — retry or contact directly by email",
+    "prevPage": "← CAPABILITIES",
+    "backHome": "BACK_HOME"
   }
 }

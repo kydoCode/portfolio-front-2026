@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import projectsData from '@/data/projects.json';
 import BurgerMenu from '@/components/BurgerMenu';
 import BubbleBackground from '@/components/BubbleBackground';
@@ -14,6 +15,7 @@ export default function SystemCapabilities() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -77,7 +79,7 @@ export default function SystemCapabilities() {
 
         {/* SKILLS */}
         <div className="mb-16 md:mb-20">
-          <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">Technical_Stack</h2>
+          <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('capabilities.skillsTitle')}</h2>
           <div className="space-y-4 md:space-y-6">
             {techStack.map((skill, i) => (
               <div key={i}>
@@ -98,7 +100,7 @@ export default function SystemCapabilities() {
 
         {/* CERTIFICATIONS */}
         <div className="mb-16 md:mb-20">
-          <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">Certifications</h2>
+          <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('capabilities.certificationsTitle')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {certifications.map((cert, i) => (
               <div key={i} className="border border-cyan-500/20 p-4 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
@@ -137,7 +139,7 @@ export default function SystemCapabilities() {
 
         {/* PROJETS */}
         <div>
-          <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">Project_Archive</h2>
+          <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('capabilities.projectsTitle')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {projectsData.projets.map((project, i) => (
               <div
@@ -171,13 +173,13 @@ export default function SystemCapabilities() {
             onClick={() => router.push('/core')}
             className="border border-cyan-500/50 text-cyan-500/50 px-6 md:px-8 py-3 text-xs tracking-widest hover:border-cyan-500 hover:text-cyan-500 transition-all"
           >
-            ← CORE
+            {t('capabilities.prevPage')}
           </button>
           <button
             onClick={() => router.push('/peripheral')}
             className="border border-cyan-500 text-cyan-500 px-8 md:px-12 py-3 md:py-4 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all"
           >
-            NEXT: PERIPHERAL →
+            {t('capabilities.nextPage')}
           </button>
         </div>
       </section>
@@ -195,12 +197,12 @@ export default function SystemCapabilities() {
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent animate-[scan_2s_linear_infinite]" />
             <h3 className="text-lg md:text-2xl font-bold uppercase mb-4 md:mb-6 pr-8">DATA_TRANSFER // {selectedProject.nom}</h3>
             <div className="space-y-3 text-sm">
-              <div><span className="text-cyan-500">CONTEXT:</span> <span className="opacity-80">{selectedProject.context}</span></div>
-              <div><span className="text-cyan-500">ROLE:</span> <span className="opacity-80">{selectedProject.role}</span></div>
-              <div><span className="text-cyan-500">YEAR:</span> <span className="opacity-80">{selectedProject.year}</span></div>
+              <div><span className="text-cyan-500">{t('capabilities.modalContext')}</span> <span className="opacity-80">{selectedProject.context}</span></div>
+              <div><span className="text-cyan-500">{t('capabilities.modalRole')}</span> <span className="opacity-80">{selectedProject.role}</span></div>
+              <div><span className="text-cyan-500">{t('capabilities.modalYear')}</span> <span className="opacity-80">{selectedProject.year}</span></div>
               {'highlights' in selectedProject && selectedProject.highlights && (
                 <div>
-                  <span className="text-cyan-500">HIGHLIGHTS:</span>
+                  <span className="text-cyan-500">{t('capabilities.modalHighlights')}</span>
                   <ul className="mt-2 space-y-1">
                     {(selectedProject.highlights as string[]).map((h, i) => (
                       <li key={i} className="text-xs opacity-70 before:content-['>_'] before:text-cyan-500 before:mr-2">{h}</li>
@@ -209,7 +211,7 @@ export default function SystemCapabilities() {
                 </div>
               )}
               <div>
-                <span className="text-cyan-500">TOOLS:</span>
+                <span className="text-cyan-500">{t('capabilities.modalTools')}</span>
                 <div className="flex flex-wrap gap-2 mt-2">
                   {selectedProject.technologies.map((tech, i) => (
                     <span key={i} className="text-xs bg-cyan-500/20 px-2 py-1 rounded">{tech}</span>
@@ -219,14 +221,14 @@ export default function SystemCapabilities() {
               {'demo' in selectedProject && selectedProject.demo && (
                 <div>
                   <a href={selectedProject.demo as string} target="_blank" rel="noopener noreferrer" className="text-cyan-500 hover:text-white text-xs tracking-widest transition-colors">
-                    → LIVE_DEMO
+                    {t('capabilities.modalDemo')}
                   </a>
                 </div>
               )}
               {'github' in selectedProject && selectedProject.github && (
                 <div>
                   <a href={selectedProject.github as string} target="_blank" rel="noopener noreferrer" className="text-cyan-500 hover:text-white text-xs tracking-widest transition-colors">
-                    → GITHUB
+                    {t('capabilities.modalGithub')}
                   </a>
                 </div>
               )}

@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import educationData from '@/data/education_full.json';
 import experienceData from '@/data/experience.json';
 import BurgerMenu from '@/components/BurgerMenu';
@@ -16,6 +17,7 @@ const certifications = [
 
 export default function CoreClient() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showAllEdu, setShowAllEdu] = useState(false);
@@ -44,18 +46,13 @@ export default function CoreClient() {
       <BubbleBackground />
       {!isMobile && <Cursor />}
 
-      <button
-        onClick={() => setMenuOpen(!menuOpen)}
-        className="fixed top-6 right-6 z-[100] flex flex-col gap-1.5 w-8 h-8 justify-center items-center"
-        aria-label="Menu"
-      >
+      <button onClick={() => setMenuOpen(!menuOpen)} className="fixed top-6 right-6 z-[100] flex flex-col gap-1.5 w-8 h-8 justify-center items-center" aria-label="Menu">
         <span className={`w-6 h-0.5 bg-cyan-500 transition-all ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
         <span className={`w-6 h-0.5 bg-cyan-500 transition-all ${menuOpen ? 'opacity-0' : ''}`} />
         <span className={`w-6 h-0.5 bg-cyan-500 transition-all ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
       </button>
 
       <BurgerMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} currentPage="core" />
-
       <div className="fixed top-6 left-6 text-3xl md:text-4xl font-black z-50 cursor-pointer" onClick={() => router.push('/')}>S.</div>
 
       {!isMobile && (
@@ -64,13 +61,10 @@ export default function CoreClient() {
         </div>
       )}
 
-      {/* HERO */}
       <section className="h-[50vh] md:h-screen flex flex-col justify-center items-center relative px-6">
-        <span className="text-xs tracking-[6px] md:tracking-[10px] text-cyan-500 uppercase mb-4 opacity-80">Core Protocol</span>
-        <h1 className="text-[14vw] md:text-[12vw] leading-[0.85] uppercase text-center font-bold">
-          SILENT<br />SYSTEM
-        </h1>
-        <div className="mt-4 text-xs text-cyan-500/50 font-mono">&gt; CONFIGURING_CORE_ASSETS...</div>
+        <span className="text-xs tracking-[6px] md:tracking-[10px] text-cyan-500 uppercase mb-4 opacity-80">{t('core.protocol')}</span>
+        <h1 className="text-[14vw] md:text-[12vw] leading-[0.85] uppercase text-center font-bold">SILENT<br />SYSTEM</h1>
+        <div className="mt-4 text-xs text-cyan-500/50 font-mono">&gt; {t('core.booting')}</div>
       </section>
 
       <section className="max-w-[1400px] mx-auto px-4 md:px-8 pb-20">
@@ -78,11 +72,11 @@ export default function CoreClient() {
         {/* CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-16 md:mb-20">
           {[
-            { num: '1 // Intellect Asset', title: 'Furtivité Sémantique', desc: "L'expertise littéraire appliquée à la robustesse des systèmes.", rotate: 'rotateY(12deg) rotateX(8deg)' },
-            { num: '2 // CyberOps SOC', title: 'Robustesse Abyssale', desc: 'Monitoring furtif et défense périmétrique résiliente.', rotate: 'rotateY(-12deg) rotateX(8deg)' },
+            { labelKey: 'core.card1Label', titleKey: 'core.card1Title', descKey: 'core.card1Desc', rotate: 'rotateY(12deg) rotateX(8deg)' },
+            { labelKey: 'core.card2Label', titleKey: 'core.card2Title', descKey: 'core.card2Desc', rotate: 'rotateY(-12deg) rotateX(8deg)' },
           ].map((card) => (
             <div
-              key={card.num}
+              key={card.labelKey}
               className="h-[280px] md:h-[420px] group"
               style={{ perspective: '1200px' }}
               onMouseMove={(e) => {
@@ -104,9 +98,9 @@ export default function CoreClient() {
               <div className="card-inner h-full transition-transform duration-300" style={{ transformStyle: 'preserve-3d', transform: isMobile ? 'none' : card.rotate }}>
                 <div className="card-content relative h-full border border-white/10 rounded-[24px] md:rounded-[32px] p-8 md:p-14 bg-white/[0.02] backdrop-blur-xl flex flex-col justify-end overflow-hidden transition-all group-hover:border-cyan-500 group-hover:shadow-[0_0_30px_rgba(0,245,255,0.15)]">
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_var(--x,50%)_var(--y,50%),rgba(0,245,255,0.18)_0%,transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-                  <span className="text-[0.65rem] text-cyan-500 tracking-[3px] mb-3 uppercase relative z-10">{card.num}</span>
-                  <h3 className="text-2xl md:text-[2.4rem] font-bold mb-3 relative z-10">{card.title}</h3>
-                  <p className="text-sm opacity-70 leading-relaxed relative z-10">{card.desc}</p>
+                  <span className="text-[0.65rem] text-cyan-500 tracking-[3px] mb-3 uppercase relative z-10">{t(card.labelKey)}</span>
+                  <h3 className="text-2xl md:text-[2.4rem] font-bold mb-3 relative z-10">{t(card.titleKey)}</h3>
+                  <p className="text-sm opacity-70 leading-relaxed relative z-10">{t(card.descKey)}</p>
                 </div>
               </div>
             </div>
@@ -115,10 +109,8 @@ export default function CoreClient() {
 
         {/* FORMATION + EXPERIENCE */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 mb-16 md:mb-20">
-
-          {/* FORMATION */}
           <div>
-            <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">Formation_Module</h2>
+            <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('core.formationTitle')}</h2>
             <div className="relative pl-6 md:pl-8 border-l-2 border-cyan-500/30">
               {visibleEdu.map((edu, i) => (
                 <div key={i} className="relative mb-6 group pl-3 md:pl-4">
@@ -128,9 +120,7 @@ export default function CoreClient() {
                   {'etablissement' in edu
                     ? <p className="text-xs opacity-70">{edu.etablissement as string}</p>
                     : 'etablissements' in edu && (
-                      <p className="text-xs opacity-70">
-                        {(edu.etablissements as { nom: string }[]).map(e => e.nom).join(' · ')}
-                      </p>
+                      <p className="text-xs opacity-70">{(edu.etablissements as { nom: string }[]).map(e => e.nom).join(' · ')}</p>
                     )
                   }
                   {'mention' in edu && edu.mention && (
@@ -140,18 +130,14 @@ export default function CoreClient() {
               ))}
             </div>
             {educationData.education.length > 5 && (
-              <button
-                onClick={() => setShowAllEdu(!showAllEdu)}
-                className="mt-4 text-xs text-cyan-500 tracking-widest hover:text-white transition-colors border border-cyan-500/30 px-4 py-2 hover:border-cyan-500"
-              >
-                {showAllEdu ? '↑ RÉDUIRE' : `↓ VOIR TOUT (${educationData.education.length} entrées)`}
+              <button onClick={() => setShowAllEdu(!showAllEdu)} className="mt-4 text-xs text-cyan-500 tracking-widest hover:text-white transition-colors border border-cyan-500/30 px-4 py-2 hover:border-cyan-500">
+                {showAllEdu ? t('core.seeLess') : `${t('core.seeAll')} (${educationData.education.length} ${t('core.entries')})`}
               </button>
             )}
           </div>
 
-          {/* EXPERIENCE */}
           <div>
-            <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">Mission_History</h2>
+            <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('core.experienceTitle')}</h2>
             <div className="space-y-4 md:space-y-6">
               {visibleExp.map((exp, i) => (
                 <div key={i} className="border border-cyan-500/20 p-4 md:p-6 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
@@ -169,11 +155,8 @@ export default function CoreClient() {
               ))}
             </div>
             {experienceData.experience.length > 3 && (
-              <button
-                onClick={() => setShowAllExp(!showAllExp)}
-                className="mt-4 text-xs text-cyan-500 tracking-widest hover:text-white transition-colors border border-cyan-500/30 px-4 py-2 hover:border-cyan-500"
-              >
-                {showAllExp ? '↑ RÉDUIRE' : `↓ VOIR TOUT (${experienceData.experience.length} postes)`}
+              <button onClick={() => setShowAllExp(!showAllExp)} className="mt-4 text-xs text-cyan-500 tracking-widest hover:text-white transition-colors border border-cyan-500/30 px-4 py-2 hover:border-cyan-500">
+                {showAllExp ? t('core.seeLess') : `${t('core.seeAll')} (${experienceData.experience.length} ${t('core.posts')})`}
               </button>
             )}
           </div>
@@ -181,17 +164,13 @@ export default function CoreClient() {
 
         {/* CERTIFICATIONS */}
         <div className="mb-16 md:mb-20">
-          <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">Certifications_Module</h2>
+          <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('core.certificationsTitle')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {certifications.map((cert, i) => (
               <div key={i} className="border border-cyan-500/20 p-4 md:p-5 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
                 <div className="flex items-start justify-between gap-2 mb-3">
                   <h3 className="text-sm font-bold leading-tight">{cert.name}</h3>
-                  <span className={`text-xs px-2 py-0.5 border rounded flex-shrink-0 ${
-                    cert.priority === 'HIGH'
-                      ? 'bg-orange-500/20 border-orange-500 text-orange-500'
-                      : 'bg-cyan-500/20 border-cyan-500 text-cyan-500'
-                  }`}>
+                  <span className={`text-xs px-2 py-0.5 border rounded flex-shrink-0 ${cert.priority === 'HIGH' ? 'bg-orange-500/20 border-orange-500 text-orange-500' : 'bg-cyan-500/20 border-cyan-500 text-cyan-500'}`}>
                     {cert.priority}
                   </span>
                 </div>
@@ -199,13 +178,11 @@ export default function CoreClient() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-cyan-500">{cert.year}</span>
-                    <span className={`text-xs font-mono ${cert.state === 'ACTIVE' ? 'text-green-500' : 'text-yellow-500'}`}>
-                      [{cert.state}]
-                    </span>
+                    <span className={`text-xs font-mono ${cert.state === 'ACTIVE' ? 'text-green-500' : 'text-yellow-500'}`}>[{cert.state}]</span>
                   </div>
                   {cert.link && (
                     <a href={cert.link} target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-500 hover:text-white transition-colors">
-                      Vérifier →
+                      {t('core.verify')}
                     </a>
                   )}
                 </div>
@@ -216,20 +193,19 @@ export default function CoreClient() {
 
         {/* SYSTEM LOG */}
         <div className="bg-black/50 border border-cyan-500/30 p-4 md:p-6 font-mono text-xs mb-16 md:mb-20">
-          <div className="text-cyan-500">&gt; CONFIGURING_CORE_ASSETS...</div>
-          <div className="text-green-500">&gt; EDUCATION_MODULE: LOADED ({educationData.education.length} entries)</div>
-          <div className="text-green-500">&gt; EXPERIENCE_MODULE: LOADED ({experienceData.experience.length} entries)</div>
-          <div className="text-green-500">&gt; CERTIFICATIONS_MODULE: LOADED ({certifications.length} entries)</div>
-          <div className="text-cyan-500 animate-pulse">&gt; SYSTEM_READY_</div>
+          <div className="text-cyan-500">&gt; {t('core.booting')}</div>
+          <div className="text-green-500">&gt; {t('core.logEducation')} ({educationData.education.length})</div>
+          <div className="text-green-500">&gt; {t('core.logExperience')} ({experienceData.experience.length})</div>
+          <div className="text-green-500">&gt; {t('core.logCertifications')} ({certifications.length})</div>
+          <div className="text-cyan-500 animate-pulse">&gt; {t('core.logReady')}</div>
         </div>
 
-        {/* NAVIGATION */}
         <div className="flex flex-col sm:flex-row justify-center gap-3 md:gap-4">
           <button onClick={() => router.push('/')} className="border border-cyan-500/50 text-cyan-500/50 px-6 md:px-8 py-3 text-xs tracking-widest hover:border-cyan-500 hover:text-cyan-500 transition-all">
-            ← HOME
+            ← {t('nav.home')}
           </button>
           <button onClick={() => router.push('/capabilities')} className="border border-cyan-500 text-cyan-500 px-8 md:px-12 py-3 md:py-4 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all">
-            NEXT: CAPABILITIES →
+            {t('core.nextPage')}
           </button>
         </div>
       </section>

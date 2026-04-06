@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface BurgerMenuProps {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface BurgerMenuProps {
 export default function BurgerMenu({ isOpen, onClose, currentPage }: BurgerMenuProps) {
   const router = useRouter();
   const [isMuted, setIsMuted] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const saved = localStorage.getItem('soundMuted');
@@ -65,7 +67,7 @@ export default function BurgerMenu({ isOpen, onClose, currentPage }: BurgerMenuP
         onClick={toggleMute}
         className="text-lg text-cyan-500 hover:text-white transition-colors tracking-widest flex items-center gap-3"
       >
-        <span>{isMuted ? 'SOUND_OFF' : 'SOUND_ON'}</span>
+        <span>{isMuted ? t('nav.soundOff') : t('nav.soundOn')}</span>
         <span className="text-xs opacity-50">[{isMuted ? 'MUTED' : 'ACTIVE'}]</span>
       </button>
       <a 
@@ -73,7 +75,7 @@ export default function BurgerMenu({ isOpen, onClose, currentPage }: BurgerMenuP
         target="_blank" 
         className="text-lg text-cyan-500 hover:text-white transition-colors tracking-widest"
       >
-        DOWNLOAD_CV
+        {t('nav.downloadCv')}
       </a>
     </div>
   );

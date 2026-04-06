@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import hobbiesData from '@/data/hobbies.json';
 import BurgerMenu from '@/components/BurgerMenu';
 import BubbleBackground from '@/components/BubbleBackground';
@@ -16,6 +17,7 @@ export default function PeripheralData() {
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState('');
   const [isMobile, setIsMobile] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -86,7 +88,7 @@ export default function PeripheralData() {
 
         {/* HOBBIES */}
         <div className="mb-16 md:mb-20">
-          <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">Beyond_Code</h2>
+          <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('peripheral.hobbiesTitle')}</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {hobbiesData.hobbies.map((hobby, i) => (
               <div key={i} className="border border-cyan-500/20 p-4 md:p-6 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
@@ -105,7 +107,7 @@ export default function PeripheralData() {
 
         {/* FORMULAIRE TERMINAL */}
         <div className="bg-black/50 border border-cyan-500/30 p-6 md:p-8 font-mono">
-          <div className="text-cyan-500 mb-6 text-sm">&gt; INITIATE_CONTACT_PROTOCOL</div>
+          <div className="text-cyan-500 mb-6 text-sm">&gt; {t('peripheral.contactTitle')}</div>
 
           <div className="relative mb-6">
             <input
@@ -116,7 +118,7 @@ export default function PeripheralData() {
               placeholder=" "
             />
             <label className="absolute left-2 top-3 text-cyan-500/50 text-xs transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-cyan-500 peer-[:not(:placeholder-shown)]:-top-4">
-              &gt; NAME
+              &gt; {t('peripheral.labelName')}
             </label>
           </div>
 
@@ -129,7 +131,7 @@ export default function PeripheralData() {
               placeholder=" "
             />
             <label className="absolute left-2 top-3 text-cyan-500/50 text-xs transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-cyan-500 peer-[:not(:placeholder-shown)]:-top-4">
-              &gt; EMAIL
+              &gt; {t('peripheral.labelEmail')}
             </label>
           </div>
 
@@ -142,7 +144,7 @@ export default function PeripheralData() {
               placeholder=" "
             />
             <label className="absolute left-3 top-3 text-cyan-500/50 text-xs transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-cyan-500 peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:bg-[#050a12] peer-[:not(:placeholder-shown)]:px-2">
-              &gt; MESSAGE
+              &gt; {t('peripheral.labelMessage')}
             </label>
           </div>
 
@@ -151,7 +153,7 @@ export default function PeripheralData() {
             disabled={sending}
             className="relative overflow-hidden border border-cyan-500 text-cyan-500 px-8 md:px-12 py-3 md:py-4 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
           >
-            <span className="relative z-10">{sending ? 'SENDING...' : 'SEND_TRANSMISSION'}</span>
+            <span className="relative z-10">{sending ? t('peripheral.sending') : t('peripheral.send')}</span>
             {sonarActive && (
               <div className="absolute inset-0 bg-cyan-500 animate-[implode_0.6s_ease-out]" />
             )}
@@ -159,11 +161,11 @@ export default function PeripheralData() {
 
           {messageSent && (
             <div className="mt-4 text-green-500 text-xs font-mono">
-              &gt; TRANSMISSION_SUCCESSFUL — message reçu, réponse sous 48h
+              &gt; {t('peripheral.successMsg')}
             </div>
           )}
           {sendError && (
-            <div className="mt-4 text-red-400 text-xs font-mono">{sendError}</div>
+            <div className="mt-4 text-red-400 text-xs font-mono">{sendError === '> CHAMPS_INCOMPLETS' ? `> ${t('peripheral.errorIncomplete').replace('> ','')}` : `> ${t('peripheral.errorFailed').replace('> ','')}`}</div>
           )}
         </div>
 
@@ -173,13 +175,13 @@ export default function PeripheralData() {
             onClick={() => router.push('/capabilities')}
             className="border border-cyan-500/50 text-cyan-500/50 px-6 md:px-8 py-3 text-xs tracking-widest hover:border-cyan-500 hover:text-cyan-500 transition-all"
           >
-            ← CAPABILITIES
+            {t('peripheral.prevPage')}
           </button>
           <button
             onClick={() => router.push('/')}
             className="border border-cyan-500 text-cyan-500 px-8 md:px-12 py-3 md:py-4 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all"
           >
-            RETOUR_ACCUEIL
+            {t('peripheral.backHome')}
           </button>
         </div>
       </section>

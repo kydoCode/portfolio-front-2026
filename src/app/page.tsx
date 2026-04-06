@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from 'react-i18next';
 import Cursor from '@/components/Cursor';
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [torchActive, setTorchActive] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     setMounted(true);
@@ -81,7 +83,7 @@ export default function Home() {
 
       <section className="h-screen flex flex-col justify-center items-center relative z-[9999] px-6 pt-16 md:pt-32">
         <span className="text-xs md:text-sm tracking-[6px] md:tracking-[12px] text-cyan-500 uppercase mb-6 md:mb-12 opacity-80 animate-[fadeIn_1s_ease-in] text-center">
-          Sylvain CLEMENT - Portfolio
+          {t('landing.tagline')}
         </span>
 
         <h1
@@ -94,14 +96,14 @@ export default function Home() {
         </h1>
 
         <p className="mt-6 md:mt-8 text-xs md:text-sm text-cyan-500/70 max-w-xs md:max-w-md text-center tracking-wide animate-[fadeIn_1s_ease-in_0.5s_both]">
-          Interface de navigation sécurisée // Accès aux données système
+          {t('landing.subtitle')}
         </p>
 
         <button
           onClick={() => router.push('/core')}
           className="mt-10 md:mt-20 px-8 md:px-16 py-4 md:py-6 bg-transparent border border-cyan-500 text-cyan-500 uppercase tracking-[3px] md:tracking-[5px] text-sm md:text-lg rounded-sm transition-all hover:bg-cyan-500 hover:text-[#050a12] hover:shadow-[0_0_50px_#00F5FF] animate-[fadeIn_1s_ease-in_0.8s_both] relative overflow-hidden group flex items-center justify-center"
         >
-          <span className="relative z-10">Démarrer l&apos;immersion</span>
+          <span className="relative z-10">{t('landing.cta')}</span>
           <div className="absolute inset-0 bg-cyan-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300" />
         </button>
 
