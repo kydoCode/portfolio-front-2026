@@ -5,6 +5,13 @@ import en from './locales/en.json';
 import de from './locales/de.json';
 import zh from './locales/zh.json';
 
+const savedLang = typeof window !== 'undefined'
+  ? (localStorage.getItem('lang') ?? navigator.language.split('-')[0])
+  : 'fr';
+
+const supportedLangs = ['fr', 'en', 'de', 'zh'];
+const lng = supportedLangs.includes(savedLang) ? savedLang : 'fr';
+
 i18n
   .use(initReactI18next)
   .init({
@@ -12,13 +19,11 @@ i18n
       fr: { translation: fr },
       en: { translation: en },
       de: { translation: de },
-      zh: { translation: zh }
+      zh: { translation: zh },
     },
-    lng: typeof window !== 'undefined' ? navigator.language.split('-')[0] : 'fr',
-    fallbackLng: ['fr', 'en'],
-    interpolation: {
-      escapeValue: false
-    }
+    lng,
+    fallbackLng: 'fr',
+    interpolation: { escapeValue: false },
   });
 
 export default i18n;
