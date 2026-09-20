@@ -19,12 +19,18 @@ model User {
 model Experience {
   id         String   @id @default(cuid())
   poste      String
+  poste_en   String?
+  poste_de   String?
+  poste_zh   String?
   entreprise String?
   annees     String[]
   logo       String?
   url        String?
   favicon    String?
   details    Json
+  details_en Json?
+  details_de Json?
+  details_zh Json?
   visible    Boolean  @default(true)
   featured   Boolean  @default(false)
   order      Int      @default(0)
@@ -72,6 +78,9 @@ model Project {
   name                  String
   title                 String?
   description           String
+  description_en        String?
+  description_de        String?
+  description_zh        String?
   image                 String?
   image_path            String?
   technologies          String[]
@@ -80,6 +89,9 @@ model Project {
   html_version          String?
   modernity_score       Json?
   context               String?
+  context_en            String?
+  context_de            String?
+  context_zh            String?
   githubUrl             String?
   repo_url              String?
   liveUrl               String?
@@ -90,6 +102,9 @@ model Project {
   strategy              String?
   tools                 String[]
   learnings             String[]
+  learnings_en          String[]
+  learnings_de          String[]
+  learnings_zh          String[]
   startDate             DateTime?
   endDate               DateTime?
   order                 Int       @default(0)
@@ -135,15 +150,21 @@ model Language {
 }
 
 model Hobby {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  icon        String?
-  visible     Boolean  @default(true)
-  featured    Boolean  @default(false)
-  order       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id             String   @id @default(cuid())
+  name           String
+  name_en        String?
+  name_de        String?
+  name_zh        String?
+  description    String?
+  description_en String?
+  description_de String?
+  description_zh String?
+  icon           String?
+  visible        Boolean  @default(true)
+  featured       Boolean  @default(false)
+  order          Int      @default(0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }
 
 model Creation {

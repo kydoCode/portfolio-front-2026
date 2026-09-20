@@ -4,6 +4,12 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Hobby } from '@prisma/client';
+
+type Localized = Record<string, unknown>;
+function loc<T>(obj: Localized, field: string, lang: string): T {
+  const val = obj[`${field}_${lang}`];
+  return (val ?? obj[field]) as T;
+}
 import { useUnderwaterSound } from '@/hooks/useUnderwaterSound';
 import BurgerMenu from '@/components/BurgerMenu';
 import BubbleBackground from '@/components/BubbleBackground';
@@ -22,7 +28,8 @@ export default function PeripheralClient({ hobbies }: Props) {
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState('');
   const [isMobile, setIsMobile] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = ['en', 'de', 'zh'].includes(i18n.language) ? i18n.language : 'fr';
   const { play } = useUnderwaterSound();
   const visibleHobbies = hobbies;
 
@@ -100,8 +107,8 @@ export default function PeripheralClient({ hobbies }: Props) {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {visibleHobbies.map((hobby) => (
               <div key={hobby.id} className="border border-cyan-500/20 p-4 md:p-6">
-                <h3 className="text-xs md:text-sm uppercase mb-2 md:mb-3 text-cyan-500">{hobby.name}</h3>
-                <p className="text-xs opacity-70">{hobby.description}</p>
+                <h3 className="text-xs md:text-sm uppercase mb-2 md:mb-3 text-cyan-500">{loc<string>(hobby as Localized, 'name', lang)}</h3>
+                <p className="text-xs opacity-70">{loc<string>(hobby as Localized, 'description', lang)}</p>
               </div>
             ))}
           </div>

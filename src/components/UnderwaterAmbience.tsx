@@ -85,7 +85,14 @@ export default function UnderwaterAmbience() {
 
       nodesRef.current = nodes;
       setStarted(true);
-      setActive(true);
+      // Respecter le mute existant dès le démarrage
+      const wasMuted = localStorage.getItem('soundMuted') === 'true';
+      if (wasMuted) {
+        ctx.suspend();
+        setActive(false);
+      } else {
+        setActive(true);
+      }
     } catch {}
   };
 

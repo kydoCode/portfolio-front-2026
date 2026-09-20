@@ -4,6 +4,12 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Experience, Education, Certification } from '@prisma/client';
+
+type Localized = Record<string, unknown>;
+function loc<T>(obj: Localized, field: string, lang: string): T {
+  const val = obj[`${field}_${lang}`];
+  return (val ?? obj[field]) as T;
+}
 import BurgerMenu from '@/components/BurgerMenu';
 import BubbleBackground from '@/components/BubbleBackground';
 import Cursor from '@/components/Cursor';
@@ -22,7 +28,8 @@ const STATE_CONFIG: Record<string, { label: string; color: string }> = {
 
 export default function CoreClient({ experience, education, certifications }: Props) {
   const router = useRouter();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = ['en', 'de', 'zh'].includes(i18n.language) ? i18n.language : 'fr';
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showAllEdu, setShowAllEdu] = useState(false);
@@ -200,14 +207,14 @@ export default function CoreClient({ experience, education, certifications }: Pr
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex-1 min-w-0">
                       <span className="text-xs text-cyan-500">{exp.annees.join(' — ')}</span>
-                      <h3 className="text-base md:text-lg font-bold uppercase mt-2">{exp.poste}</h3>
+                      <h3 className="text-base md:text-lg font-bold uppercase mt-2">{loc<string>(exp as Localized, 'poste', lang)}</h3>
                       {exp.entreprise && <span className="text-sm opacity-50">{exp.entreprise}</span>}
                     </div>
                     <span className={`text-cyan-500 text-xs mt-1 flex-shrink-0 transition-transform duration-200 ${expandedExp === exp.id ? 'rotate-180' : ''}`}>▼</span>
                   </div>
                   {expandedExp === exp.id && (
                     <ul className="mt-4 space-y-1 border-t border-cyan-500/20 pt-4">
-                      {(exp.details as string[]).map((detail, j) => (
+                      {loc<string[]>(exp as Localized, 'details', lang).map((detail, j) => (
                         <li key={j} className="text-xs opacity-70 before:content-['>_'] before:text-cyan-500 before:mr-2">
                           {detail.replace(/<[^>]*>/g, '')}
                         </li>

@@ -4,6 +4,12 @@ import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import type { Project, Certification, Skill } from '@prisma/client';
+
+type Localized = Record<string, unknown>;
+function loc<T>(obj: Localized, field: string, lang: string): T {
+  const val = obj[`${field}_${lang}`];
+  return (val ?? obj[field]) as T;
+}
 import { useUnderwaterSound } from '@/hooks/useUnderwaterSound';
 import BurgerMenu from '@/components/BurgerMenu';
 import BubbleBackground from '@/components/BubbleBackground';
@@ -27,7 +33,8 @@ export default function CapabilitiesClient({ projects, certifications, skills }:
   const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const lang = ['en', 'de', 'zh'].includes(i18n.language) ? i18n.language : 'fr';
   const { play } = useUnderwaterSound();
 
   useEffect(() => {
@@ -138,7 +145,7 @@ export default function CapabilitiesClient({ projects, certifications, skills }:
                     <span className="text-[0.6rem] text-orange-400 border border-orange-400/50 px-2 py-0.5 rounded mb-2 inline-block tracking-widest">FEATURED</span>
                   )}
                   <h3 className="text-base md:text-xl font-bold uppercase mb-2">{project.name}</h3>
-                  <p className="text-xs opacity-70 mb-3 line-clamp-2">{project.context ?? project.description}</p>
+                  <p className="text-xs opacity-70 mb-3 line-clamp-2">{loc<string>(project as Localized, 'context', lang) ?? loc<string>(project as Localized, 'description', lang)}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {project.technologies.slice(0, 4).map((tech, j) => (
                       <span key={j} className="text-xs bg-cyan-500/10 text-cyan-500 px-2 py-0.5 rounded">{tech}</span>
@@ -213,10 +220,10 @@ export default function CapabilitiesClient({ projects, certifications, skills }:
             </h3>
 
             <div className="space-y-4 text-sm">
-              {selectedProject.context && (
+              {loc<string>(selectedProject as Localized, 'context', lang) && (
                 <div>
                   <span className="text-cyan-500 text-xs tracking-widest">{t('capabilities.modalContext')}</span>
-                  <p className="mt-1 opacity-80 text-sm leading-relaxed">{selectedProject.context}</p>
+                  <p className="mt-1 opacity-80 text-sm leading-relaxed">{loc<string>(selectedProject as Localized, 'context', lang)}</p>
                 </div>
               )}
 
@@ -229,11 +236,11 @@ export default function CapabilitiesClient({ projects, certifications, skills }:
                 </div>
               </div>
 
-              {selectedProject.learnings.length > 0 && (
+              {loc<string[]>(selectedProject as Localized, 'learnings', lang).length > 0 && (
                 <div>
                   <span className="text-cyan-500 text-xs tracking-widest">{t('capabilities.modalHighlights')}</span>
                   <ul className="mt-2 space-y-1">
-                    {selectedProject.learnings.map((h, i) => (
+                    {loc<string[]>(selectedProject as Localized, 'learnings', lang).map((h, i) => (
                       <li key={i} className="text-xs opacity-70 before:content-['>_'] before:text-cyan-500 before:mr-2">{h}</li>
                     ))}
                   </ul>
