@@ -22,8 +22,8 @@ export async function POST(req: NextRequest) {
     const resend = new Resend(apiKey);
 
     await resend.emails.send({
-      from: 'Portfolio <onboarding@resend.dev>',
-      to: process.env.CONTACT_EMAIL ?? 'sylvain.clement.dev@gmail.com',
+      from: process.env.CONTACT_FROM ?? 'Portfolio <onboarding@resend.dev>',
+      to: process.env.CONTACT_TO ?? '',
       replyTo: email,
       subject: `[Portfolio] Message de ${name}`,
       text: `Nom: ${name}\nEmail: ${email}\n\n${message}`,

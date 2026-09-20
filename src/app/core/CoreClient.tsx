@@ -27,6 +27,7 @@ export default function CoreClient({ experience, education, certifications }: Pr
   const [isMobile, setIsMobile] = useState(false);
   const [showAllEdu, setShowAllEdu] = useState(false);
   const [showAllExp, setShowAllExp] = useState(false);
+  const [expandedExp, setExpandedExp] = useState<string | null>(null);
   const [depth, setDepth] = useState(0);
   const audioCtxRef = useRef<AudioContext | null>(null);
 
@@ -45,10 +46,15 @@ export default function CoreClient({ experience, education, certifications }: Pr
   }, [isMobile]);
 
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => { if (e.key === 'Escape' && menuOpen) setMenuOpen(false); };
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (expandedExp) setExpandedExp(null);
+        else if (menuOpen) setMenuOpen(false);
+      }
+    };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
-  }, [menuOpen]);
+  }, [menuOpen, expandedExp]);
 
   const playBubble = () => {
     try {
@@ -90,7 +96,6 @@ export default function CoreClient({ experience, education, certifications }: Pr
         </div>
       )}
 
-      {/* HERO — fix mobile: hauteur auto, padding top pour éviter chevauchement avec nav */}
       <section className="flex flex-col justify-center items-center relative px-6 pt-24 pb-12 md:h-screen md:pt-0 md:pb-0">
         <span className="text-xs tracking-[6px] md:tracking-[10px] text-cyan-500 uppercase mb-4 opacity-80 text-center">{t('core.protocol')}</span>
         <h1 className="text-[clamp(3rem,14vw,10rem)] leading-[0.85] uppercase text-center font-bold">
@@ -175,17 +180,30 @@ export default function CoreClient({ experience, education, certifications }: Pr
             <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('core.experienceTitle')}</h2>
             <div className="space-y-4 md:space-y-6">
               {visibleExp.map((exp) => (
-                <div key={exp.id} className="border border-cyan-500/20 p-4 md:p-6 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
-                  <span className="text-xs text-cyan-500">{exp.annees.join(' — ')}</span>
-                  <h3 className="text-base md:text-lg font-bold uppercase mt-2">{exp.poste}</h3>
-                  {exp.entreprise && <span className="text-sm opacity-50">{exp.entreprise}</span>}
-                  <ul className="mt-3 space-y-1">
-                    {(exp.details as string[]).slice(0, 3).map((detail, j) => (
-                      <li key={j} className="text-xs opacity-70 before:content-['>_'] before:text-cyan-500 before:mr-2">
-                        {detail.replace(/<[^>]*>/g, '')}
-                      </li>
-                    ))}
-                  </ul>
+                <div
+                  key={exp.id}
+                  className="border border-cyan-500/20 p-4 md:p-6 hover:border-cyan-500 transition-all cursor-pointer"
+                  onClick={() => { setExpandedExp(expandedExp === exp.id ? null : exp.id); playBubble(); }}
+                  role="button"
+                  aria-expanded={expandedExp === exp.id}
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex-1 min-w-0">
+                      <span className="text-xs text-cyan-500">{exp.annees.join(' — ')}</span>
+                      <h3 className="text-base md:text-lg font-bold uppercase mt-2">{exp.poste}</h3>
+                      {exp.entreprise && <span className="text-sm opacity-50">{exp.entreprise}</span>}
+                    </div>
+                    <span className={`text-cyan-500 text-xs mt-1 flex-shrink-0 transition-transform duration-200 ${expandedExp === exp.id ? 'rotate-180' : ''}`}>▼</span>
+                  </div>
+                  {expandedExp === exp.id && (
+                    <ul className="mt-4 space-y-1 border-t border-cyan-500/20 pt-4">
+                      {(exp.details as string[]).map((detail, j) => (
+                        <li key={j} className="text-xs opacity-70 before:content-['>_'] before:text-cyan-500 before:mr-2">
+                          {detail.replace(/<[^>]*>/g, '')}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               ))}
             </div>
@@ -197,7 +215,7 @@ export default function CoreClient({ experience, education, certifications }: Pr
           </div>
         </div>
 
-        {/* CERTIFICATIONS avec state */}
+        {/* CERTIFICATIONS */}
         <div className="mb-16 md:mb-20">
           <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('core.certificationsTitle')}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

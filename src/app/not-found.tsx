@@ -1,25 +1,23 @@
-import Link from 'next/link';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+'use client';
+
+import { useRouter } from 'next/navigation';
 
 export default function NotFound() {
+  const router = useRouter();
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      <Header />
-      <main className="flex-grow flex flex-col items-center justify-center px-4">
-        <h1 className="text-6xl font-bold text-gray-900 mb-4">404</h1>
-        <h2 className="text-2xl font-semibold text-gray-700 mb-8">Page Not Found</h2>
-        <p className="text-gray-600 mb-8 text-center max-w-md">
-          The page you are looking for does not exist or has been moved.
-        </p>
-        <Link 
-          href="/" 
-          className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-        >
-          Back to Home
-        </Link>
-      </main>
-      <Footer />
+    <div className="min-h-screen bg-[#050a12] text-white flex flex-col items-center justify-center font-mono px-6">
+      <div className="text-cyan-500 text-xs tracking-[6px] uppercase mb-4 opacity-70">ERROR_NODE // SIGNAL_LOST</div>
+      <div className="text-[clamp(5rem,20vw,14rem)] font-black leading-none text-white/10 select-none">404</div>
+      <div className="text-cyan-500 text-sm tracking-widest mt-2 mb-8">&gt; PAGE_NOT_FOUND</div>
+      <p className="text-xs text-white/40 max-w-xs text-center mb-10 leading-relaxed">
+        Ce nœud n&apos;existe pas dans le système. La transmission a été perdue.
+      </p>
+      <button
+        onClick={() => router.push('/')}
+        className="border border-cyan-500 text-cyan-500 px-10 py-4 text-xs tracking-[4px] uppercase hover:bg-cyan-500 hover:text-[#050a12] transition-all"
+      >
+        ← RETOUR_SURFACE
+      </button>
     </div>
   );
 }

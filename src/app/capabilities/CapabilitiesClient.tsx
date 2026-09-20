@@ -22,6 +22,7 @@ const SKILL_CATEGORIES = [
   { label: 'UI/UX & Design', items: ['Figma', 'Canva', 'Maquettage', 'Prototypage', 'Unity', 'Blender'] },
   { label: 'Outils & Méthodes', items: ['Git', 'GitHub', 'SCRUM', 'Kanban', 'VS Code', 'Xcode', 'SEO', 'CMS'] },
   { label: 'IA Générative', items: ['GitHub Copilot', 'ChatGPT', 'Amazon Q', 'Blackbox AI'] },
+  { label: 'Réseaux & Systèmes (TSSR)', items: ['TCP/IP', 'VLAN', 'DNS', 'DHCP', 'DMZ', 'Active Directory', 'Windows Server', 'Linux', 'pfSense', 'Snort', 'WireGuard', 'OpenVPN', 'Cisco Packet Tracer', 'Ubiquiti', 'Asterisk', 'Proxmox', 'QNAP', 'Fog Server', 'GLPI / ITIL', 'Azure', 'VNC', 'Scripting PowerShell / Bash'] },
 ];
 
 const STATE_CONFIG: Record<string, { label: string; color: string }> = {
@@ -84,7 +85,7 @@ export default function CapabilitiesClient({ projects, certifications, skills: _
                 <span className="text-xs text-cyan-500/60 tracking-[3px] uppercase mb-3 block">{cat.label}</span>
                 <div className="flex flex-wrap gap-2">
                   {cat.items.map((item) => (
-                    <span key={item} className="text-xs border border-cyan-500/20 text-white/70 px-3 py-1 hover:border-cyan-500 hover:text-cyan-500 transition-all">
+                    <span key={item} className="text-xs border border-cyan-500/20 text-white/70 px-3 py-1">
                       {item}
                     </span>
                   ))}

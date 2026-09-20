@@ -99,7 +99,7 @@ export default function PeripheralClient({ hobbies }: Props) {
           <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('peripheral.hobbiesTitle')}</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {visibleHobbies.map((hobby) => (
-              <div key={hobby.id} className="border border-cyan-500/20 p-4 md:p-6 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
+              <div key={hobby.id} className="border border-cyan-500/20 p-4 md:p-6">
                 <h3 className="text-xs md:text-sm uppercase mb-2 md:mb-3 text-cyan-500">{hobby.name}</h3>
                 <p className="text-xs opacity-70">{hobby.description}</p>
               </div>

@@ -45,9 +45,13 @@ export default function Home() {
     return () => clearInterval(glitchInterval);
   }, []);
 
+  const [navigating, setNavigating] = useState(false);
+
   const handleCta = () => {
+    if (navigating) return;
+    setNavigating(true);
     play('transition');
-    setTimeout(() => router.push('/core'), 300);
+    router.push('/core');
   };
 
   return (
