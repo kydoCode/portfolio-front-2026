@@ -77,7 +77,7 @@ const SKILL_CATEGORIES = [
   'Réseaux & Systèmes (TSSR)',
 ] as const;
 
-
+const ARRAY_FIELDS = ['technologies', 'learnings', 'annees', 'details'];
 
 function serializeForForm(item: Item, fields: { key: string }[]): Record<string, string> {
   const out: Record<string, string> = {};
