@@ -34,6 +34,7 @@ const STATE_CONFIG: Record<string, { label: string; color: string }> = {
 export default function CapabilitiesClient({ projects, certifications, skills: _skills }: Props) {
   const router = useRouter();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { t } = useTranslation();
@@ -50,12 +51,13 @@ export default function CapabilitiesClient({ projects, certifications, skills: _
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         if (selectedProject) setSelectedProject(null);
+        else if (selectedCert) setSelectedCert(null);
         else if (menuOpen) setMenuOpen(false);
       }
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
-  }, [menuOpen, selectedProject]);
+  }, [menuOpen, selectedProject, selectedCert]);
 
   return (
     <div className="min-h-screen bg-[#050a12] text-white overflow-x-hidden" style={{ cursor: isMobile ? 'auto' : 'none' }}>
@@ -102,9 +104,13 @@ export default function CapabilitiesClient({ projects, certifications, skills: _
             {certifications.map((cert) => {
               const stateConf = STATE_CONFIG[(cert as unknown as { state: string }).state] ?? STATE_CONFIG.ACTIVE;
               return (
-                <div key={cert.id} className="border border-cyan-500/20 p-4 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
+                <div
+                  key={cert.id}
+                  className="border border-cyan-500/20 p-4 cursor-pointer hover:border-cyan-500 transition-colors group"
+                  onClick={() => { setSelectedCert(cert); play('bubble'); }}
+                >
                   <div className="flex items-start justify-between gap-2 mb-3">
-                    <h3 className="text-sm font-bold leading-tight">{cert.nom}</h3>
+                    <h3 className="text-sm font-bold leading-tight group-hover:text-cyan-400 transition-colors">{cert.nom}</h3>
                     <span className={`text-[0.6rem] px-2 py-0.5 border rounded whitespace-nowrap flex-shrink-0 ${stateConf.color}`}>
                       {stateConf.label}
                     </span>
@@ -112,11 +118,7 @@ export default function CapabilitiesClient({ projects, certifications, skills: _
                   <p className="text-xs opacity-50 mb-3">{cert.organisme}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-cyan-500">{new Date(cert.date).getFullYear()}</span>
-                    {cert.url && (
-                      <a href={cert.url} target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-500 hover:text-white transition-colors">
-                        {t('core.verify')}
-                      </a>
-                    )}
+                    <span className="text-xs text-cyan-500/40 tracking-widest">→ DÉTAILS</span>
                   </div>
                 </div>
               );
@@ -165,6 +167,40 @@ export default function CapabilitiesClient({ projects, certifications, skills: _
           </button>
         </div>
       </section>
+
+      {/* MODALE CERTIF */}
+      {selectedCert && (() => {
+        const stateConf = STATE_CONFIG[(selectedCert as unknown as { state: string }).state] ?? STATE_CONFIG.ACTIVE;
+        return (
+          <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 md:p-8" onClick={() => setSelectedCert(null)}>
+            <div
+              className="border border-cyan-500 bg-[#050a12] p-6 md:p-8 max-w-md w-full relative"
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyan-500 to-transparent animate-[scan_2s_linear_infinite]" />
+              <div className="flex items-start justify-between gap-3 mb-4">
+                <h3 className="text-base md:text-xl font-bold uppercase leading-tight pr-4">{selectedCert.nom}</h3>
+                <span className={`text-[0.6rem] px-2 py-0.5 border rounded whitespace-nowrap flex-shrink-0 mt-1 ${stateConf.color}`}>{stateConf.label}</span>
+              </div>
+              <p className="text-xs text-cyan-500/60 mb-2 tracking-widest">{selectedCert.organisme}</p>
+              <p className="text-xs text-white/40 mb-4">{new Date(selectedCert.date).getFullYear()}</p>
+              {selectedCert.description && <p className="text-xs opacity-70 mb-4 leading-relaxed">{selectedCert.description}</p>}
+              <div className="flex gap-4 pt-4 border-t border-cyan-500/20">
+                {selectedCert.url ? (
+                  <a href={selectedCert.url} target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-500 hover:text-white transition-colors tracking-widest">
+                    → {t('core.verify')}
+                  </a>
+                ) : (
+                  <span className="text-xs text-white/20 tracking-widest">→ VÉRIFICATION N/A</span>
+                )}
+              </div>
+              <button onClick={() => setSelectedCert(null)} className="mt-6 border border-cyan-500 text-cyan-500 px-6 py-2 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all">
+                {t('capabilities.modalClose')}
+              </button>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* MODALE PROJET — fix scroll + github + demo toujours présents */}
       {selectedProject && (

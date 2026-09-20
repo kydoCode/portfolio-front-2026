@@ -28,6 +28,7 @@ export default function CoreClient({ experience, education, certifications }: Pr
   const [showAllEdu, setShowAllEdu] = useState(false);
   const [showAllExp, setShowAllExp] = useState(false);
   const [expandedExp, setExpandedExp] = useState<string | null>(null);
+  const [selectedCert, setSelectedCert] = useState<typeof certifications[0] | null>(null);
   const [depth, setDepth] = useState(0);
   const audioCtxRef = useRef<AudioContext | null>(null);
 
@@ -49,12 +50,13 @@ export default function CoreClient({ experience, education, certifications }: Pr
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         if (expandedExp) setExpandedExp(null);
+        else if (selectedCert) setSelectedCert(null);
         else if (menuOpen) setMenuOpen(false);
       }
     };
     window.addEventListener('keydown', handleEsc);
     return () => window.removeEventListener('keydown', handleEsc);
-  }, [menuOpen, expandedExp]);
+  }, [menuOpen, expandedExp, selectedCert]);
 
   const playBubble = () => {
     try {
@@ -151,18 +153,26 @@ export default function CoreClient({ experience, education, certifications }: Pr
             <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('core.formationTitle')}</h2>
             <div className="relative pl-6 md:pl-8 border-l-2 border-cyan-500/30">
               {visibleEdu.map((edu) => (
-                <div key={edu.id} className="relative mb-6 group pl-3 md:pl-4">
-                  <div className="absolute -left-[13px] w-5 h-5 md:w-6 md:h-6 bg-cyan-500 rounded-full border-4 border-[#050a12] group-hover:scale-125 transition-transform z-10" />
+                <div key={edu.id} className="relative mb-6 pl-3 md:pl-4">
+                  {edu.url ? (
+                    <a
+                      href={edu.url} target="_blank" rel="noopener noreferrer" onClick={playBubble}
+                      className="absolute -left-[13px] w-5 h-5 md:w-6 md:h-6 bg-cyan-500 rounded-full border-4 border-[#050a12] hover:scale-125 transition-transform z-10 block"
+                      aria-label={edu.diplome}
+                    />
+                  ) : (
+                    <div className="absolute -left-[13px] w-5 h-5 md:w-6 md:h-6 bg-cyan-500 rounded-full border-4 border-[#050a12] z-10" />
+                  )}
                   <span className="text-xs text-cyan-500 block mb-1">
                     {edu.annees && edu.annees.length > 0 ? edu.annees.join(' — ') : '—'}
                   </span>
                   {edu.url ? (
                     <a href={edu.url} target="_blank" rel="noopener noreferrer" onClick={playBubble}
-                      className="text-base md:text-lg font-bold group-hover:text-cyan-400 transition-colors hover:underline underline-offset-2 block">
+                      className="text-base md:text-lg font-bold hover:text-cyan-400 transition-colors hover:underline underline-offset-2 block">
                       {edu.diplome}
                     </a>
                   ) : (
-                    <h3 className="text-base md:text-lg font-bold group-hover:text-cyan-400 transition-colors">{edu.diplome}</h3>
+                    <h3 className="text-base md:text-lg font-bold">{edu.diplome}</h3>
                   )}
                   <p className="text-xs opacity-70">{edu.etablissement}</p>
                   {edu.mention && <span className="text-xs text-cyan-500/60 mt-1 block">Mention : {edu.mention}</span>}
@@ -222,9 +232,13 @@ export default function CoreClient({ experience, education, certifications }: Pr
             {certifications.map((cert) => {
               const stateConf = STATE_CONFIG[(cert as unknown as { state: string }).state] ?? STATE_CONFIG.ACTIVE;
               return (
-                <div key={cert.id} className="border border-cyan-500/20 p-4 md:p-5 hover:bg-white/[0.01] hover:border-cyan-500 transition-all">
+                <div
+                  key={cert.id}
+                  className="border border-cyan-500/20 p-4 md:p-5 cursor-pointer hover:border-cyan-500 transition-colors group"
+                  onClick={() => { setSelectedCert(cert); playBubble(); }}
+                >
                   <div className="flex items-start justify-between gap-2 mb-3">
-                    <h3 className="text-sm font-bold leading-tight">{cert.nom}</h3>
+                    <h3 className="text-sm font-bold leading-tight group-hover:text-cyan-400 transition-colors">{cert.nom}</h3>
                     <span className={`text-[0.6rem] px-2 py-0.5 border rounded whitespace-nowrap flex-shrink-0 ${stateConf.color}`}>
                       {stateConf.label}
                     </span>
@@ -232,11 +246,7 @@ export default function CoreClient({ experience, education, certifications }: Pr
                   <p className="text-xs opacity-50 mb-3">{cert.organisme}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-xs text-cyan-500">{new Date(cert.date).getFullYear()}</span>
-                    {cert.url && (
-                      <a href={cert.url} target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-500 hover:text-white transition-colors">
-                        {t('core.verify')}
-                      </a>
-                    )}
+                    <span className="text-xs text-cyan-500/40 tracking-widest">→ DÉTAILS</span>
                   </div>
                 </div>
               );
@@ -262,6 +272,39 @@ export default function CoreClient({ experience, education, certifications }: Pr
           </button>
         </div>
       </section>
+
+      {/* MODALE CERTIF */}
+      {selectedCert && (() => {
+        const stateConf = STATE_CONFIG[(selectedCert as unknown as { state: string }).state] ?? STATE_CONFIG.ACTIVE;
+        return (
+          <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 md:p-8" onClick={() => setSelectedCert(null)}>
+            <div
+              className="border border-cyan-500 bg-[#050a12] p-6 md:p-8 max-w-md w-full relative"
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="flex items-start justify-between gap-3 mb-4">
+                <h3 className="text-base md:text-xl font-bold uppercase leading-tight pr-4">{selectedCert.nom}</h3>
+                <span className={`text-[0.6rem] px-2 py-0.5 border rounded whitespace-nowrap flex-shrink-0 mt-1 ${stateConf.color}`}>{stateConf.label}</span>
+              </div>
+              <p className="text-xs text-cyan-500/60 mb-2 tracking-widest">{selectedCert.organisme}</p>
+              <p className="text-xs text-white/40 mb-4">{new Date(selectedCert.date).getFullYear()}</p>
+              {selectedCert.description && <p className="text-xs opacity-70 mb-4 leading-relaxed">{selectedCert.description}</p>}
+              <div className="flex gap-4 pt-4 border-t border-cyan-500/20">
+                {selectedCert.url ? (
+                  <a href={selectedCert.url} target="_blank" rel="noopener noreferrer" className="text-xs text-cyan-500 hover:text-white transition-colors tracking-widest">
+                    → {t('core.verify')}
+                  </a>
+                ) : (
+                  <span className="text-xs text-white/20 tracking-widest">→ VÉRIFICATION N/A</span>
+                )}
+              </div>
+              <button onClick={() => setSelectedCert(null)} className="mt-6 border border-cyan-500 text-cyan-500 px-6 py-2 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all">
+                FERMER
+              </button>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }
