@@ -299,7 +299,7 @@ export default function CoreClient({ experience, education, certifications }: Pr
                 )}
               </div>
               <button onClick={() => setSelectedCert(null)} className="mt-6 border border-cyan-500 text-cyan-500 px-6 py-2 text-xs tracking-widest hover:bg-cyan-500 hover:text-[#050a12] transition-all">
-                FERMER
+                {t('capabilities.certClose')}
               </button>
             </div>
           </div>

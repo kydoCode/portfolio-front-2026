@@ -41,6 +41,7 @@ export default function BurgerMenu({ isOpen, onClose, currentPage }: BurgerMenuP
     const newMuted = !isMuted;
     setIsMuted(newMuted);
     localStorage.setItem('soundMuted', String(newMuted));
+    window.dispatchEvent(new CustomEvent('soundMutedChange', { detail: newMuted }));
   };
 
   const changeLang = (code: string) => {

@@ -238,6 +238,28 @@ export default function AdminPage() {
   };
 
   useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      if (editItem || isCreating) {
+        const hasInput = Object.values(editVals).some(v => v.trim() !== '');
+        if (hasInput) {
+          if (window.confirm('Fermer sans sauvegarder ?')) {
+            setEditItem(null);
+            setIsCreating(false);
+          }
+        } else {
+          setEditItem(null);
+          setIsCreating(false);
+        }
+      } else if (deleteConfirm) {
+        setDeleteConfirm(null);
+      }
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [editItem, isCreating, editVals, deleteConfirm]);
+
+  useEffect(() => {
     setEditItem(null);
     setIsCreating(false);
     setDeleteConfirm(null);

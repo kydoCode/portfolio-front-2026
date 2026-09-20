@@ -96,11 +96,38 @@ export default function UnderwaterAmbience() {
     if (active) {
       ctx.suspend();
       setActive(false);
+      localStorage.setItem('soundMuted', 'true');
     } else {
       ctx.resume();
       setActive(true);
+      localStorage.setItem('soundMuted', 'false');
     }
   };
+
+  // Sync avec le toggle du BurgerMenu via storage event
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== 'soundMuted') return;
+      const muted = e.newValue === 'true';
+      const ctx = ctxRef.current;
+      if (!ctx) return;
+      if (muted) { ctx.suspend(); setActive(false); }
+      else { ctx.resume(); setActive(true); }
+    };
+    const onCustom = (e: Event) => {
+      const muted = (e as CustomEvent<boolean>).detail;
+      const ctx = ctxRef.current;
+      if (!ctx) return;
+      if (muted) { ctx.suspend(); setActive(false); }
+      else { ctx.resume(); setActive(true); }
+    };
+    window.addEventListener('storage', onStorage);
+    window.addEventListener('soundMutedChange', onCustom);
+    return () => {
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('soundMutedChange', onCustom);
+    };
+  }, []);
 
   // Démarrage au premier clic utilisateur sur la page
   useEffect(() => {
