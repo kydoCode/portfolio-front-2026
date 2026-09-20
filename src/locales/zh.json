@@ -23,8 +23,8 @@
     "card2Label": "2 // 质量与安全",
     "card2Title": "ISTQB与网络安全",
     "card2Desc": "ISTQB Foundation v4.0认证，通过TSSR和CyberOps课程了解网络安全基础。",
-    "formationTitle": "教育模块",
-    "experienceTitle": "任务历史",
+    "formationTitle": "Education_History",
+    "experienceTitle": "Mission_History",
     "certificationsTitle": "认证模块",
     "seeAll": "↓ 查看全部",
     "seeLess": "↑ 收起",
@@ -53,7 +53,7 @@
     "nextPage": "下一页：外围 →"
   },
   "peripheral": {
-    "hobbiesTitle": "代码之外",
+    "hobbiesTitle": "Beyond_Code_&&_IT",
     "contactTitle": "启动联系协议",
     "labelName": "> 姓名",
     "labelEmail": "> 邮箱",

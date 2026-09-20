@@ -23,7 +23,7 @@
     "card2Label": "2 // Qualité & Sécurité",
     "card2Title": "ISTQB & Curiosité Cyber",
     "card2Desc": "Certifié ISTQB Foundation v4.0, sensibilisé à la cybersécurité via TSSR et CyberOps en cours.",
-    "formationTitle": "Formation_Module",
+    "formationTitle": "Education_History",
     "experienceTitle": "Mission_History",
     "certificationsTitle": "Certifications_Module",
     "seeAll": "↓ VOIR TOUT",
@@ -53,7 +53,7 @@
     "nextPage": "SUIVANT: PERIPHERAL →"
   },
   "peripheral": {
-    "hobbiesTitle": "Beyond_Code",
+    "hobbiesTitle": "Beyond_Code_&&_IT",
     "contactTitle": "INITIER_PROTOCOLE_CONTACT",
     "labelName": "> NOM",
     "labelEmail": "> EMAIL",
