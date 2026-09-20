@@ -67,7 +67,17 @@ const LABELS: Record<Collection, { list: string; nameKey: string; fields: { key:
   },
 };
 
-const ARRAY_FIELDS = ['technologies', 'learnings', 'annees', 'details'];
+const SKILL_CATEGORIES = [
+  'Front-end',
+  'Back-end',
+  'iOS Native',
+  'UI/UX & Design',
+  'Outils & Méthodes',
+  'IA Générative',
+  'Réseaux & Systèmes (TSSR)',
+] as const;
+
+
 
 function serializeForForm(item: Item, fields: { key: string }[]): Record<string, string> {
   const out: Record<string, string> = {};
@@ -109,6 +119,21 @@ export default function AdminPage() {
   const [editVals, setEditVals] = useState<Record<string, string>>({});
   const [isCreating, setIsCreating] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
+  const [dumping, setDumping] = useState(false);
+
+  const dumpDb = async () => {
+    setDumping(true);
+    const res = await fetch('/api/ss-ctrl-7x9k', { headers: { 'x-admin-token': token } });
+    const json = await res.json();
+    const blob = new Blob([JSON.stringify(json, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `db_dump_${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    setDumping(false);
+  };
 
   const load = useCallback(async (t: string) => {
     const res = await fetch('/api/ss-ctrl-7x9k', { headers: { 'x-admin-token': t } });
@@ -259,6 +284,15 @@ export default function AdminPage() {
             LOGOUT
           </button>
         </div>
+        <div className="flex justify-end mb-6">
+          <button
+            onClick={dumpDb}
+            disabled={dumping}
+            className="border border-white/20 text-white/40 px-4 py-2 text-xs tracking-widest hover:border-cyan-500/50 hover:text-cyan-500/70 transition-all disabled:opacity-30"
+          >
+            {dumping ? 'EXPORT...' : '↓ DB_DUMP'}
+          </button>
+        </div>
 
         {/* TABS */}
         <div className="flex gap-2 mb-8 flex-wrap">
@@ -387,6 +421,17 @@ export default function AdminPage() {
                       rows={4}
                       className="w-full bg-transparent border border-cyan-500/30 text-white p-2 text-sm focus:border-cyan-500 outline-none resize-none"
                     />
+                  ) : activeTab === 'skills' && f.key === 'category' ? (
+                    <select
+                      value={editVals[f.key] ?? ''}
+                      onChange={e => setEditVals(v => ({ ...v, [f.key]: e.target.value }))}
+                      className="w-full bg-[#050a12] border-b border-cyan-500/30 text-white px-2 py-2 text-sm focus:border-cyan-500 outline-none"
+                    >
+                      <option value="">-- choisir --</option>
+                      {SKILL_CATEGORIES.map(cat => (
+                        <option key={cat} value={cat}>{cat}</option>
+                      ))}
+                    </select>
                   ) : (
                     <input
                       type="text"
