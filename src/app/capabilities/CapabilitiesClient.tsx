@@ -15,23 +15,13 @@ interface Props {
   skills: Skill[];
 }
 
-const SKILL_CATEGORIES = [
-  { label: 'Front-end', items: ['HTML', 'CSS', 'JavaScript', 'React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Bootstrap'] },
-  { label: 'Back-end', items: ['Node.js', 'Express.js', 'PHP', 'Symfony', 'Python', 'MySQL', 'PostgreSQL', 'NoSQL'] },
-  { label: 'iOS Native', items: ['Swift', 'SwiftUI', 'Tests unitaires'] },
-  { label: 'UI/UX & Design', items: ['Figma', 'Canva', 'Maquettage', 'Prototypage', 'Unity', 'Blender'] },
-  { label: 'Outils & Méthodes', items: ['Git', 'GitHub', 'SCRUM', 'Kanban', 'VS Code', 'Xcode', 'SEO', 'CMS'] },
-  { label: 'IA Générative', items: ['GitHub Copilot', 'ChatGPT', 'Amazon Q', 'Blackbox AI'] },
-  { label: 'Réseaux & Systèmes (TSSR)', items: ['TCP/IP', 'VLAN', 'DNS', 'DHCP', 'DMZ', 'Active Directory', 'Windows Server', 'Linux', 'pfSense', 'Snort', 'WireGuard', 'OpenVPN', 'Cisco Packet Tracer', 'Ubiquiti', 'Asterisk', 'Proxmox', 'QNAP', 'Fog Server', 'GLPI / ITIL', 'Azure', 'VNC', 'Scripting PowerShell / Bash'] },
-];
-
 const STATE_CONFIG: Record<string, { label: string; color: string }> = {
   ACTIVE:  { label: 'CERTIFIÉ',   color: 'text-green-400 border-green-400 bg-green-400/10' },
   PENDING: { label: 'EN COURS',   color: 'text-yellow-400 border-yellow-400 bg-yellow-400/10' },
   EXPIRED: { label: 'EXPIRÉ',     color: 'text-white/30 border-white/20 bg-white/5' },
 };
 
-export default function CapabilitiesClient({ projects, certifications, skills: _skills }: Props) {
+export default function CapabilitiesClient({ projects, certifications, skills }: Props) {
   const router = useRouter();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
@@ -78,17 +68,23 @@ export default function CapabilitiesClient({ projects, certifications, skills: _
 
       <section className="max-w-[1400px] mx-auto px-4 md:px-8 py-20 pt-24">
 
-        {/* SKILLS — tags par catégorie */}
+        {/* SKILLS — groupés par catégorie depuis DB */}
         <div className="mb-16 md:mb-20">
           <h2 className="text-xl md:text-2xl font-bold uppercase mb-6 md:mb-8 text-cyan-500">{t('capabilities.skillsTitle')}</h2>
           <div className="space-y-6">
-            {SKILL_CATEGORIES.map((cat) => (
-              <div key={cat.label}>
-                <span className="text-xs text-cyan-500/60 tracking-[3px] uppercase mb-3 block">{cat.label}</span>
+            {Object.entries(
+              skills.reduce<Record<string, Skill[]>>((acc, s) => {
+                if (!acc[s.category]) acc[s.category] = [];
+                acc[s.category].push(s);
+                return acc;
+              }, {})
+            ).map(([category, items]) => (
+              <div key={category}>
+                <span className="text-xs text-cyan-500/60 tracking-[3px] uppercase mb-3 block">{category}</span>
                 <div className="flex flex-wrap gap-2">
-                  {cat.items.map((item) => (
-                    <span key={item} className="text-xs border border-cyan-500/20 text-white/70 px-3 py-1">
-                      {item}
+                  {items.map((skill) => (
+                    <span key={skill.id} className="text-xs border border-cyan-500/20 text-white/70 px-3 py-1">
+                      {skill.name}
                     </span>
                   ))}
                 </div>

@@ -7,6 +7,7 @@ const MODELS = {
   projects:       'project',
   experience:     'experience',
   education:      'education',
+  skills:         'skill',
   hobbies:        'hobby',
   certifications: 'certification',
 } as const;
@@ -26,10 +27,11 @@ function checkAuth(req: NextRequest) {
 export async function GET(req: NextRequest) {
   if (!checkAuth(req)) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
-  const [projects, experience, education, hobbies, certifications] = await Promise.all([
+  const [projects, experience, education, skills, hobbies, certifications] = await Promise.all([
     prisma.project.findMany({ orderBy: { order: 'asc' } }),
     prisma.experience.findMany({ orderBy: { order: 'asc' } }),
     prisma.education.findMany({ orderBy: { order: 'asc' } }),
+    prisma.skill.findMany({ orderBy: { order: 'asc' } }),
     prisma.hobby.findMany({ orderBy: { order: 'asc' } }),
     prisma.certification.findMany({ orderBy: { order: 'asc' } }),
   ]);
@@ -38,6 +40,7 @@ export async function GET(req: NextRequest) {
     projects:       { projets: projects },
     experience:     { experience },
     education:      { education },
+    skills:         { skills },
     hobbies:        { hobbies },
     certifications: { certifications },
   });

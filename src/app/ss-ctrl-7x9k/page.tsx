@@ -2,10 +2,10 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
-type Item = { id: string; visible: boolean; featured: boolean; [key: string]: unknown };
+type Item = { id: string; visible: boolean; featured: boolean; order: number; [key: string]: unknown };
 type DataStore = Record<string, { [listKey: string]: Item[] }>;
 
-const COLLECTIONS = ['projects', 'experience', 'education', 'hobbies', 'certifications'] as const;
+const COLLECTIONS = ['projects', 'experience', 'education', 'skills', 'hobbies', 'certifications'] as const;
 type Collection = typeof COLLECTIONS[number];
 
 const LABELS: Record<Collection, { list: string; nameKey: string; fields: { key: string; label: string; type: string }[] }> = {
@@ -39,6 +39,13 @@ const LABELS: Record<Collection, { list: string; nameKey: string; fields: { key:
       { key: 'annees', label: 'Années (virgule)', type: 'text' },
       { key: 'mention', label: 'Mention', type: 'text' },
       { key: 'url', label: 'URL', type: 'text' },
+    ],
+  },
+  skills: {
+    list: 'skills', nameKey: 'name',
+    fields: [
+      { key: 'name', label: 'Nom', type: 'text' },
+      { key: 'category', label: 'Catégorie', type: 'text' },
     ],
   },
   hobbies: {
@@ -130,6 +137,34 @@ export default function AdminPage() {
     setSaving(null);
   };
 
+  const reorder = async (collection: Collection, id: string, direction: 'up' | 'down') => {
+    const listKey = LABELS[collection].list;
+    const items = [...(data[collection]?.[listKey] ?? [])].sort((a, b) => a.order - b.order);
+    const idx = items.findIndex(i => i.id === id);
+    const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
+    if (swapIdx < 0 || swapIdx >= items.length) return;
+
+    const a = items[idx];
+    const b = items[swapIdx];
+    setSaving(`order-${id}`);
+
+    await Promise.all([
+      fetch('/api/ss-ctrl-7x9k', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+        body: JSON.stringify({ action: 'update', collection, id: a.id, data: { order: b.order } }),
+      }),
+      fetch('/api/ss-ctrl-7x9k', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-admin-token': token },
+        body: JSON.stringify({ action: 'update', collection, id: b.id, data: { order: a.order } }),
+      }),
+    ]);
+
+    await load(token);
+    setSaving(null);
+  };
+
   const openEdit = (item: Item) => {
     setIsCreating(false);
     setEditItem(item);
@@ -210,7 +245,7 @@ export default function AdminPage() {
 
   const listKey = LABELS[activeTab].list;
   const nameKey = LABELS[activeTab].nameKey;
-  const items: Item[] = data[activeTab]?.[listKey] ?? [];
+  const items: Item[] = [...(data[activeTab]?.[listKey] ?? [])].sort((a, b) => a.order - b.order);
 
   return (
     <div className="min-h-screen bg-[#050a12] text-white font-mono p-6 md:p-10">
@@ -255,19 +290,38 @@ export default function AdminPage() {
 
         {/* TABLE */}
         <div className="space-y-2 mb-8">
-          <div className="grid grid-cols-[1fr_80px_80px_100px] gap-4 text-xs text-white/30 px-4 mb-2">
+          <div className="grid grid-cols-[24px_1fr_80px_80px_120px] gap-3 text-xs text-white/30 px-4 mb-2">
+            <span></span>
             <span>ENTRY</span>
             <span className="text-center">VISIBLE</span>
             <span className="text-center">FEATURED</span>
             <span className="text-center">ACTIONS</span>
           </div>
-          {items.map((item) => {
+          {items.map((item, idx) => {
             const name = (item[nameKey] as string) ?? item.id;
+            const sub = activeTab === 'skills' ? (item.category as string) : null;
             return (
-              <div key={item.id} className={`grid grid-cols-[1fr_80px_80px_100px] gap-4 items-center border px-4 py-3 transition-all ${
+              <div key={item.id} className={`grid grid-cols-[24px_1fr_80px_80px_120px] gap-3 items-center border px-4 py-3 transition-all ${
                 item.visible ? 'border-cyan-500/20' : 'border-white/5 opacity-40'
               }`}>
-                <span className="text-sm truncate">{name}</span>
+                {/* ORDER ARROWS */}
+                <div className="flex flex-col gap-0.5">
+                  <button
+                    onClick={() => reorder(activeTab, item.id, 'up')}
+                    disabled={idx === 0 || saving === `order-${item.id}`}
+                    className="text-cyan-500/40 hover:text-cyan-500 disabled:opacity-20 text-[10px] leading-none"
+                  >▲</button>
+                  <button
+                    onClick={() => reorder(activeTab, item.id, 'down')}
+                    disabled={idx === items.length - 1 || saving === `order-${item.id}`}
+                    className="text-cyan-500/40 hover:text-cyan-500 disabled:opacity-20 text-[10px] leading-none"
+                  >▼</button>
+                </div>
+
+                <div className="min-w-0">
+                  <span className="text-sm truncate block">{name}</span>
+                  {sub && <span className="text-[10px] text-cyan-500/40 truncate block">{sub}</span>}
+                </div>
 
                 <div className="flex justify-center">
                   <button
@@ -298,18 +352,8 @@ export default function AdminPage() {
                 </div>
 
                 <div className="flex justify-center gap-2">
-                  <button
-                    onClick={() => openEdit(item)}
-                    className="text-xs text-cyan-500 hover:text-white transition-colors tracking-widest"
-                  >
-                    EDIT
-                  </button>
-                  <button
-                    onClick={() => setDeleteConfirm(item.id)}
-                    className="text-xs text-red-400/60 hover:text-red-400 transition-colors"
-                  >
-                    DEL
-                  </button>
+                  <button onClick={() => openEdit(item)} className="text-xs text-cyan-500 hover:text-white transition-colors">EDIT</button>
+                  <button onClick={() => setDeleteConfirm(item.id)} className="text-xs text-red-400/60 hover:text-red-400 transition-colors">DEL</button>
                 </div>
               </div>
             );
@@ -332,7 +376,6 @@ export default function AdminPage() {
             <div className="text-cyan-500 text-xs mb-6 tracking-widest">
               {isCreating ? '> CREATE_ENTRY' : '> EDIT_ENTRY'}
             </div>
-
             <div className="space-y-4">
               {LABELS[activeTab].fields.map(f => (
                 <div key={f.key}>
@@ -355,7 +398,6 @@ export default function AdminPage() {
                 </div>
               ))}
             </div>
-
             <div className="flex gap-3 mt-6">
               <button
                 onClick={saveEdit}
